@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="mem-commen" />
+        <module name="mem-dao" />
+        <module name="mem-domain" />
+        <module name="mem-rabbitmq" />
+        <module name="mem-redis" />
+        <module name="mem-rpc" />
+        <module name="mem-service" />
+        <module name="mem-webapp" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mem-commen" target="1.7" />
+      <module name="mem-dao" target="1.7" />
+      <module name="mem-domain" target="1.7" />
+      <module name="mem-rabbitmq" target="1.7" />
+      <module name="mem-redis" target="1.7" />
+      <module name="mem-rpc" target="1.7" />
+      <module name="mem-service" target="1.7" />
+      <module name="mem-webapp" target="1.7" />
+      <module name="peiyu-mem" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mem-commen" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mem-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mem-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mem-rabbitmq" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mem-redis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mem-rpc" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mem-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mem-webapp" charset="UTF-8" />
+  </component>
+</project>
