@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peiyu.mem.dao.CpActivityDao">
+    <!--保存开始-->
+<insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpActivity">
+insert into activity (id, vendorId, actNo,
+      actName, startDate, endDate,
+      getLimitType, getLimitQuantity, useLimitType,
+      useLimitQuantity, startTime, endTime,
+      weekFlag, allowSimt, applyScopeType,
+      useScopeType, status, memo,createDate, modifyDate,
+      creator, mender,df,sendType,overMoney,useOverMoney)
+    values (#{id,jdbcType=BIGINT}, #{vendorId,jdbcType=BIGINT}, #{actNo,jdbcType=VARCHAR},
+      #{actName,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP},
+      #{getLimitType,jdbcType=INTEGER}, #{getLimitQuantity,jdbcType=INTEGER}, #{useLimitType,jdbcType=INTEGER},
+      #{useLimitQuantity,jdbcType=INTEGER}, #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
+      #{weekFlag,jdbcType=VARCHAR}, #{allowSimt,jdbcType=INTEGER}, #{applyScopeType,jdbcType=INTEGER},
+      #{useScopeType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP},#{creator,jdbcType=VARCHAR}, #{mender,jdbcType=VARCHAR},
+      #{df,jdbcType=INTEGER}, #{sendType,jdbcType=INTEGER}, #{overMoney,jdbcType=DOUBLE}, #{useOverMoney,jdbcType=DOUBLE})
+</insert>
+    <!--保存结束-->
+</mapper>
