@@ -8,8 +8,22 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mem-webapp</artifactId>
     <packaging>war</packaging>
-    <name>mem-webapp Maven Webapp</name>
+    <name>mem-webapp</name>
     <url>http://maven.apache.org</url>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <mem.imp.file>dev</mem.imp.file>
+                <!--一级域名-->
+                <mem.domain>peiyu.com</mem.domain>
+                <mem.jdbc.datasource.type>dbcp</mem.jdbc.datasource.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+        </profile>
+    </profiles>
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
