@@ -2,22 +2,132 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.peiyu.mem.dao.CpActivityDao">
     <!--保存开始-->
-<insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpActivity">
+    <insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpActivity">
 insert into activity (id, vendorId, actNo,
       actName, startDate, endDate,
       getLimitType, getLimitQuantity, useLimitType,
       useLimitQuantity, startTime, endTime,
       weekFlag, allowSimt, applyScopeType,
       useScopeType, status, memo,createDate, modifyDate,
-      creator, mender,df,sendType,overMoney,useOverMoney)
+      creator,df,sendType,overMoney,useOverMoney)
     values (#{id,jdbcType=BIGINT}, #{vendorId,jdbcType=BIGINT}, #{actNo,jdbcType=VARCHAR},
       #{actName,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP},
       #{getLimitType,jdbcType=INTEGER}, #{getLimitQuantity,jdbcType=INTEGER}, #{useLimitType,jdbcType=INTEGER},
       #{useLimitQuantity,jdbcType=INTEGER}, #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
       #{weekFlag,jdbcType=VARCHAR}, #{allowSimt,jdbcType=INTEGER}, #{applyScopeType,jdbcType=INTEGER},
       #{useScopeType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR},
-      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP},#{creator,jdbcType=VARCHAR}, #{mender,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP},#{creator,jdbcType=VARCHAR},
       #{df,jdbcType=INTEGER}, #{sendType,jdbcType=INTEGER}, #{overMoney,jdbcType=DOUBLE}, #{useOverMoney,jdbcType=DOUBLE})
 </insert>
     <!--保存结束-->
+    <!--删除开始-->
+    <insert id="delete" parameterType="java.lang.Long">
+        DELETE  FROM  activity WHERE  id=#{id}
+    </insert>
+    <!--删除结束-->
+    <!--更新开始-->
+    <update id="update" parameterType="com.peiyu.mem.domian.entity.CpActivity">
+        UPDATE activity
+        <set>
+            <if test="vendorId != null" >
+                vendorId = #{vendorId,jdbcType=BIGINT},
+            </if>
+            <if test="actNo != null" >
+                actNo = #{actNo,jdbcType=VARCHAR},
+            </if>
+            <if test="actName != null" >
+                actName = #{actName,jdbcType=VARCHAR},
+            </if>
+            <if test="startDate != null" >
+                startDate = #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDate != null" >
+                endDate = #{endDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="getLimitType != null" >
+                getLimitType = #{getLimitType,jdbcType=INTEGER},
+            </if>
+            <if test="getLimitQuantity != null" >
+                getLimitQuantity = #{getLimitQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="useLimitType != null" >
+                useLimitType = #{useLimitType,jdbcType=INTEGER},
+            </if>
+            <if test="useLimitQuantity != null" >
+                useLimitQuantity = #{useLimitQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null" >
+                startTime = #{startTime,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null" >
+                endTime = #{endTime,jdbcType=VARCHAR},
+            </if>
+            <if test="weekFlag != null" >
+                weekFlag = #{weekFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="allowSimt != null" >
+                allowSimt = #{allowSimt,jdbcType=INTEGER},
+            </if>
+            <if test="applyScopeType != null" >
+                applyScopeType = #{applyScopeType,jdbcType=INTEGER},
+            </if>
+            <if test="useScopeType != null" >
+                useScopeType = #{useScopeType,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="memo != null" >
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyDate != null" >
+                modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null" >
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="df != null" >
+                df = #{df,jdbcType=INTEGER},
+            </if>
+            <if test="sendType != null" >
+                sendType= #{sendType,jdbcType=INTEGER},
+            </if>
+            <if test="overMoney != null" >
+                overMoney=#{overMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="useOverMoney != null" >
+                useOverMoney=#{useOverMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+    </update>
+    <!--更新结束-->
+    <!--查询开始-->
+    <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.CpActivity">
+     SELECT * FROM activity WHERE df=0 AND id=#{id}
+    </select>
+    <select id="getCpActivitysByVendorId" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.CpActivity">
+      SELECT * FROM activity WHERE df=0 AND vendorId=#{vendorId}
+    </select>
+    <select id="getCpActivityBySearch" parameterType="com.peiyu.mem.domian.entity.CpActivity"  resultType="com.peiyu.mem.domian.entity.CpActivity">
+        SELECT * FROM activity WHERE df=0
+        <if test="vendorId != null">
+            and vendorId = #{vendorId}
+        </if>
+        <if test="actNo != null">
+            and actNo = #{actNo}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+        <if test="sendType != null">
+            and sendType = #{sendType}
+        </if>
+        <if test="endDate != null">
+            and  <![CDATA[ startDate<=#{endDate} and  #{endDate}<=endDate]]>
+        </if>
+    </select>
+    <!--查询结束-->
 </mapper>
