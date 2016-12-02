@@ -16,6 +16,7 @@
         <module>mem-webapp</module>
         <module>mem-rpc</module>
         <module>mem-redis</module>
+        <module>mem-manager</module>
     </modules>
     <properties>
         <spring_version>4.2.5.RELEASE</spring_version>
@@ -29,6 +30,8 @@
         <mybatis-spring>1.3.0</mybatis-spring>
         <dubbo>2.5.3</dubbo>
         <zookeeper>3.4.0</zookeeper>
+        <log4j>1.2.17</log4j>
+        <commons-collections>3.2.1</commons-collections>
     </properties>
     <dependencies>
         <!--spring核心容器依赖开始-->
@@ -72,6 +75,18 @@
             <version>${jackson.version}</version>
         </dependency>
         <!--json依赖结束-->
+        <!--log4j开始-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j}</version>
+        </dependency>
+        <!--log4j结束-->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections}</version>
+        </dependency>
         <!--单元测试依赖开始-->
         <dependency>
             <groupId>org.springframework</groupId>
