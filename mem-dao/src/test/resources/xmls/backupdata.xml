@@ -22,7 +22,14 @@
     <applylimit id="1" vendorId="1414" ownRecordCode="VD2016101300002" ownRecordType="1" applyScopeType="4" detailCode="7782210" detailName="冰糖葫芦"
                 memo="备注" createDate="2016-10-13" modifyDate="2016-10-13" creator="lp" df="0">
     </applylimit>
+    <applylimit id="2" vendorId="1414" ownRecordCode="VD2016101300002" ownRecordType="1" applyScopeType="4" detailCode="7782210" detailName="冰糖葫芦"
+                memo="备注" createDate="2016-10-13" modifyDate="2016-10-13" creator="lp" df="0">
+    </applylimit>
+
     <uselimit id="1" vendorId="1483" ownRecordCode="VD2016101300001" ownRecordType="1" useScopeType="2" organCode="" organName="" storeCode="1011"
+              storeName="总机构" memo="备注" createDate="2016-09-10" modifyDate="2016-10-10" creator="lp" df="0">
+    </uselimit>
+    <uselimit id="2" vendorId="1483" ownRecordCode="VD2016101300001" ownRecordType="1" useScopeType="2" organCode="" organName="" storeCode="1011"
               storeName="总机构" memo="备注" createDate="2016-09-10" modifyDate="2016-10-10" creator="lp" df="0">
     </uselimit>
 </dataset>
