@@ -21,7 +21,7 @@ public class CpMakingTask implements Serializable {
     /**
      *活动编码<br/>
      **/
-    private String orderNo;
+    private String actNo;
 
     /**
      *活动名称<br/>
@@ -109,21 +109,9 @@ public class CpMakingTask implements Serializable {
     private String creator;
 
     /**
-     *最后修改人用户名<br/>
-     **/
-    private String mender;
-
-    /**
      *是否已删除1删除 0正常<br/>
      **/
     private Integer df;
-
-    /**
-     *数据版本<br/>
-     **/
-    private Integer version;
-
-
 
     /**
      *制券数量<br/>
@@ -159,12 +147,12 @@ public class CpMakingTask implements Serializable {
     }
 
 
-    public String getOrderNo() {
-        return orderNo;
+    public String getActNo() {
+        return actNo;
     }
 
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo == null ? null : orderNo.trim();
+    public void setActNo(String actNo) {
+        this.actNo = actNo == null ? null : actNo.trim();
     }
 
 
@@ -316,31 +304,12 @@ public class CpMakingTask implements Serializable {
         this.creator = creator == null ? null : creator.trim();
     }
 
-
-    public String getMender() {
-        return mender;
-    }
-
-    public void setMender(String mender) {
-        this.mender = mender == null ? null : mender.trim();
-    }
-
-
     public Integer getDf() {
         return df;
     }
 
     public void setDf(Integer df) {
         this.df = df;
-    }
-
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public double getTicNum() {
