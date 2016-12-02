@@ -206,11 +206,11 @@ public class CpActivity implements Serializable {
         this.vendorId = vendorId;
     }
 
-    public String getOrderNo() {
+    public String getActNo() {
         return actNo;
     }
 
-    public void setOrderNo(String actNo) {
+    public void setActNo(String actNo) {
         this.actNo = actNo == null ? null : actNo.trim();
     }
 
