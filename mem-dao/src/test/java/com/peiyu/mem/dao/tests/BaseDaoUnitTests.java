@@ -15,13 +15,11 @@ import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xml.sax.InputSource;
 
-import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -36,15 +34,12 @@ import java.util.List;
  * 测试大概流程，建立数据库连接-> 备份表 -> 调用Dao层接口 ->
  * 从数据库取实际结果-> 事先准备的期望结果 -> 断言 -> 回滚数据库 -> 关闭数据库
  */
-@RunWith(SpringJUnit4ClassRunner.class)//让测试运行于Spring测试环境
-@ContextConfiguration(locations = {"classpath*:/spring-config-dao.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath*:/config/spring-dao-test.xml"})
 @Rollback
 public class BaseDaoUnitTests extends DatabaseTestCase {
     private String fileName;
     private Connection connection;
-    @Autowired
-    private DataSource dataSource;
-
     @Before
     public void setUp() throws Exception{
         dataBackUp();
@@ -53,10 +48,9 @@ public class BaseDaoUnitTests extends DatabaseTestCase {
     @Override
     protected IDatabaseConnection getConnection() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/peiyu-mem?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true", "root", "123456");
-        return new MySqlConnection(conn, "peiyu-mem");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/peiyu_mem?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true", "root", "123456");
+        return new MySqlConnection(conn, "peiyu_mem");
     }
-
     @Override
     protected IDataSet getDataSet() throws Exception {
         InputStream inputStream=getClass().getResourceAsStream("/xmls/backupdata.xml");
@@ -89,6 +83,12 @@ public class BaseDaoUnitTests extends DatabaseTestCase {
      */
     protected List<String> getTableNames() {
         List<String> tableNames = new ArrayList<>();
+        tableNames.add("activity");
+        tableNames.add("actsubgroup");
+        tableNames.add("applylimit");
+        tableNames.add("coupon");
+        tableNames.add("makingtask");
+        tableNames.add("uselimit");
         return tableNames;
     }
     /**
@@ -148,17 +148,6 @@ public class BaseDaoUnitTests extends DatabaseTestCase {
         deleteBackFile();
         closeConnection();
     }
-    /**
-     * 备份的文件名
-     */
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
     /**
      * 数据库连接
      * @param connection
