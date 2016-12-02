@@ -1,8 +1,11 @@
 package com.peiyu.mem.dao;
 
+import org.springframework.stereotype.Repository;
+
 /**
  * Created by Administrator on 2016/11/29.
  */
+@Repository
 public interface BaseDao<T> {
     /**
      * 插入一条信息
@@ -34,5 +37,5 @@ public interface BaseDao<T> {
      * @param id
      * @return
      */
-    T select(Integer id);
+    T get(Long id);
 }
