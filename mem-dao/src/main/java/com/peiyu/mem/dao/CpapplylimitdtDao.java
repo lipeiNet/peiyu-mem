@@ -11,7 +11,6 @@ import java.util.List;
  */
 @Repository
 public interface CpapplylimitdtDao extends BaseDao<CpApplyLimitdt> {
-
     /**
      * 批量插入应用范围限制
      * @return
