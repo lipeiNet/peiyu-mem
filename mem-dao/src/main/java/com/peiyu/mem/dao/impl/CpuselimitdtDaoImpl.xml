@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.peiyu.mem.dao.CpuselimitdtDao">
-<insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpUseLimitdt">
- insert into uselimit (id, vendorId, ownRecordCode, ownRecordType, useScopeType, organCode,
+   <insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpUseLimitdt">
+   insert into uselimit (id, vendorId, ownRecordCode, ownRecordType, useScopeType, organCode,
       organName, storeCode, storeName,  memo, createDate, modifyDate, creator, df)
     values (#{id,jdbcType=BIGINT}, #{vendorId,jdbcType=BIGINT}, #{ownRecordCode,jdbcType=VARCHAR},
       #{ownRecordType,jdbcType=INTEGER}, #{useScopeType,jdbcType=INTEGER}, #{organCode,jdbcType=VARCHAR},
       #{organName,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR},
       #{memo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP},
       #{creator,jdbcType=VARCHAR}, #{df,jdbcType=INTEGER})
-</insert>
+    </insert>
+    <insert id="insertBatchUselimits" parameterType="java.util.List">
+       insert into uselimit (id, vendorId, ownRecordCode, ownRecordType, useScopeType, organCode,
+      organName, storeCode, storeName,  memo, createDate, modifyDate, creator, df)
+       VALUES
+        <foreach collection="useLimitdts" index="index" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.vendorId,jdbcType=BIGINT}, #{item.ownRecordCode,jdbcType=VARCHAR},
+            #{item.ownRecordType,jdbcType=INTEGER}, #{item.useScopeType,jdbcType=INTEGER}, #{item.organCode,jdbcType=VARCHAR},
+            #{item.organName,jdbcType=VARCHAR}, #{item.storeCode,jdbcType=VARCHAR}, #{item.storeName,jdbcType=VARCHAR},
+            #{item.memo,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.modifyDate,jdbcType=TIMESTAMP},
+            #{item.creator,jdbcType=VARCHAR}, #{item.df,jdbcType=INTEGER})
+        </foreach>
+    </insert>
     <delete id="delete" parameterType="java.lang.Long">
         delete FROM uselimit WHERE id=#{id}
     </delete>
@@ -57,6 +69,53 @@
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatchUselimits" parameterType="java.util.List">
+        <foreach collection="useLimitdts" item="item" index="index" separator=";">
+            update uselimit
+            <set >
+                <if test="item.vendorId != null" >
+                    vendorId = #{item.vendorId,jdbcType=BIGINT},
+                </if>
+                <if test="item.ownRecordCode != null" >
+                    ownRecordCode = #{item.ownRecordCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.ownRecordType != null" >
+                    ownRecordType = #{item.ownRecordType,jdbcType=INTEGER},
+                </if>
+                <if test="item.useScopeType != null" >
+                    useScopeType = #{item.useScopeType,jdbcType=INTEGER},
+                </if>
+                <if test="item.organCode != null" >
+                    organCode = #{item.organCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.organName != null" >
+                    organName = #{item.organName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.storeCode != null" >
+                    storeCode = #{item.storeCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.storeName != null" >
+                    storeName = #{item.storeName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.memo != null" >
+                    memo = #{item.memo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.createDate != null" >
+                    createDate = #{item.createDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.modifyDate != null" >
+                    modifyDate = #{item.modifyDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.creator != null" >
+                    creator = #{item.creator,jdbcType=VARCHAR},
+                </if>
+                <if test="item.df != null" >
+                    df = #{item.df,jdbcType=INTEGER},
+                </if>
+            </set>
+            where id = #{item.id,jdbcType=BIGINT}
+        </foreach>
     </update>
     <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.CpUseLimitdt">
         select * from uselimit WHERE id=#{id}
