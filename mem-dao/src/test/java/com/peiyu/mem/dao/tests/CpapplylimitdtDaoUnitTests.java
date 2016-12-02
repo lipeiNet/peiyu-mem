@@ -63,7 +63,7 @@ public class CpapplylimitdtDaoUnitTests extends BaseDaoUnitTests {
     @Test
     public void testUpdateBatchApplylimits(){
         List<CpApplyLimitdt> applyLimitdts=new ArrayList<>();
-        for (int i=0;i<2;i++){
+        for (int i=1;i<3;i++){
             CpApplyLimitdt applyLimitdt=new CpApplyLimitdt();
             applyLimitdt.setId((long)i);
             applyLimitdt.setVendorId(1433l);
@@ -73,7 +73,7 @@ public class CpapplylimitdtDaoUnitTests extends BaseDaoUnitTests {
             applyLimitdts.add(applyLimitdt);
         }
        int result=applylimitdtDao.updateBatchApplylimits(applyLimitdts);
-        assertEquals(0,result);
+        assertEquals(1,result);
     }
     @Test
     public void testGet(){
