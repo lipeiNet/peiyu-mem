@@ -13,4 +13,36 @@
     <build>
         <finalName>mem-service-${version}</finalName>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.peiyu.mem</groupId>
+            <artifactId>mem-domain</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.peiyu.mem</groupId>
+            <artifactId>mem-dao</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.peiyu.mem</groupId>
+            <artifactId>mem-manager</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.peiyu.mem</groupId>
+            <artifactId>mem-commen</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dianxiaohuo.mem</groupId>
+            <artifactId>mem-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dianxiaohuo.mem</groupId>
+            <artifactId>mem-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 </project>
