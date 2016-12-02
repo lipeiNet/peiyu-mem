@@ -7,7 +7,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.unitils.reflectionassert.ReflectionAssert;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/1.
@@ -22,8 +24,25 @@ public class CpapplylimitdtDaoUnitTests extends BaseDaoUnitTests {
         applyLimitdt.setVendorId(1433l);
         applyLimitdt.setCreateDate(new Date());
         applyLimitdt.setDetailName("121");
+        applyLimitdt.setOwnRecordCode("1");
         int result=applylimitdtDao.insert(applyLimitdt);
         assertEquals(1,result);
+    }
+    @Test
+    public void testInsertBatchApplylimits(){
+        List<CpApplyLimitdt> applyLimitdts=new ArrayList<>();
+        for (int i=0;i<3;i++){
+            CpApplyLimitdt applyLimitdt=new CpApplyLimitdt();
+            applyLimitdt.setVendorId(1433l);
+            applyLimitdt.setDetailCode(""+i);
+            applyLimitdt.setMemo("备注"+i);
+            applyLimitdt.setOwnRecordCode(""+i);
+            applyLimitdt.setCreator("lp");
+            applyLimitdt.setCreateDate(new Date());
+            applyLimitdts.add(applyLimitdt);
+        }
+        int result=applylimitdtDao.insertBatchApplylimits(applyLimitdts);
+        assertEquals(3,result);
     }
     @Test
     public void testDelete(){
@@ -40,6 +59,21 @@ public class CpapplylimitdtDaoUnitTests extends BaseDaoUnitTests {
         applyLimitdt.setMemo("qwe");
         int result=applylimitdtDao.update(applyLimitdt);
         assertEquals(1,result);
+    }
+    @Test
+    public void testUpdateBatchApplylimits(){
+        List<CpApplyLimitdt> applyLimitdts=new ArrayList<>();
+        for (int i=0;i<2;i++){
+            CpApplyLimitdt applyLimitdt=new CpApplyLimitdt();
+            applyLimitdt.setId((long)i);
+            applyLimitdt.setVendorId(1433l);
+            applyLimitdt.setCreateDate(new Date());
+            applyLimitdt.setDetailName("1");
+            applyLimitdt.setMemo("1");
+            applyLimitdts.add(applyLimitdt);
+        }
+       int result=applylimitdtDao.updateBatchApplylimits(applyLimitdts);
+        assertEquals(0,result);
     }
     @Test
     public void testGet(){
