@@ -12,6 +12,11 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
+            <groupId>com.peiyu.mem</groupId>
+            <artifactId>mem-commen</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.2.2</version>
@@ -55,6 +60,12 @@
             <groupId>com.peiyu.mem</groupId>
             <artifactId>mem-domain</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.peiyu.mem</groupId>
+            <artifactId>mem-commen</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

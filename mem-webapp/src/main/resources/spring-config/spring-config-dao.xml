@@ -6,7 +6,7 @@
        http://www.springframework.org/schema/context
    http://www.springframework.org/schema/context/spring-context.xsd">
     <!--引入jdbc文件-->
-    <context:property-placeholder location="jdbc.properties"/>
+    <context:property-placeholder location="/jdbc.properties"/>
     <!--配置数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${mem.jdbc.driver}"/>
