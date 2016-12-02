@@ -7,7 +7,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.unitils.reflectionassert.ReflectionAssert;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/1.
@@ -27,6 +29,21 @@ public class CpuselimitdtDaoUnitTests extends BaseDaoUnitTests{
         assertEquals(1,result);
     }
     @Test
+    public void  testInsertBatchApplylimits(){
+        List<CpUseLimitdt> useLimitdts=new ArrayList<>();
+        for (int i=0;i<5;i++){
+            CpUseLimitdt useLimitdt=new CpUseLimitdt();
+            useLimitdt.setDf(1);
+            useLimitdt.setVendorId(124l);
+            useLimitdt.setStoreName(""+i);
+            useLimitdt.setMemo("11"+i);
+            useLimitdt.setOrganName("zongjigou"+i);
+            useLimitdts.add(useLimitdt);
+        }
+        int result=cpuselimitdtDao.insertBatchUselimits(useLimitdts);
+        assertEquals(5,result);
+    }
+    @Test
     public void testDelete(){
         int result=cpuselimitdtDao.delete(1l);
         assertEquals(1,result);
@@ -41,6 +58,22 @@ public class CpuselimitdtDaoUnitTests extends BaseDaoUnitTests{
         useLimitdt.setOwnRecordCode("3");
         useLimitdt.setId(1l);
         int result=cpuselimitdtDao.update(useLimitdt);
+        assertEquals(1,result);
+    }
+    @Test
+    public void testUpdateBatchApplylimits(){
+        List<CpUseLimitdt> useLimitdts=new ArrayList<>();
+        for (int i=1;i<3;i++){
+            CpUseLimitdt useLimitdt=new CpUseLimitdt();
+            useLimitdt.setOrganName("1");
+            useLimitdt.setMemo("2");
+            useLimitdt.setDf(1);
+            useLimitdt.setModifyDate(new Date());
+            useLimitdt.setOwnRecordCode("3");
+            useLimitdt.setId((long)i);
+            useLimitdts.add(useLimitdt);
+        }
+        int result=cpuselimitdtDao.updateBatchUselimits(useLimitdts);
         assertEquals(1,result);
     }
     @Test
