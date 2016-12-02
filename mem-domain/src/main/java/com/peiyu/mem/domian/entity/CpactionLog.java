@@ -59,19 +59,9 @@ public class CpactionLog implements Serializable {
     private String creator;
 
     /**
-     *最后修改人用户名<br/>
-     **/
-    private String mender;
-
-    /**
      *是否已删除1删除 0正常<br/>
      **/
     private Integer df;
-
-    /**
-     *数据版本<br/>
-     **/
-    private Integer version;
 
     /**
      *操作<br/>
@@ -174,27 +164,11 @@ public class CpactionLog implements Serializable {
         this.creator = creator == null ? null : creator.trim();
     }
 
-    public String getMender() {
-        return mender;
-    }
-
-    public void setMender(String mender) {
-        this.mender = mender == null ? null : mender.trim();
-    }
-
     public Integer getDf() {
         return df;
     }
 
     public void setDf(Integer df) {
         this.df = df;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 }
