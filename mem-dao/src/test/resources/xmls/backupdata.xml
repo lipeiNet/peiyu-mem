@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-
+    <activity id="1" vendorId="1433" actNo="201611301615" actName="消费送券" startDate="2016-11-29" endDate="2016-12-30" getLimitType="1"
+              getLimitQuantity="2" useLimitType="0" useLimitQuantity="1" startTime="18:24" endTime="18:27" weekFlag="1101010"
+              allowSimt="0" applyScopeType="0" useScopeType="1" status="0" memo="备注" createDate="2016-11-29" modifyDate="2016-11-29"
+              creator="lp" df="0" sendType="0" overMoney="100" useOverMoney="200">
+    </activity>
+    <actsubgroup id="1" vendorId="1433" actNo="201611301615" actName="消费送券" subgroupCode="201200123" cpValue="10" inheritActLimit="0"
+                 startDate="2016-11-29" endDate="2016-12-30" getLimitType="1" getLimitQuantity="2" useLimitType="0" useLimitQuantity="1"
+                 startTime="18:24" endTime="18:27" weekFlag="1101010" allowSimt="0" applyScopeType="0" useScopeType="1" memo="备注"
+                 createDate="2016-11-29" modifyDate="2016-11-29" creator="lp" df="0" sendType="0" overMoney="100" useOverMoney="200">
+    </actsubgroup>
+    <makingtask id="1" vendorId="1458" actNo="VD2016081000004" actName="测试手动发优惠券" subgroupCode="VE2016081000007" cpValue="10"
+                startDate="2016-08-10" endDate="2016-12-01" taskCode="VF2016081000001" genNoRulePrefix="YLSD"
+                genNoRuleSuffix="1" serialNoStart="1" serialNoLength="5" taskBeginTime="2016-08-10" taskEndTime="2016-08-10" state="1" memo="备注"
+                createDate="2016-08-10" modifyDate="2016-08-10" creator="lp" df="0" ticNum="1000" couRules="1" couRulesNum="5">
+    </makingtask>
+    <coupon id="1" vendorId="1461" actNo="VD2016090800001" actName="消费送券" subgroupCode="VE2016090800001" cpCode="10142851" cpValue="25"
+            cpLimitValue="30" startDate="2016-09-08" endDate="2016-09-16" state="1" memNo="17876647" memCat="黄金会员" useOrganCode="WS2016091200016"
+            useOrganName="千百大厦" useStoreCode="11" useStoreName="910004" useValue="10" memo="备注" createDate="2016-09-08" modifyDate="2016-10-08" creator="lp" df="0">
+    </coupon>
+    <applylimit id="1" vendorId="1414" ownRecordCode="VD2016101300002" ownRecordType="1" applyScopeType="4" detailCode="7782210" detailName="冰糖葫芦"
+                memo="备注" createDate="2016-10-13" modifyDate="2016-10-13" creator="lp" df="0">
+    </applylimit>
+    <uselimit id="1" vendorId="1483" ownRecordCode="VD2016101300001" ownRecordType="1" useScopeType="2" organCode="" organName="" storeCode="1011"
+              storeName="总机构" memo="备注" createDate="2016-09-10" modifyDate="2016-10-10" creator="lp" df="0">
+    </uselimit>
 </dataset>
