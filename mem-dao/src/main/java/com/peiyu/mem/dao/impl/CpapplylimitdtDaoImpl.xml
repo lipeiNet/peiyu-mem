@@ -9,6 +9,17 @@
       #{detailName,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
       #{modifyDate,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{df,jdbcType=INTEGER})
     </insert>
+    <insert id="insertBatchApplylimits" parameterType="java.util.List">
+        insert into applylimit (vendorId, ownRecordCode, ownRecordType,
+          applyScopeType, detailCode, detailName, memo, createDate, modifyDate, creator, df)
+          VALUES
+          <foreach collection="applyLimitdts" index="index" item="item" separator=",">
+              (#{item.vendorId,jdbcType=BIGINT}, #{item.ownRecordCode,jdbcType=VARCHAR},
+              #{item.ownRecordType,jdbcType=INTEGER}, #{item.applyScopeType,jdbcType=INTEGER}, #{item.detailCode,jdbcType=VARCHAR},
+              #{item.detailName,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP},
+              #{item.modifyDate,jdbcType=TIMESTAMP}, #{item.creator,jdbcType=VARCHAR}, #{item.df,jdbcType=INTEGER})
+          </foreach>
+    </insert>
     <delete id="delete" parameterType="java.lang.Long">
         delete FROM applylimit WHERE id=#{id}
     </delete>
@@ -50,6 +61,47 @@
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatchApplylimits" parameterType="java.util.List">
+        <foreach collection="applyLimitdts" item="item" index="index" separator=";">
+            UPDATE applylimit
+            <set>
+                <if test="item.vendorId != null" >
+                    vendorId = #{item.vendorId,jdbcType=BIGINT},
+                </if>
+                <if test="item.ownRecordCode!= null" >
+                    ownRecordCode = #{item.ownRecordCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.ownRecordType != null" >
+                    ownRecordType = #{item.ownRecordType,jdbcType=INTEGER},
+                </if>
+                <if test="item.applyScopeType != null" >
+                    applyScopeType = #{item.applyScopeType,jdbcType=INTEGER},
+                </if>
+                <if test="item.detailCode != null" >
+                    detailCode = #{item.detailCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.detailName != null" >
+                    detailName = #{item.detailName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.memo != null" >
+                    memo = #{item.memo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.createDate != null" >
+                    createDate = #{item.createDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.modifyDate != null" >
+                    modifyDate = #{item.modifyDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.creator != null" >
+                    creator = #{item.creator,jdbcType=VARCHAR},
+                </if>
+                <if test="item.df != null" >
+                    df = #{item.df,jdbcType=INTEGER},
+                </if>
+            </set>
+            WHERE id=#{item.id,jdbcType=BIGINT}
+        </foreach>
     </update>
     <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.CpApplyLimitdt">
         select * from applylimit WHERE id=#{id};
