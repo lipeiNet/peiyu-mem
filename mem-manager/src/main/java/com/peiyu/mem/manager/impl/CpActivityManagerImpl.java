@@ -41,14 +41,10 @@ public class CpActivityManagerImpl implements CpActivityManager {
                 try {
                     activityDao.insert(cpActivity);
                     if (CollectionUtils.isNotEmpty(applyLimits)) {
-                        for (CpApplyLimitdt applyLimitdt : applyLimits) {
-                            applyLimitdtDao.insert(applyLimitdt);
-                        }
+                        applyLimitdtDao.insertBatchApplylimits(applyLimits);
                     }
                     if (CollectionUtils.isNotEmpty(useLimits)) {
-                        for (CpUseLimitdt useLimitdt : useLimits) {
-                            cpuselimitdtDao.insert(useLimitdt);
-                        }
+                        cpuselimitdtDao.insertBatchUselimits(useLimits);
                     }
                     return true;
                 } catch (Exception e) {
