@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peiyu.mem.dao.CpActsubGroupDao">
+    <insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpActsubGroup">
+ insert into actsubgroup (id, vendorId, actNo,actName, subgroupCode, cpValue,
+      cpLimitValue, cpType, inheritActLimit,startDate, endDate, getLimitType,
+      getLimitQuantity, useLimitType, useLimitQuantity,startTime, endTime, weekFlag,
+      allowSimt, applyScopeType, useScopeType,memo, createDate, modifyDate,
+      creator, df,sendType,overMoney,useOverMoney)
+    values(#{id,jdbcType=BIGINT}, #{vendorId,jdbcType=BIGINT}, #{actNo,jdbcType=VARCHAR},
+      #{actName,jdbcType=VARCHAR}, #{subgroupCode,jdbcType=VARCHAR}, #{cpValue,jdbcType=DOUBLE},
+      #{cpLimitValue,jdbcType=DOUBLE}, #{cpType,jdbcType=VARCHAR}, #{inheritActLimit,jdbcType=INTEGER},
+      #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{getLimitType,jdbcType=INTEGER},
+      #{getLimitQuantity,jdbcType=SMALLINT}, #{useLimitType,jdbcType=INTEGER}, #{useLimitQuantity,jdbcType=SMALLINT},
+      #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{weekFlag,jdbcType=VARCHAR},
+      #{allowSimt,jdbcType=INTEGER}, #{applyScopeType,jdbcType=INTEGER}, #{useScopeType,jdbcType=INTEGER},
+      #{memo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP},
+      #{creator,jdbcType=VARCHAR}, #{df,jdbcType=INTEGER}, #{sendType,jdbcType=INTEGER}, #{overMoney,jdbcType=DOUBLE}, #{useOverMoney,jdbcType=DOUBLE})
+    </insert>
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM actsubgroup WHERE id=#{id}
+    </delete>
+    <update id="update" parameterType="com.peiyu.mem.domian.entity.CpActsubGroup">
+        UPDATE actsubgroup
+        <set>
+            <if test="vendorId != null" >
+                vendorId = #{vendorId,jdbcType=BIGINT},
+            </if>
+            <if test="actNo != null" >
+                actNo = #{actNo,jdbcType=VARCHAR},
+            </if>
+            <if test="actName != null" >
+                actName = #{actName,jdbcType=VARCHAR},
+            </if>
+            <if test="subgroupCode != null" >
+                subgroupCode = #{subgroupCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cpValue != null" >
+                cpValue = #{cpValue,jdbcType=DOUBLE},
+            </if>
+            <if test="cpLimitValue != null" >
+                cpLimitValue = #{cpLimitValue,jdbcType=DOUBLE},
+            </if>
+            <if test="cpType != null" >
+                cpType = #{cpType,jdbcType=VARCHAR},
+            </if>
+            <if test="inheritActLimit != null" >
+                inheritActLimit = #{inheritActLimit,jdbcType=INTEGER},
+            </if>
+            <if test="startDate != null" >
+                startDate = #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDate != null" >
+                endDate = #{endDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="getLimitType != null" >
+                getLimitType = #{getLimitType,jdbcType=INTEGER},
+            </if>
+            <if test="getLimitQuantity != null" >
+                getLimitQuantity = #{getLimitQuantity,jdbcType=SMALLINT},
+            </if>
+            <if test="useLimitType != null" >
+                useLimitType = #{useLimitType,jdbcType=INTEGER},
+            </if>
+            <if test="useLimitQuantity != null" >
+                useLimitQuantity = #{useLimitQuantity,jdbcType=SMALLINT},
+            </if>
+            <if test="startTime != null" >
+                startTime = #{startTime,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null" >
+                endTime = #{endTime,jdbcType=VARCHAR},
+            </if>
+            <if test="weekFlag != null" >
+                weekFlag = #{weekFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="allowSimt != null" >
+                allowSimt = #{allowSimt,jdbcType=INTEGER},
+            </if>
+            <if test="applyScopeType != null" >
+                applyScopeType = #{applyScopeType,jdbcType=INTEGER},
+            </if>
+            <if test="useScopeType != null" >
+                useScopeType = #{useScopeType,jdbcType=INTEGER},
+            </if>
+            <if test="memo != null" >
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyDate != null" >
+                modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null" >
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="df != null" >
+                df = #{df,jdbcType=INTEGER},
+            </if>
+            <if test="sendType != null" >
+                sendType= #{sendType,jdbcType=INTEGER},
+            </if>
+            <if test="overMoney != null" >
+                overMoney=#{overMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="useOverMoney != null" >
+                useOverMoney=#{useOverMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.CpActsubGroup">
+       SELECT * FROM actsubgroup WHERE id=#{id}
+    </select>
+    <select id="getCpActsubGroupList" parameterType="com.peiyu.mem.domian.entity.CpActsubGroup" resultType="com.peiyu.mem.domian.entity.CpActsubGroup">
+        SELECT * FROM actsubgroup WHERE df=0 AND vendorId=#{vendorId}
+        <include refid="whereCase"></include>
+    </select>
+    <select id="getCpActsubGroupsByActNos" resultType="com.peiyu.mem.domian.entity.CpActsubGroup">
+      select * from actsubgroup WHERE df=0 AND vendorId=#{vendorId}
+      AND actNo IN
+      <foreach collection="actNos" index="index" item="item" separator=",">
+          #{item}
+      </foreach>
+    </select>
+    <sql id="whereCase">
+        <if test="actNo != null and actNo != ''" >
+            and actNo = #{actNo}
+        </if>
+        <if test="subgroupCode != null and subgroupCode != ''" >
+            and subgroupCode = #{subgroupCode}
+        </if>
+        <if test="sendType != null">
+            and sendType = #{sendType}
+        </if>
+        <if test="cpValue != null">
+            AND cpValue=#{cpValue}
+        </if>
+        <if test="endDate != null">
+            and <![CDATA[startDate<=#{endDate} and  #{endDate}<=endDate]]>
+        </if>
+    </sql>
+</mapper>

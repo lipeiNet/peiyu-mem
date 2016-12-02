@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peiyu.mem.dao.CpuselimitdtDao">
+<insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpUseLimitdt">
+ insert into uselimit (id, vendorId, ownRecordCode, ownRecordType, useScopeType, organCode,
+      organName, storeCode, storeName,  memo, createDate, modifyDate, creator, df)
+    values (#{id,jdbcType=BIGINT}, #{vendorId,jdbcType=BIGINT}, #{ownRecordCode,jdbcType=VARCHAR},
+      #{ownRecordType,jdbcType=INTEGER}, #{useScopeType,jdbcType=INTEGER}, #{organCode,jdbcType=VARCHAR},
+      #{organName,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR},
+      #{memo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP},
+      #{creator,jdbcType=VARCHAR}, #{df,jdbcType=INTEGER})
+</insert>
+    <delete id="delete" parameterType="java.lang.Long">
+        delete FROM uselimit WHERE id=#{id}
+    </delete>
+    <update id="update" parameterType="com.peiyu.mem.domian.entity.CpUseLimitdt">
+        update uselimit
+        <set >
+            <if test="vendorId != null" >
+                vendorId = #{vendorId,jdbcType=BIGINT},
+            </if>
+            <if test="ownRecordCode != null" >
+                ownRecordCode = #{ownRecordCode,jdbcType=VARCHAR},
+            </if>
+            <if test="ownRecordType != null" >
+                ownRecordType = #{ownRecordType,jdbcType=INTEGER},
+            </if>
+            <if test="useScopeType != null" >
+                useScopeType = #{useScopeType,jdbcType=INTEGER},
+            </if>
+            <if test="organCode != null" >
+                organCode = #{organCode,jdbcType=VARCHAR},
+            </if>
+            <if test="organName != null" >
+                organName = #{organName,jdbcType=VARCHAR},
+            </if>
+            <if test="storeCode != null" >
+                storeCode = #{storeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="storeName != null" >
+                storeName = #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null" >
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyDate != null" >
+                modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null" >
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="df != null" >
+                df = #{df,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.CpUseLimitdt">
+        select * from uselimit WHERE id=#{id}
+    </select>
+    <select id="getCpUseLimitdts" parameterType="com.peiyu.mem.domian.entity.CpUseLimitdt" resultType="com.peiyu.mem.domian.entity.CpUseLimitdt">
+        select * from uselimit
+        <where>
+        df = 0
+        <if test="vendorId != null">
+            and vendorId = #{vendorId}
+        </if>
+        <if test="ownRecordCode != null">
+            and ownRecordCode = #{ownRecordCode}
+        </if>
+      </where>
+    </select>
+</mapper>
