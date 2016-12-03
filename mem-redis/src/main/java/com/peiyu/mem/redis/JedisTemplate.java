@@ -29,13 +29,11 @@ public class JedisTemplate {
         try {
             jedis.set(key, value);
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+              jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
     }
     /**
@@ -49,13 +47,11 @@ public class JedisTemplate {
         try {
             jedis.setex(key, expiredseconds, value);
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
     }
     /**
@@ -70,13 +66,11 @@ public class JedisTemplate {
             String tmp = jedis.get(key);
             value = tmp != null ? tmp : value;
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
         return value;
     }
@@ -102,13 +96,11 @@ public class JedisTemplate {
         try {
             jedis.hset(key, fieldKey, value);
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
     }
 
@@ -127,27 +119,23 @@ public class JedisTemplate {
             }
             jedis.hmset(key, hash);
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
     }
     public void hmset(String key,Map<String,String> map){
         Jedis jedis=getJedis();
         try {
             jedis.hmset(key,map);
-        }catch (Exception e){
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+        }catch (Exception e) {
+            if (jedis != null) {
+                jedis.close();
             }
-        }finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+        } finally {
+            jedis.close();
         }
     }
 
@@ -162,14 +150,12 @@ public class JedisTemplate {
         Jedis jedis=getJedis();
         try {
             jedis.hsetnx(key,fieldKey,value);
-        }catch (Exception e){
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+        }catch (Exception e) {
+            if (jedis != null) {
+                jedis.close();
             }
-        }finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+        } finally {
+            jedis.close();
         }
     }
     /**
@@ -185,13 +171,11 @@ public class JedisTemplate {
             String tmp = jedis.hget(key, fieldKey);
             value = tmp != null ? tmp : value;
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
         return value;
     }
@@ -207,16 +191,14 @@ public class JedisTemplate {
         try {
             List<String> returnValue = jedis.hmget(key, fields);
             return returnValue;
-        }catch (Exception e){
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+        } catch (Exception e) {
+            if (jedis != null) {
+                jedis.close();
             }
-            return null;
-        }finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+        } finally {
+            jedis.close();
         }
+        return null;
     }
     /**
      * 获取在哈希表中指定 key 的所有字段和值
@@ -230,13 +212,11 @@ public class JedisTemplate {
             Map<String, String> tmpmap = jedis.hgetAll(key);
             map = tmpmap != null ? tmpmap : map;
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
         return map;
     }
@@ -250,14 +230,12 @@ public class JedisTemplate {
         Jedis jedis=getJedis();
         try {
             jedis.hdel(key,fields);
-        }catch (Exception e){
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+        }catch (Exception e) {
+            if (jedis != null) {
+                jedis.close();
             }
-        }finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+        } finally {
+            jedis.close();
         }
     }
 
@@ -272,13 +250,11 @@ public class JedisTemplate {
         try {
             return jedis.hexists(key, field);
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
         return false;
     }
@@ -293,14 +269,12 @@ public class JedisTemplate {
         Jedis jedis=getJedis();
         try {
             jedis.hincrBy(key,field,incerement);
-        }catch (Exception e){
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+        }catch (Exception e) {
+            if (jedis != null) {
+                jedis.close();
             }
-        }finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+        } finally {
+            jedis.close();
         }
     }
 
@@ -314,14 +288,12 @@ public class JedisTemplate {
         try {
             Set<String> result = jedis.hkeys(key);
             return result;
-        }catch (Exception e){
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+        }catch (Exception e) {
+            if (jedis != null) {
+                jedis.close();
             }
-        }finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+        } finally {
+            jedis.close();
         }
         return null;
     }
@@ -337,13 +309,11 @@ public class JedisTemplate {
             List<String> result = jedis.hvals(key);
             return result;
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
         return null;
     }
@@ -359,13 +329,11 @@ public class JedisTemplate {
             Long result = jedis.hlen(key);
             return result;
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
         return 0L;
     }
@@ -382,13 +350,11 @@ public class JedisTemplate {
             ScanResult<Map.Entry<String, String>> scanResult = jedis.hscan(key, cursor);
             return scanResult;
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
         return null;
     }
@@ -832,13 +798,11 @@ public class JedisTemplate {
             Set<String> tmp = jedis.keys(keysPattern);
             set = tmp != null ? tmp : set;
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
         return set;
     }
@@ -852,13 +816,11 @@ public class JedisTemplate {
         try {
             jedis.flushDB();
         } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
+            if (jedis != null) {
+                jedis.close();
             }
         } finally {
-            if (jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
+            jedis.close();
         }
     }
     private Jedis getJedis() {
