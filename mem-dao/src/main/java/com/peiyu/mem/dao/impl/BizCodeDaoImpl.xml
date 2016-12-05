@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peiyu.mem.dao.BizCodeDao">
+    <insert id="insert" parameterType="com.peiyu.mem.domian.entity.BizCode">
+        INSERT INTO bizcode(id,vendorId,bizCode,bizName,bno,curDate,serialNumber,
+        lengthValue,memo,createDate,modifyDate)
+        VALUES(#{id,jdbcType=BIGINT},#{vendorId,jdbcType=BIGINT},#{bizCode,jdbcType=VARCHAR},
+        #{bizName,jdbcType=VARCHAR},#{bno,jdbcType=VARCHAR},#{curDate,jdbcType=TIMESTAMP},
+        #{serialNumber,jdbcType=INTEGER},#{lengthValue,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP},#{modifyDate,jdbcType=TIMESTAMP})
+    </insert>
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM bizcode WHERE id=#{id}
+    </delete>
+    <update id="update" parameterType="com.peiyu.mem.domian.entity.BizCode">
+           <![CDATA[
+           update bizcode
+           set bizCode=#{bizCode},bizName=#{bizName},curDate=#{curDate},serialNumber=#{serialNumber},
+           lengthValue=#{lengthValue},memo=#{memo},modifyDate=#{modifyDate}
+           where id=#{id}
+        ]]>
+    </update>
+    <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.BizCode">
+        SELECT * FROM bizcode WHERE id=#{id}
+    </select>
+    <select id="getBizcodeByBno" resultType="com.peiyu.mem.domian.entity.BizCode">
+        select * from bizcode
+        where vendorId=#{vendorId} and bno=#{bizNo}
+    </select>
+</mapper>
