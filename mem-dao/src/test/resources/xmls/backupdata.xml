@@ -32,4 +32,10 @@
     <uselimit id="2" vendorId="1483" ownRecordCode="VD2016101300001" ownRecordType="1" useScopeType="2" organCode="" organName="" storeCode="1011"
               storeName="总机构" memo="备注" createDate="2016-09-10" modifyDate="2016-10-10" creator="lp" df="0">
     </uselimit>
+    <bizcode id="1" vendorId="1483" bizCode="VD" bizName="优惠券活动编码" bno="Activity_Codes" curDate="2016-12-05" serialNumber="1" lengthValue="5"
+             memo="优惠券活动编码" createDate="2016-07-25" modifyDate="2016-07-25">
+    </bizcode>
+    <bizcode id="2" vendorId="1483" bizCode="VD" bizName="优惠券活动编码" bno="Activity_Codes" curDate="2016-12-05" serialNumber="1" lengthValue="5"
+             memo="优惠券活动编码" createDate="2016-07-25" modifyDate="2016-07-25">
+    </bizcode>
 </dataset>
