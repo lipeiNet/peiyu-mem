@@ -1,8 +1,8 @@
 package com.peiyu.mem.service.impl;
 
-import com.dxh.mem.common.SysConstants;
 import com.migr.common.util.StringUtils;
 import com.migr.common.util.bean.BeanUtils;
+import com.peiyu.mem.commen.SysConstants;
 import com.peiyu.mem.dao.CpActivityDao;
 import com.peiyu.mem.domian.entity.CpActivity;
 import com.peiyu.mem.domian.entity.CpApplyLimitdt;
