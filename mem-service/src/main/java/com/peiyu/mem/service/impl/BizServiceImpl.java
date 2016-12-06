@@ -8,12 +8,14 @@ import com.peiyu.mem.manager.impl.BizCodeManagerImpl;
 import com.peiyu.mem.service.BizService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 /**
  * Created by Administrator on 2016/12/5.
  */
+@Service
 public class BizServiceImpl implements BizService {
     private Logger log = Logger.getLogger(BizServiceImpl.class);
     @Autowired
@@ -21,7 +23,7 @@ public class BizServiceImpl implements BizService {
     @Autowired
     private BizCodeDao bizCodeDao;
     @Override
-    public String getOddNumbers(Long vendorId, String bno, Integer i) {
+    public synchronized String getOddNumbers(Long vendorId, String bno, Integer i) {
         String OddNumbers = null;
         if (i == null || i > 3) {//防止死循环
             return null;
