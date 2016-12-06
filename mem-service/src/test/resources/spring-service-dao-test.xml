@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--引入jdbc文件-->
+    <context:property-placeholder location="jdbc_service.properties" ignore-unresolvable="true"/>
+    <!--配置数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${mem.jdbc.driver}"/>
+        <property name="url" value="${mem.jdbc.url}"/>
+        <property name="username" value="${mem.jdbc.username}"/>
+        <property name="password" value="${mem.jdbc.password}"/>
+        <!-- 设置连接池初始值 -->
+        <property name="initialSize" value="5" />
+        <!-- 设置连接池最大值 -->
+        <property name="maxActive" value="200"/>
+        <!-- 最大等待 -->
+        <property name="maxWait" value="10000" />
+        <!-- 设置连接池最大空闲值 -->
+        <property name="maxIdle" value="10" />
+        <!-- 设置连接池最小空闲值 -->
+        <property name="minIdle" value="5" />
+    </bean>
+    <!--注入映射的接口类-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.peiyu.mem.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <!--扫描mybatis文件-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="com/peiyu/mem/dao/impl/*.xml" />
+    </bean>
+</beans>
