@@ -84,12 +84,10 @@ public class CpActivityServiceImpl implements CpActivityService {
                 if (activityManager.insertCpActivity(cpActivity, applyLimits, useLimits)) {
                     return 1;
                 }
-                return 0;
             }
             if (activityManager.updateCpActivity(cpActivity, applyLimits, useLimits)) {
                 return 1;
             }
-            return 0;
         }
         return 0;
     }
