@@ -64,16 +64,6 @@ public class CpMakingTask implements Serializable {
     private String genNoRuleSuffix;
 
     /**
-     *序列号起始<br/>
-     **/
-    private Integer serialNoStart;
-
-    /**
-     *序列号长度<br/>
-     **/
-    private Integer serialNoLength;
-
-    /**
      *任务开始时间<br/>
      **/
     private Date taskBeginTime;
@@ -117,15 +107,6 @@ public class CpMakingTask implements Serializable {
      *制券数量<br/>
      **/
     private double ticNum;
-
-    /**
-     * 生成优惠券编号规则（0：不带随机数，1：带随机数）
-     */
-    private Integer couRules;
-    /**
-     * 随机数位数
-     */
-    private Integer couRulesNum;
 
     public Long getId() {
         return id;
@@ -222,25 +203,6 @@ public class CpMakingTask implements Serializable {
         this.genNoRuleSuffix = genNoRuleSuffix == null ? null : genNoRuleSuffix.trim();
     }
 
-
-    public Integer getSerialNoStart() {
-        return serialNoStart;
-    }
-
-    public void setSerialNoStart(Integer serialNoStart) {
-        this.serialNoStart = serialNoStart;
-    }
-
-
-    public Integer getSerialNoLength() {
-        return serialNoLength;
-    }
-
-    public void setSerialNoLength(Integer serialNoLength) {
-        this.serialNoLength = serialNoLength;
-    }
-
-
     public Date getTaskBeginTime() {
         return taskBeginTime;
     }
@@ -316,21 +278,5 @@ public class CpMakingTask implements Serializable {
 
     public void setTicNum(double ticNum) {
         this.ticNum = ticNum;
-    }
-
-    public Integer getCouRules() {
-        return couRules;
-    }
-
-    public void setCouRules(Integer couRules) {
-        this.couRules = couRules;
-    }
-
-    public Integer getCouRulesNum() {
-        return couRulesNum;
-    }
-
-    public void setCouRulesNum(Integer couRulesNum) {
-        this.couRulesNum = couRulesNum;
     }
 }
