@@ -25,6 +25,7 @@
         <module name="mem-commen" />
         <module name="mem-dao" />
         <module name="mem-domain" />
+        <module name="mem-manager" />
         <module name="mem-rabbitmq" />
         <module name="mem-redis" />
         <module name="mem-rpc" />
@@ -36,6 +37,7 @@
       <module name="mem-commen" target="1.7" />
       <module name="mem-dao" target="1.7" />
       <module name="mem-domain" target="1.7" />
+      <module name="mem-manager" target="1.7" />
       <module name="mem-rabbitmq" target="1.7" />
       <module name="mem-redis" target="1.7" />
       <module name="mem-rpc" target="1.7" />
