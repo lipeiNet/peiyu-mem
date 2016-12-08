@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/rabbit  http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <import resource="spring-rabbitmq-share.xml"/>
+    <context:component-scan base-package="com.peiyu.mem.rabbitmq"/>
+    <context:property-placeholder location="/rabbitmq-server.properties" ignore-unresolvable="true"/>
+    <!--定义rabbitmq模板类-->
+    <rabbit:template exchange="${rabbit.makeCoupons.exchange.direct}" id="rabbitTemplate" connection-factory="connectionFactory"
+                     message-converter="jsonMessageConverter"/>
+    <bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.JsonMessageConverter"/>
+</beans>
