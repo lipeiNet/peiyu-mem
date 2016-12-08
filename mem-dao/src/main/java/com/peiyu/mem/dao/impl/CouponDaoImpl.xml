@@ -11,6 +11,18 @@ insert into coupon (id, vendorId, actNo,actName, subgroupCode, cpCode,
       #{memNo,jdbcType=VARCHAR}, #{memCat,jdbcType=VARCHAR},#{useValue,jdbcType=DOUBLE},#{memo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
       #{modifyDate,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR},#{df,jdbcType=INTEGER})
     </insert>
+    <insert id="insertBatchCoupons">
+        insert into coupon (id, vendorId, actNo,actName, subgroupCode, cpCode,
+      cpValue, startDate, endDate, state,memNo, memCat, useValue,  memo, createDate,
+      modifyDate, creator,df)VALUES
+        <foreach collection="coupons" index="index" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.vendorId,jdbcType=BIGINT}, #{item.actNo,jdbcType=VARCHAR},
+            #{item.actName,jdbcType=VARCHAR}, #{item.subgroupCode,jdbcType=VARCHAR}, #{item.cpCode,jdbcType=VARCHAR},
+            #{item.cpValue,jdbcType=DOUBLE},  #{item.startDate,jdbcType=TIMESTAMP},#{item.endDate,jdbcType=TIMESTAMP}, #{item.state,jdbcType=INTEGER},
+            #{item.memNo,jdbcType=VARCHAR}, #{item.memCat,jdbcType=VARCHAR},#{item.useValue,jdbcType=DOUBLE},#{item.memo,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.modifyDate,jdbcType=TIMESTAMP}, #{item.creator,jdbcType=VARCHAR},#{item.df,jdbcType=INTEGER})
+        </foreach>
+    </insert>
     <delete id="delete" parameterType="java.lang.Long">
         DELETE FROM coupon WHERE id=#{id}
     </delete>
