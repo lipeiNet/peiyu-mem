@@ -10,6 +10,7 @@ import com.peiyu.mem.service.MakingTaskService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class MakingTaskServiceImpl implements MakingTaskService {
     private MakingTaskManager makingTaskManager;
     @Autowired
     private CouponManager couponManager;
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public int insertMakingTask(CpMakingTask makingTask) {
@@ -73,7 +76,7 @@ public class MakingTaskServiceImpl implements MakingTaskService {
             log.info("生产优惠券消费时间："+(start2-start1)+"毫秒");
             if (CollectionUtils.isNotEmpty(tempCoupons)) {
                 makingTaskManager.insertCacheByMakingConpon(vendorId, taskCode);
-                new Thread() {
+                taskExecutor.execute(new Runnable() {
                     @Override
                     public void run() {
                         boolean result = couponManager.insertCoupons(tempCoupons);
@@ -83,7 +86,7 @@ public class MakingTaskServiceImpl implements MakingTaskService {
                             makingTaskDao.update(tempMakingTask);
                         }
                     }
-                }.start();
+                });
             }
         } catch (Exception e) {
             log.error("异步制券出现异常", e);
