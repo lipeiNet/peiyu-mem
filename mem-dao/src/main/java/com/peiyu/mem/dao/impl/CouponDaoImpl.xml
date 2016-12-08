@@ -3,17 +3,12 @@
 <mapper namespace="com.peiyu.mem.dao.CouponDao">
     <insert id="insert" parameterType="com.peiyu.mem.domian.entity.Coupon">
 insert into coupon (id, vendorId, actNo,actName, subgroupCode, cpCode,
-      cpValue, cpLimitValue,startDate, endDate, state,
-      memNo, memCat, useOrganCode, useOrganName, useStoreCode,
-      useStoreName, useValue,  memo, createDate,
+      cpValue, startDate, endDate, state,memNo, memCat, useValue,  memo, createDate,
       modifyDate, creator,df)
     values (#{id,jdbcType=BIGINT}, #{vendorId,jdbcType=BIGINT}, #{actNo,jdbcType=VARCHAR},
       #{actName,jdbcType=VARCHAR}, #{subgroupCode,jdbcType=VARCHAR}, #{cpCode,jdbcType=VARCHAR},
-      #{cpValue,jdbcType=DOUBLE}, #{cpLimitValue,jdbcType=DOUBLE},  #{startDate,jdbcType=TIMESTAMP},
-      #{endDate,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER},
-      #{memNo,jdbcType=VARCHAR}, #{memCat,jdbcType=VARCHAR},
-      #{useOrganCode,jdbcType=VARCHAR}, #{useOrganName,jdbcType=VARCHAR}, #{useStoreCode,jdbcType=VARCHAR},
-      #{useStoreName,jdbcType=VARCHAR}, #{useValue,jdbcType=DOUBLE},#{memo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+      #{cpValue,jdbcType=DOUBLE},  #{startDate,jdbcType=TIMESTAMP},#{endDate,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER},
+      #{memNo,jdbcType=VARCHAR}, #{memCat,jdbcType=VARCHAR},#{useValue,jdbcType=DOUBLE},#{memo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
       #{modifyDate,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR},#{df,jdbcType=INTEGER})
     </insert>
     <delete id="delete" parameterType="java.lang.Long">
@@ -40,9 +35,6 @@ insert into coupon (id, vendorId, actNo,actName, subgroupCode, cpCode,
             <if test="cpValue != null" >
                 cpValue = #{cpValue,jdbcType=DOUBLE},
             </if>
-            <if test="cpLimitValue != null" >
-                cpLimitValue = #{cpLimitValue,jdbcType=DOUBLE},
-            </if>
             <if test="startDate != null" >
                 startDate = #{startDate,jdbcType=TIMESTAMP},
             </if>
@@ -57,18 +49,6 @@ insert into coupon (id, vendorId, actNo,actName, subgroupCode, cpCode,
             </if>
             <if test="memCat != null" >
                 memCat = #{memCat,jdbcType=VARCHAR},
-            </if>
-            <if test="useOrganCode != null" >
-                useOrganCode = #{useOrganCode,jdbcType=VARCHAR},
-            </if>
-            <if test="useOrganName != null" >
-                useOrganName = #{useOrganName,jdbcType=VARCHAR},
-            </if>
-            <if test="useStoreCode != null" >
-                useStoreCode = #{useStoreCode,jdbcType=VARCHAR},
-            </if>
-            <if test="useStoreName != null" >
-                useStoreName = #{useStoreName,jdbcType=VARCHAR},
             </if>
             <if test="useValue != null" >
                 useValue = #{useValue,jdbcType=DOUBLE},
