@@ -3,7 +3,7 @@ package com.peiyu.mem.manager.impl;
 import com.peiyu.mem.dao.CouponDao;
 import com.peiyu.mem.domian.entity.Coupon;
 import com.peiyu.mem.manager.CouponManager;
-import org.apache.commons.collections.CollectionUtils;
+import com.peiyu.mem.utils.ListUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,22 +27,26 @@ public class CouponManagerImpl implements CouponManager {
 
     @Override
     public boolean insertCoupons(final List<Coupon> coupons) {
-        final long start1=System.currentTimeMillis();
+        final long start1 = System.currentTimeMillis();
         TransactionTemplate template = new TransactionTemplate(transactionManager);
         return template.execute(new TransactionCallback<Boolean>() {
             @Override
             public Boolean doInTransaction(TransactionStatus transactionStatus) {
                 try {
-                    if (CollectionUtils.isNotEmpty(coupons)) {
-                        for (Coupon coupon : coupons) {
-                            couponDao.insert(coupon);
+                    if (coupons.size() <= 5000) {
+                        couponDao.insertBatchCoupons(coupons);
+                    }
+                    if (coupons.size() > 5000) {
+                        List<List<Coupon>> tempCoupons = ListUtil.splitList(coupons, 5000);
+                        for (List<Coupon> item : tempCoupons) {
+                            couponDao.insertBatchCoupons(item);
                         }
                     }
-                    long end1=System.currentTimeMillis();
-                    log.info("添加10000张优惠券消耗时间："+(end1-start1)+"毫秒");
+                    long end1 = System.currentTimeMillis();
+                    log.info("添加10000张优惠券消耗时间：" + (end1 - start1) + "毫秒");
                     return true;
                 } catch (Exception e) {
-                    log.error("添加优惠券异常："+e);
+                    log.error("添加优惠券异常：" + e);
                     transactionStatus.setRollbackOnly();
                     return false;
                 }
