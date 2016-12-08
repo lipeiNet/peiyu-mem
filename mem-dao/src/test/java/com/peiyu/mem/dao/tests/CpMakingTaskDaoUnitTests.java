@@ -22,7 +22,6 @@ public class CpMakingTaskDaoUnitTests extends BaseDaoUnitTests {
         makingTask.setDf(1);
         makingTask.setActName("lingka");
         makingTask.setCreateDate(new Date());
-        makingTask.setCouRulesNum(1);
         makingTask.setId(null);
         int result=cpMakingTaskDao.insert(makingTask);
         assertEquals(1,result);
@@ -40,7 +39,6 @@ public class CpMakingTaskDaoUnitTests extends BaseDaoUnitTests {
         makingTask.setActName("ngka");
         makingTask.setCreator("zhangsan");
         makingTask.setCreateDate(new Date());
-        makingTask.setCouRulesNum(1);
         makingTask.setId(1l);
         int result=cpMakingTaskDao.update(makingTask);
         assertEquals(1,result);
@@ -71,8 +69,6 @@ public class CpMakingTaskDaoUnitTests extends BaseDaoUnitTests {
         makingTask.setTaskCode("VF2016081000001");
         makingTask.setGenNoRulePrefix("YLSD");
         makingTask.setGenNoRuleSuffix("1");
-        makingTask.setSerialNoStart(1);
-        makingTask.setSerialNoLength(5);
         makingTask.setTaskBeginTime(DateUtil.getFormatDate("2016-08-10","yyyy-MM-dd"));
         makingTask.setTaskEndTime(DateUtil.getFormatDate("2016-08-10","yyyy-MM-dd"));
         makingTask.setState(1);
@@ -81,8 +77,6 @@ public class CpMakingTaskDaoUnitTests extends BaseDaoUnitTests {
         makingTask.setCreator("lp");
         makingTask.setModifyDate(DateUtil.getFormatDate("2016-08-10","yyyy-MM-dd"));
         makingTask.setTicNum(1000);
-        makingTask.setCouRules(1);
-        makingTask.setCouRulesNum(5);
         makingTask.setDf(0);
         return makingTask;
     }
