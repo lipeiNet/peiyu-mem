@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.peiyu.mem.dao.CpMakingTaskDao">
-    <insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpMakingTask">
+    <insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpMakingTask" useGeneratedKeys="true" keyProperty="id">
  insert into makingtask (id, vendorId, actNo,actName, subgroupCode, cpValue,
       startDate, endDate, taskCode, genNoRulePrefix, genNoRuleSuffix, serialNoStart,
       serialNoLength, taskBeginTime, taskEndTime, state, memo, createDate,

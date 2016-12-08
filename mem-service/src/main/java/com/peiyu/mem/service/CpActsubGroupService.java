@@ -39,6 +39,6 @@ public interface CpActsubGroupService {
      * @param id
      * @return
      */
-    int getActsubGroup(long id);
+    CpActsubGroup getActsubGroup(Long id);
 
 }

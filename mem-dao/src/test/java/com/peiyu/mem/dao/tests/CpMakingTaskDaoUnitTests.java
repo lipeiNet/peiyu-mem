@@ -23,6 +23,7 @@ public class CpMakingTaskDaoUnitTests extends BaseDaoUnitTests {
         makingTask.setActName("lingka");
         makingTask.setCreateDate(new Date());
         makingTask.setCouRulesNum(1);
+        makingTask.setId(null);
         int result=cpMakingTaskDao.insert(makingTask);
         assertEquals(1,result);
     }
