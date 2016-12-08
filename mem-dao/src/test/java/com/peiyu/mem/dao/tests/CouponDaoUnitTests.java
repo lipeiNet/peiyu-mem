@@ -54,16 +54,11 @@ public class CouponDaoUnitTests extends BaseDaoUnitTests {
         coupon.setSubgroupCode("VE2016090800001");
         coupon.setCpCode("10142851");
         coupon.setCpValue(25d);
-        coupon.setCpLimitValue(30d);
         coupon.setStartDate(DateUtil.getFormatDate("2016-09-08","yyyy-MM-dd"));
         coupon.setEndDate(DateUtil.getFormatDate("2016-09-16","yyyy-MM-dd"));
         coupon.setState(1);
         coupon.setMemNo("17876647");
         coupon.setMemCat("黄金会员");
-        coupon.setUseStoreCode("11");
-        coupon.setUseStoreName("910004");
-        coupon.setUseOrganCode("WS2016091200016");
-        coupon.setUseOrganName("千百大厦");
         coupon.setUseValue(10d);
         coupon.setMemo("备注");
         coupon.setCreateDate(DateUtil.getFormatDate("2016-09-08","yyyy-MM-dd"));
