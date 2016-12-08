@@ -46,7 +46,6 @@ public interface MakingTaskManager {
      * @param taskCode
      */
     void deleteCacheByMakingConpon(Long vendorId,String taskCode);
-
     /**
      * 获取制券任务
      * @param
