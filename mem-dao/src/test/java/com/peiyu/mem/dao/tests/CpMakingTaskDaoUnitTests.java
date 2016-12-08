@@ -51,6 +51,12 @@ public class CpMakingTaskDaoUnitTests extends BaseDaoUnitTests {
         CpMakingTask result=cpMakingTaskDao.get(1l);
         ReflectionAssert.assertReflectionEquals(except, result);
     }
+    @Test
+    public void testGetCpMakingTaskByTaskCode() {
+        CpMakingTask except = getExceptMakingTask();
+        CpMakingTask result = cpMakingTaskDao.getCpMakingTaskByTaskCode(1458l, "VF2016081000001");
+        ReflectionAssert.assertReflectionEquals(except, result);
+    }
 
     public CpMakingTask getExceptMakingTask(){
         CpMakingTask makingTask=new CpMakingTask();
