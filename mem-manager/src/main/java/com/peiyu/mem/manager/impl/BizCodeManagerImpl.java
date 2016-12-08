@@ -7,6 +7,7 @@ import com.peiyu.mem.manager.BizCodeManager;
 import com.peiyu.mem.redis.JedisTemplate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
@@ -15,6 +16,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 /**
  * Created by Administrator on 2016/12/5.
  */
+@Service
 public class BizCodeManagerImpl implements BizCodeManager {
     private Logger log = Logger.getLogger(BizCodeManagerImpl.class);
     @Autowired
@@ -56,7 +58,7 @@ public class BizCodeManagerImpl implements BizCodeManager {
             log.error("更新缓存失败，code为null");
             return false;
         }
-        String cacheKey = String.format("%s_%s", code.getVendorId(), code.getBizCode());
+        String cacheKey = String.format("%s_%s", code.getVendorId(), code.getBno());
         try {
             jedisTemplate.set(cacheKey, JsonUtil.objectToJson(code));
         } catch (Exception e) {
