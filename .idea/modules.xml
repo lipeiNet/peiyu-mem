@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/mem-commen/mem-commen.iml" filepath="$PROJECT_DIR$/mem-commen/mem-commen.iml" />
       <module fileurl="file://$PROJECT_DIR$/mem-dao/mem-dao.iml" filepath="$PROJECT_DIR$/mem-dao/mem-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/mem-domain/mem-domain.iml" filepath="$PROJECT_DIR$/mem-domain/mem-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mem-manager/mem-manager.iml" filepath="$PROJECT_DIR$/mem-manager/mem-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/mem-rabbitmq/mem-rabbitmq.iml" filepath="$PROJECT_DIR$/mem-rabbitmq/mem-rabbitmq.iml" />
       <module fileurl="file://$PROJECT_DIR$/mem-redis/mem-redis.iml" filepath="$PROJECT_DIR$/mem-redis/mem-redis.iml" />
       <module fileurl="file://$PROJECT_DIR$/mem-rpc/mem-rpc.iml" filepath="$PROJECT_DIR$/mem-rpc/mem-rpc.iml" />

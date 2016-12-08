@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd ">
+    <description>redis的配置文件</description>
+    <context:property-placeholder location="redis.properties"/>
+    <!--配置jedispool的相关属性-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- 最大连接数限制，系统默认为8 -->
+        <property name="maxTotal" value="${redis.maxTotal}" />
+        <!-- 最大空闲连接数限制，系统默认为8 -->
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <!-- 最小空闲连接数限制，系统默认为0 -->
+        <property name="minIdle" value="${redis.minIdle}" />
+        <!-- 最大等待时间单位为毫秒，设定为10秒 -->
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+        <!-- 对获取到的connection进行validateObject检验-->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+    <!--设置各个业务的redis域名/ip以及对应的端口号 -->
+    <!-- 期望将各个业务应用用到的redis隔离开，目前通过端口号隔离 -->
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1" value="${redis.hostName}" type="java.lang.String"/>
+        <constructor-arg index="2" value="${redis.port}" type="int"/>
+    </bean>
+    <bean id="jedisTemplate" class="com.peiyu.mem.redis.JedisTemplate">
+        <constructor-arg index="0" ref="jedisPool" />
+    </bean>
+</beans>

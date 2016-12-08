@@ -20,5 +20,10 @@
             <artifactId>mem-dao</artifactId>
             <version>${version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.peiyu.mem</groupId>
+            <artifactId>mem-redis</artifactId>
+            <version>${version}</version>
+        </dependency>
     </dependencies>
 </project>

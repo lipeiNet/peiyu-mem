@@ -34,15 +34,5 @@
             <artifactId>mem-commen</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.dianxiaohuo.mem</groupId>
-            <artifactId>mem-common</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dianxiaohuo.mem</groupId>
-            <artifactId>mem-common</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 </project>

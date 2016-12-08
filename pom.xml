@@ -74,6 +74,11 @@
             <artifactId>jackson-core-asl</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.migr.common</groupId>
+            <artifactId>migr-common-util</artifactId>
+            <version>1.0</version>
+        </dependency>
         <!--json依赖结束-->
         <!--log4j开始-->
         <dependency>
