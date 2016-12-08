@@ -7,6 +7,7 @@ import com.peiyu.mem.domian.entity.CpMakingTask;
 import com.peiyu.mem.manager.CouponManager;
 import com.peiyu.mem.manager.MakingTaskManager;
 import com.peiyu.mem.service.MakingTaskService;
+import com.peiyu.mem.utils.GenerateOnlyIdUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import java.util.Random;
  */
 @Service
 public class MakingTaskServiceImpl implements MakingTaskService {
-    private Logger log=Logger.getLogger(MakingTaskServiceImpl.class);
+    private Logger log = Logger.getLogger(MakingTaskServiceImpl.class);
     @Autowired
     private CpMakingTaskDao makingTaskDao;
     @Autowired
@@ -40,16 +41,15 @@ public class MakingTaskServiceImpl implements MakingTaskService {
                 log.error("重复提交");
                 return 0;
             }
-            if (makingTask.getId()==null||"".equals(makingTask.getId())){
+            if (makingTask.getId() == null || "".equals(makingTask.getId())) {
                 makingTaskDao.insert(makingTask);
-            }
-            else{
+            } else {
                 makingTaskDao.update(makingTask);
             }
             makingTaskManager.insertCacheByTaskCode(makingTask);
             return 1;
-        }catch (Exception e){
-            log.error("保存制券任务失败："+e.getMessage());
+        } catch (Exception e) {
+            log.error("保存制券任务失败：" + e.getMessage());
             return 0;
         }
     }
@@ -70,10 +70,10 @@ public class MakingTaskServiceImpl implements MakingTaskService {
             tempMakingTask.setTaskBeginTime(new Date());
             makingTaskDao.update(tempMakingTask);
 
-            long start1=System.currentTimeMillis();
+            long start1 = System.currentTimeMillis();
             final List<Coupon> tempCoupons = getTempCoupons(tempMakingTask);
-            long start2=System.currentTimeMillis();
-            log.info("生产优惠券消费时间："+(start2-start1)+"毫秒");
+            long start2 = System.currentTimeMillis();
+            log.info("生产优惠券消费时间：" + (start2 - start1) + "毫秒");
             if (CollectionUtils.isNotEmpty(tempCoupons)) {
                 makingTaskManager.insertCacheByMakingConpon(vendorId, taskCode);
                 taskExecutor.execute(new Runnable() {
@@ -97,21 +97,21 @@ public class MakingTaskServiceImpl implements MakingTaskService {
 
     @Override
     public void deleteMakingTask(long id) {
-        if (id==0){
+        if (id == 0) {
             return;
         }
         try {
             makingTaskDao.delete(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error(e.getMessage());
         }
     }
 
     @Override
     public int updateMakingTask(CpMakingTask makingTask) {
-        try{
+        try {
             makingTaskDao.update(makingTask);
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error(e.getMessage());
         }
         return 0;
@@ -122,82 +122,42 @@ public class MakingTaskServiceImpl implements MakingTaskService {
         return makingTaskDao.get(id);
     }
 
-   @Override
+    @Override
     public String getTempCpCode(CpMakingTask makingTask) {
-        String f = "%0" + makingTask.getSerialNoLength() + "d";
-        String cpCode1;
-        String cpCode2;
-        String cpCode3;
-        if (makingTask.getCouRules() != null && makingTask.getCouRules() == 1) {
-            cpCode1 = makingTask.getGenNoRulePrefix() + String.format(f, makingTask.getSerialNoStart() + 0)
-                    + getRandomNumber(makingTask.getCouRulesNum()) + makingTask.getGenNoRuleSuffix();
-            cpCode2 = makingTask.getGenNoRulePrefix() + String.format(f, makingTask.getSerialNoStart() + 2)
-                    + getRandomNumber(makingTask.getCouRulesNum()) + makingTask.getGenNoRuleSuffix();
-            cpCode3 = makingTask.getGenNoRulePrefix() + String.format(f, makingTask.getSerialNoStart() + makingTask.getTicNum())
-                    + getRandomNumber(makingTask.getCouRulesNum()) + makingTask.getGenNoRuleSuffix();
-        }
-        cpCode1 = makingTask.getGenNoRulePrefix() + String.format(f, makingTask.getSerialNoStart() + 0)
-                + makingTask.getGenNoRuleSuffix();
-        cpCode2 = makingTask.getGenNoRulePrefix() + String.format(f, makingTask.getSerialNoStart() + 2)
-                + makingTask.getGenNoRuleSuffix();
-        cpCode3 = makingTask.getGenNoRulePrefix() + String.format(f, makingTask.getSerialNoStart() + makingTask.getTicNum())
-                + makingTask.getGenNoRuleSuffix();
+        GenerateOnlyIdUtils onlyIdUtils = new GenerateOnlyIdUtils(0, 0);
+        String cpCode1 = makingTask.getGenNoRulePrefix() + onlyIdUtils.nextId() + makingTask.getGenNoRuleSuffix();
+        String cpCode2 = makingTask.getGenNoRulePrefix() + onlyIdUtils.nextId() + makingTask.getGenNoRuleSuffix();
+        String cpCode3 = makingTask.getGenNoRulePrefix() + onlyIdUtils.nextId() + makingTask.getGenNoRuleSuffix();
         return cpCode1 + cpCode2 + "..." + cpCode3;
     }
 
     /**
      * 获取临时的优惠券集合
+     *
      * @param makingTask
      * @return
      */
     protected List<Coupon> getTempCoupons(CpMakingTask makingTask) {
-        List<Coupon> tempCoupons = new ArrayList<>();
-        List<String> cpCodes = new ArrayList<>();
-        String f = "%0" + makingTask.getSerialNoLength() + "d";
-        for (int i = 0; i < makingTask.getTicNum(); i++) {
-            String cpCode = "";
-            if (makingTask.getCouRules() != null && makingTask.getCouRules() == 1) {
-                cpCode = makingTask.getGenNoRulePrefix() + String.format(f, makingTask.getSerialNoStart() + i)
-                        + getRandomNumber(makingTask.getCouRulesNum()) + makingTask.getGenNoRuleSuffix();
-            }
-            if (makingTask.getCouRules() == null || makingTask.getCouRules() != 1) {
-                cpCode = makingTask.getGenNoRulePrefix() + String.format(f, makingTask.getSerialNoStart() + i)
-                        + makingTask.getGenNoRuleSuffix();
-            }
-            if (!cpCodes.contains(cpCode)) {
-                cpCodes.add(cpCode);
-            }
+        if (makingTask.getTicNum() <= 0) {
+            return null;
         }
-        for (String cpCode : cpCodes) {
+        List<Coupon> tempCoupons = new ArrayList<>();
+        GenerateOnlyIdUtils onlyIdUtils = new GenerateOnlyIdUtils(0, 0);
+        for (int i = 0; i < makingTask.getTicNum(); i++) {
             Coupon coupon = new Coupon();
             coupon.setId(null);
-            coupon.setCpCode(cpCode);
+            coupon.setCpCode(Long.toString(onlyIdUtils.nextId()));
             coupon.setVendorId(makingTask.getVendorId());
-            coupon.setCreateDate(new Date());
             coupon.setActName(makingTask.getActName());
             coupon.setActNo(makingTask.getActNo());
             coupon.setSubgroupCode(makingTask.getSubgroupCode());
             coupon.setState(SysConstants.COUPONSTATE.NOGRANT);
             coupon.setCpValue(makingTask.getCpValue());
+            coupon.setStartDate(makingTask.getStartDate());
+            coupon.setEndDate(makingTask.getEndDate());
+            coupon.setCreateDate(new Date());
             tempCoupons.add(coupon);
         }
         return tempCoupons;
     }
-    /**
-     * 生产随机数
-     * @param length
-     * @return
-     */
-    protected int getRandomNumber(int length){
-        try {
-            Random random=new Random();
-            Double maxNumber=Math.pow(10,length);
-            return random.nextInt(maxNumber.intValue());
-        }catch (Exception e){
-            log.error("生产随机数异常："+e.getMessage());
-            return 0;
-        }
-    }
-
-
 }
