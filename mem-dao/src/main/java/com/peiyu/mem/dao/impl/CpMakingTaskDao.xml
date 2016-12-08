@@ -3,17 +3,15 @@
 <mapper namespace="com.peiyu.mem.dao.CpMakingTaskDao">
     <insert id="insert" parameterType="com.peiyu.mem.domian.entity.CpMakingTask" useGeneratedKeys="true" keyProperty="id">
  insert into makingtask (id, vendorId, actNo,actName, subgroupCode, cpValue,
-      startDate, endDate, taskCode, genNoRulePrefix, genNoRuleSuffix, serialNoStart,
-      serialNoLength, taskBeginTime, taskEndTime, state, memo, createDate,
-      modifyDate, creator, df,ticNum,couRules,couRulesNum)
+      startDate, endDate, taskCode, genNoRulePrefix, genNoRuleSuffix,  taskBeginTime, taskEndTime, state, memo, createDate,
+      modifyDate, creator, df,ticNum)
     values (#{id,jdbcType=BIGINT}, #{vendorId,jdbcType=BIGINT}, #{actNo,jdbcType=VARCHAR},
       #{actName,jdbcType=VARCHAR}, #{subgroupCode,jdbcType=VARCHAR}, #{cpValue,jdbcType=DOUBLE},
       #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{taskCode,jdbcType=VARCHAR},
-      #{genNoRulePrefix,jdbcType=VARCHAR}, #{genNoRuleSuffix,jdbcType=VARCHAR}, #{serialNoStart,jdbcType=INTEGER},
-      #{serialNoLength,jdbcType=INTEGER}, #{taskBeginTime,jdbcType=TIMESTAMP}, #{taskEndTime,jdbcType=TIMESTAMP},
+      #{genNoRulePrefix,jdbcType=VARCHAR}, #{genNoRuleSuffix,jdbcType=VARCHAR},
+      #{taskBeginTime,jdbcType=TIMESTAMP}, #{taskEndTime,jdbcType=TIMESTAMP},
       #{state,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
-      #{modifyDate,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR},#{df,jdbcType=INTEGER},#{ticNum,jdbcType=DOUBLE},
-      #{couRules,jdbcType=INTEGER}, #{couRulesNum,jdbcType=INTEGER})
+      #{modifyDate,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR},#{df,jdbcType=INTEGER},#{ticNum,jdbcType=DOUBLE})
     </insert>
     <delete id="delete" parameterType="java.lang.Long">
         DELETE FROM makingtask WHERE id=#{id}
@@ -51,12 +49,6 @@
             <if test="genNoRuleSuffix != null" >
                 genNoRuleSuffix = #{genNoRuleSuffix,jdbcType=VARCHAR},
             </if>
-            <if test="serialNoStart != null" >
-                serialNoStart = #{serialNoStart,jdbcType=INTEGER},
-            </if>
-            <if test="serialNoLength != null" >
-                serialNoLength = #{serialNoLength,jdbcType=INTEGER},
-            </if>
             <if test="taskBeginTime != null" >
                 taskBeginTime = #{taskBeginTime,jdbcType=TIMESTAMP},
             </if>
@@ -83,12 +75,6 @@
             </if>
             <if test="ticNum != null" >
                 ticNum = #{ticNum,jdbcType=DOUBLE},
-            </if>
-            <if test="couRules != null" >
-                couRules = #{couRules,jdbcType=INTEGER},
-            </if>
-            <if test="couRulesNum != null" >
-                couRulesNum = #{couRulesNum,jdbcType=INTEGER},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
