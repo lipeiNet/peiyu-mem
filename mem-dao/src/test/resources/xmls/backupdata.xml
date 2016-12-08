@@ -12,7 +12,7 @@
     </actsubgroup>
     <makingtask id="1" vendorId="1458" actNo="VD2016081000004" actName="测试手动发优惠券" subgroupCode="VE2016081000007" cpValue="10"
                 startDate="2016-08-10" endDate="2016-12-01" taskCode="VF2016081000001" genNoRulePrefix="YLSD"
-                genNoRuleSuffix="1" serialNoStart="1"  taskBeginTime="2016-08-10" taskEndTime="2016-08-10" state="1" memo="备注"
+                genNoRuleSuffix="1"  taskBeginTime="2016-08-10" taskEndTime="2016-08-10" state="1" memo="备注"
                 createDate="2016-08-10" modifyDate="2016-08-10" creator="lp" df="0" ticNum="1000">
     </makingtask>
     <coupon id="1" vendorId="1461" actNo="VD2016090800001" actName="消费送券" subgroupCode="VE2016090800001" cpCode="10142851" cpValue="25"
