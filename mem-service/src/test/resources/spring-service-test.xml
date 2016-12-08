@@ -6,8 +6,19 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <import resource="spring-redis-service-test.xml"/>
     <import resource="spring-service-dao-test.xml"/>
+    <context:property-placeholder location="threadtest.properties" ignore-unresolvable="true"/>
     <context:component-scan base-package="com.peiyu.mem"/>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!--线程池维护线程的最少数量-->
+        <property name="corePoolSize" value="${thread.corePoolSize}"/>
+        <!--线程池维护线程所允许的空闲时间-->
+        <property name="keepAliveSeconds" value="${thread.keepAliveSeconds}"/>
+        <!--线程池维护线程的最大数量-->
+        <property name="maxPoolSize" value="${thread.maxPoolSize}"/>
+        <!--线程池所使用的缓冲队列-->
+        <property name="queueCapacity" value="${thread.queueCapacity}"/>
     </bean>
 </beans>
