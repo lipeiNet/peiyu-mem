@@ -100,6 +100,9 @@
         select * from makingtask  WHERE df=0 AND vendorId=#{vendorId}
         <include refid="whereCase"></include>
     </select>
+    <select id="getCpMakingTaskByTaskCode" resultType="com.peiyu.mem.domian.entity.CpMakingTask">
+        select * from makingtask WHERE df =0 AND  vendorId=#{vendorId} AND taskCode=#{taskCode};
+    </select>
 
     <sql id="whereCase">
     <if test="actNo != null and actNo != ''" >
