@@ -71,15 +71,12 @@ public class MakingTaskManagerImpl implements MakingTaskManager {
     }
 
     @Override
-    public CpMakingTask getMakingTask(Long vendorId, String taskTask) {
-        String taskCode = String.format("%s_%s", vendorId, taskTask);
-        String taskJson = jedisTemplate.get(taskCode);
+    public CpMakingTask getMakingTask(Long vendorId, String taskCode) {
+        String taskCodeCache = String.format("%s_%s", vendorId, taskCode);
+        String taskJson = jedisTemplate.get(taskCodeCache);
         if (StringUtils.isNotBlank(taskJson)) {
             return JsonUtil.g.fromJson(taskJson, CpMakingTask.class);
         }
-        /*if (makingTask.getId() != null) {
-            return makingTaskDao.get(makingTask.getId());
-        }*/
-        return null;
+        return makingTaskDao.getCpMakingTaskByTaskCode(vendorId,taskCode);
     }
 }
