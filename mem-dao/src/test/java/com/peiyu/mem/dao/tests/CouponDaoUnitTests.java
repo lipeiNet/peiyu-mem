@@ -5,7 +5,11 @@ import com.peiyu.mem.domian.entity.Coupon;
 import com.peiyu.mem.utils.DateUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.Lifecycle;
 import org.unitils.reflectionassert.ReflectionAssert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/1.
@@ -22,6 +26,19 @@ public class CouponDaoUnitTests extends BaseDaoUnitTests {
         coupon.setCpValue(10d);
         int result=couponDao.insert(coupon);
         assertEquals(1,result);
+    }
+    @Test
+    public void testInsertBatchCoupons() {
+        List<Coupon> coupons = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Coupon coupon = new Coupon();
+            coupon.setDf(1);
+            coupon.setCreator("zhangsan" + i);
+            coupon.setActName("1234");
+            coupon.setCpValue(10d);
+            coupons.add(coupon);
+        }
+        couponDao.insertBatchCoupons(coupons);
     }
     @Test
     public void testDelete(){
