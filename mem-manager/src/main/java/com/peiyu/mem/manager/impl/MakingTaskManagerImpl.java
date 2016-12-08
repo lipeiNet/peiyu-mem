@@ -49,13 +49,13 @@ public class MakingTaskManagerImpl implements MakingTaskManager {
     public void insertCacheByTaskCode(CpMakingTask makingTask) {
         String taskCode = String.format("%s_%s", makingTask.getVendorId(), makingTask.getTaskCode());
         String taskToJson = JsonUtil.objectToJson(makingTask);
-        jedisTemplate.set(taskCode, taskToJson);
+        jedisTemplate.set(taskCode, taskToJson,24*60*60);
     }
 
     @Override
     public void insertCacheByMakingConpon(Long vendorId, String taskCode) {
         final String mainkingCode=String.format("MACK_COUPON_%s_%s",vendorId,taskCode);
-        jedisTemplate.set(mainkingCode,"制券中...");
+        jedisTemplate.set(mainkingCode,"制券中...",24*60*60);
     }
 
     @Override
