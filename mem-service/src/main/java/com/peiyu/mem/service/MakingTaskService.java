@@ -45,5 +45,4 @@ public interface MakingTaskService {
      * @return
      */
     CpMakingTask getMakingTask(long id);
-
 }
