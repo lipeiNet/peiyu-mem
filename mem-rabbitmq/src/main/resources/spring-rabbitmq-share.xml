@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:property-placeholder location="/rabbitmq-server.properties"/>
+    <rabbit:connection-factory id="connectionFactory" host="${rabbit.hosts}"
+                               port="${rabbit.port}" username="${rabbit.username}" password="${rabbit.password}" virtual-host="${rabbit.virtualHost}"
+                               channel-cache-size="50"/>
+    <rabbit:admin connection-factory="connectionFactory"/>
+    <!--定义消息队列-->
+    <rabbit:queue id="spring.makeCoupons.queue" durable="true" auto-delete="false" exclusive="false" name="${rabbit.makeCoupons.queue}"/>
+    <!--定义direct的交换机（可以绑定多个队列）-->
+    <rabbit:direct-exchange name="${rabbit.makeCoupons.exchange.direct}" durable="true" auto-delete="false" id="${rabbit.makeCoupons.exchange.direct}">
+        <rabbit:bindings>
+            <rabbit:binding queue="spring.makeCoupons.queue" key="${rabbit.makeCoupons.routingKey}"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+</beans>
