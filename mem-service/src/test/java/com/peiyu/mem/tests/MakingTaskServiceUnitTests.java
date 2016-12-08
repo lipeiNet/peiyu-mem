@@ -34,13 +34,10 @@ public class MakingTaskServiceUnitTests {
         makingTask.setTaskCode("1458001");
         makingTask.setGenNoRulePrefix("a");
         makingTask.setGenNoRuleSuffix("b");
-        makingTask.setSerialNoLength(3);
-        makingTask.setTicNum(10000);
-        makingTask.setCouRules(1);
-        makingTask.setSerialNoStart(0);
-        makingTask.setCouRulesNum(5);
+        makingTask.setTicNum(100000);
         makingTaskManager.insertCacheByTaskCode(makingTask);
         makingTaskManager.deleteCacheByMakingConpon(makingTask.getVendorId(),makingTask.getTaskCode());
+        makingTaskManager.deteleCacheByTaskCode(makingTask);
         makingTaskService.insertMakingTask(makingTask);
     }
     @Test
