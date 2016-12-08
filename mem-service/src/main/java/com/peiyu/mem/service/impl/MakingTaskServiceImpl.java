@@ -156,6 +156,7 @@ public class MakingTaskServiceImpl implements MakingTaskService {
             coupon.setStartDate(makingTask.getStartDate());
             coupon.setEndDate(makingTask.getEndDate());
             coupon.setCreateDate(new Date());
+            coupon.setDf(0);
             tempCoupons.add(coupon);
         }
         return tempCoupons;
