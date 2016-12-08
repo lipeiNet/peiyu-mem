@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/mem-commen" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mem-dao" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mem-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mem-manager" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mem-rabbitmq" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mem-redis" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mem-rpc" charset="UTF-8" />
