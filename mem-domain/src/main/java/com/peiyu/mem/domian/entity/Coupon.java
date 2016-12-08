@@ -42,11 +42,6 @@ public class Coupon implements Serializable{
     private Double cpValue;
 
     /**
-     * 最低消费
-     */
-    private Double cpLimitValue;
-
-    /**
      * 生效日期
      */
     private Date startDate;
@@ -66,26 +61,6 @@ public class Coupon implements Serializable{
      * 关联会员名称
      */
     private String memCat;
-    /**
-     *使用机构编码<br/>
-     **/
-    private String useOrganCode;
-
-    /**
-     *使用机构名称<br/>
-     **/
-    private String useOrganName;
-
-    /**
-     *使用门店编码<br/>
-     **/
-    private String useStoreCode;
-
-    /**
-     *使用门店名称<br/>
-     **/
-    private String useStoreName;
-
     /**
      *实际使用金额(可能面值50,单实际只当30使用了)<br/>
      **/
@@ -207,14 +182,6 @@ public class Coupon implements Serializable{
         this.cpCode = cpCode;
     }
 
-    public Double getCpLimitValue() {
-        return cpLimitValue;
-    }
-
-    public void setCpLimitValue(Double cpLimitValue) {
-        this.cpLimitValue = cpLimitValue;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -245,38 +212,6 @@ public class Coupon implements Serializable{
 
     public void setMemCat(String memCat) {
         this.memCat = memCat;
-    }
-
-    public String getUseOrganCode() {
-        return useOrganCode;
-    }
-
-    public void setUseOrganCode(String useOrganCode) {
-        this.useOrganCode = useOrganCode;
-    }
-
-    public String getUseOrganName() {
-        return useOrganName;
-    }
-
-    public void setUseOrganName(String useOrganName) {
-        this.useOrganName = useOrganName;
-    }
-
-    public String getUseStoreCode() {
-        return useStoreCode;
-    }
-
-    public void setUseStoreCode(String useStoreCode) {
-        this.useStoreCode = useStoreCode;
-    }
-
-    public String getUseStoreName() {
-        return useStoreName;
-    }
-
-    public void setUseStoreName(String useStoreName) {
-        this.useStoreName = useStoreName;
     }
 
     public Double getUseValue() {
