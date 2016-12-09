@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
     <import resource="spring-rabbitmq-share.xml"/>
+    <import resource="spring-dao-rabbitmq.xml"/>
+    <context:component-scan base-package="com.peiyu.mem.rabbitmq.consumers"/>
     <rabbit:listener-container connection-factory="connectionFactory">
         <rabbit:listener ref="makeCouponsHandler" method="onMessage" queues="spring.makeCoupons.queue"/>
     </rabbit:listener-container>
-    <bean id="makeCouponsHandler" class="com.peiyu.mem.rabbitmq.MakeCouponsHandler"/>
+    <bean id="makeCouponsHandler" class="com.peiyu.mem.rabbitmq.consumers.MakeCouponsHandler">
+        <property name="jsonMessageConverter" ref="jsonMessageConverter"></property>
+    </bean>
 </beans>

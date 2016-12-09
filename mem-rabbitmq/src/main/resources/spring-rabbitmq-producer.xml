@@ -8,10 +8,9 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
     <import resource="spring-rabbitmq-share.xml"/>
-    <context:component-scan base-package="com.peiyu.mem.rabbitmq"/>
+    <context:component-scan base-package="com.peiyu.mem.rabbitmq.produces"/>
     <context:property-placeholder location="/rabbitmq-server.properties" ignore-unresolvable="true"/>
     <!--定义rabbitmq模板类-->
     <rabbit:template exchange="${rabbit.makeCoupons.exchange.direct}" id="rabbitTemplate" connection-factory="connectionFactory"
                      message-converter="jsonMessageConverter"/>
-    <bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.JsonMessageConverter"/>
 </beans>
