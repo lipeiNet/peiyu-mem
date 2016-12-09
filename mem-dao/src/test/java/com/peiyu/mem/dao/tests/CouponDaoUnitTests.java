@@ -9,6 +9,7 @@ import org.springframework.context.Lifecycle;
 import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +37,8 @@ public class CouponDaoUnitTests extends BaseDaoUnitTests {
             coupon.setCreator("zhangsan" + i);
             coupon.setActName("1234");
             coupon.setCpValue(10d);
+            coupon.setStartDate(new Date());
+            coupon.setEndDate(new Date());
             coupons.add(coupon);
         }
         couponDao.insertBatchCoupons(coupons);
