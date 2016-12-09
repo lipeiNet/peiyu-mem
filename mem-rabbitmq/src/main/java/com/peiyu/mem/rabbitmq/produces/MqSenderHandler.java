@@ -1,4 +1,4 @@
-package com.peiyu.mem.rabbitmq;
+package com.peiyu.mem.rabbitmq.produces;
 
 import org.apache.log4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

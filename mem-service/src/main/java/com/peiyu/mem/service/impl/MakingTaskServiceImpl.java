@@ -146,7 +146,8 @@ public class MakingTaskServiceImpl implements MakingTaskService {
         for (int i = 0; i < makingTask.getTicNum(); i++) {
             Coupon coupon = new Coupon();
             coupon.setId(null);
-            coupon.setCpCode(Long.toString(onlyIdUtils.nextId()));
+            coupon.setCpCode(makingTask.getGenNoRulePrefix() + Long.toString(onlyIdUtils.nextId())
+                    + makingTask.getGenNoRuleSuffix());
             coupon.setVendorId(makingTask.getVendorId());
             coupon.setActName(makingTask.getActName());
             coupon.setActNo(makingTask.getActNo());

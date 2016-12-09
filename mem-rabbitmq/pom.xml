@@ -21,5 +21,10 @@
             <artifactId>spring-rabbit</artifactId>
             <version>${spring.amqp.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.peiyu.mem</groupId>
+            <artifactId>mem-dao</artifactId>
+            <version>${version}</version>
+        </dependency>
     </dependencies>
 </project>
