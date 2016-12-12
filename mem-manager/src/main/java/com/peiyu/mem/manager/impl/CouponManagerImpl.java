@@ -1,8 +1,10 @@
 package com.peiyu.mem.manager.impl;
 
+import com.migr.common.util.JsonUtil;
 import com.peiyu.mem.dao.CouponDao;
 import com.peiyu.mem.domian.entity.Coupon;
 import com.peiyu.mem.manager.CouponManager;
+import com.peiyu.mem.rabbitmq.produces.MqSenderHandler;
 import com.peiyu.mem.utils.ListUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class CouponManagerImpl implements CouponManager {
     private PlatformTransactionManager transactionManager;
     @Autowired
     private CouponDao couponDao;
+    @Autowired
+    private MqSenderHandler mqSenderHandler;
 
     @Override
     public boolean insertCoupons(final List<Coupon> coupons) {
@@ -38,8 +42,20 @@ public class CouponManagerImpl implements CouponManager {
                     }
                     if (coupons.size() > 5000) {
                         List<List<Coupon>> tempCoupons = ListUtil.splitList(coupons, 5000);
+                        int i=0;
                         for (List<Coupon> item : tempCoupons) {
-                            couponDao.insertBatchCoupons(item);
+                            try{
+                                if (i==5){
+                                    i++;
+                                    throw new Exception("异常");
+                                }
+                                couponDao.insertBatchCoupons(item);
+                                i++;
+                            }catch (Exception e){
+                                String data= JsonUtil.g.toJson(item);
+                                mqSenderHandler.sendMessage("spring.makeCoupons.queueKey",data);
+                                continue;
+                            }
                         }
                     }
                     long end1 = System.currentTimeMillis();
