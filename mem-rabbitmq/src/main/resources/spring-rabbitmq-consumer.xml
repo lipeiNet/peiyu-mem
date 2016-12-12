@@ -11,9 +11,15 @@
     <import resource="spring-dao-rabbitmq.xml"/>
     <context:component-scan base-package="com.peiyu.mem.rabbitmq.consumers"/>
     <rabbit:listener-container connection-factory="connectionFactory">
-        <rabbit:listener ref="makeCouponsHandler" method="onMessage" queues="spring.makeCoupons.queue"/>
+        <rabbit:listener ref="makeCouponsHandler1" method="onMessage" queues="spring.makeCoupons.queue"/>
     </rabbit:listener-container>
-    <bean id="makeCouponsHandler" class="com.peiyu.mem.rabbitmq.consumers.MakeCouponsHandler">
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="makeCouponsHandler2" method="onMessage" queues="spring.makeCoupons.queue"/>
+    </rabbit:listener-container>
+    <bean id="makeCouponsHandler1" class="com.peiyu.mem.rabbitmq.consumers.MakeCouponsHandler1">
+        <property name="jsonMessageConverter" ref="jsonMessageConverter"></property>
+    </bean>
+    <bean id="makeCouponsHandler2" class="com.peiyu.mem.rabbitmq.consumers.MakeCouponsHandler2">
         <property name="jsonMessageConverter" ref="jsonMessageConverter"></property>
     </bean>
 </beans>
