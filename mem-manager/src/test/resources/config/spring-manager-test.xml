@@ -6,6 +6,8 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <import resource="spring-manager-dao-test.xml"/>
     <import resource="spring-redis-config-test.xml"/>
+    <import resource="classpath*:spring-rabbitmq-consumer.xml"/>
+    <import resource="classpath*:spring-rabbitmq-producer.xml"/>
     <context:component-scan base-package="com.peiyu.mem.manager"/>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
