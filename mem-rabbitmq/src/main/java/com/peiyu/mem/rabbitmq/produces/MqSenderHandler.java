@@ -23,7 +23,7 @@ public class MqSenderHandler {
         try {
             rabbitTemplate.convertAndSend(routingKey,messageInfo);
         } catch (Exception e) {
-            log.error("发送消息失败");
+            log.error("发送消息失败"+e);
         }
     }
 }
