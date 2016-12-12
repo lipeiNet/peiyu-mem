@@ -36,7 +36,7 @@ public class MakeCouponsHandler1 implements ChannelAwareMessageListener {
                 List<Coupon> coupons = JsonUtil.g.fromJson(data, new TypeToken<List<Coupon>>() {
                 }.getType());
                 couponDao.insertBatchCoupons(coupons);
-                channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
+                channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
                 System.out.println("1类："+message.getMessageProperties().getDeliveryTag());
             }
         } catch (Exception e) {
