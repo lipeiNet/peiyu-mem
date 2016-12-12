@@ -24,27 +24,29 @@ public class MqSenderHandlerUnitTests {
     private MqSenderHandler mqSenderHandler;
     @Test
     public void testSendMessage(){
-        Coupon coupon=new Coupon();
-        coupon.setVendorId(1461l);
-        coupon.setActNo("VD2016090800001");
-        coupon.setActName("消费送券");
-        coupon.setSubgroupCode("VE2016090800001");
-        coupon.setCpCode("101851");
-        coupon.setCpValue(25d);
-        coupon.setStartDate(new Date());
-        coupon.setEndDate(new Date());
-        coupon.setState(1);
-        coupon.setMemNo("17876647");
-        coupon.setMemCat("黄金会员");
-        coupon.setUseValue(10d);
-        coupon.setMemo("备注");
-        coupon.setCreateDate(new Date());
-        coupon.setModifyDate(new Date());
-        coupon.setCreator("lp");
-        coupon.setDf(0);
-        List<Coupon> coupons=new ArrayList<>();
-        coupons.add(coupon);
-        String data= JsonUtil.g.toJson(coupons);
-        mqSenderHandler.sendMessage("spring.makeCoupons.queueKey",data);
+        for (int i=0;i<5;i++){
+            Coupon coupon=new Coupon();
+            coupon.setVendorId(1461l);
+            coupon.setActNo("VD2016090800001");
+            coupon.setActName("消费送券");
+            coupon.setSubgroupCode("VE2016090800001");
+            coupon.setCpCode("101851"+i);
+            coupon.setCpValue(25d+i);
+            coupon.setStartDate(new Date());
+            coupon.setEndDate(new Date());
+            coupon.setState(1);
+            coupon.setMemNo("17876647");
+            coupon.setMemCat("黄金会员");
+            coupon.setUseValue(10d);
+            coupon.setMemo("备注");
+            coupon.setCreateDate(new Date());
+            coupon.setModifyDate(new Date());
+            coupon.setCreator("lp");
+            coupon.setDf(0);
+            List<Coupon> coupons=new ArrayList<>();
+            coupons.add(coupon);
+            String data= JsonUtil.g.toJson(coupons);
+            mqSenderHandler.sendMessage("spring.makeCoupons.queueKey",data);
+        }
     }
 }
