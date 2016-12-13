@@ -109,4 +109,7 @@
     <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.Member">
         SELECT * FROM  member WHERE id=#{id}
     </select>
+    <select id="getMemberByMemNo" resultType="com.peiyu.mem.domian.entity.Member">
+        SELECT * FROM member WHERE vendorId=#{vendorId} AND memNo=#{memNo} AND df=0
+    </select>
 </mapper>
