@@ -89,6 +89,7 @@ public class BaseDaoUnitTests extends DatabaseTestCase {
         tableNames.add("coupon");
         tableNames.add("makingtask");
         tableNames.add("uselimit");
+        tableNames.add("member");
         return tableNames;
     }
     /**
