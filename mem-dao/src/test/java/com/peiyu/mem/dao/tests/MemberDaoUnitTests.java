@@ -80,6 +80,14 @@ public class MemberDaoUnitTests extends BaseDaoUnitTests {
         Member result= memberDao.get(1l);
         ReflectionAssert.assertReflectionEquals(except,result);
     }
+    @Test
+    public void testGetMemberByMemNo(){
+        Member expect=getExpectMember();
+        Long vendorId=1433l;
+        String memNo="134567893";
+        Member result=memberDao.getMemberByMemNo(vendorId,memNo);
+        ReflectionAssert.assertReflectionEquals(expect,result);
+    }
     protected Member getExpectMember(){
         Member expect=new Member();
         expect.setId(1l);
