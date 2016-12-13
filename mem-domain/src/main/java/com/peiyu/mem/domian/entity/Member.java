@@ -87,10 +87,6 @@ public class Member implements Serializable {
      */
     private Integer status;
 
-    /**
-     * 0不需要密码 1表示需要密码<br/>
-     */
-    private Integer needPwdFlag;
 
     /**
      *性别 0女 1男<br/>
@@ -169,11 +165,6 @@ public class Member implements Serializable {
      * 会员有效结束时间
      */
     private Date endDate;
-
-    /**
-     *修改密码专用字段(新密码)<br/>
-     **/
-    private String memPwdNew;
 
     public Long getId() {
         return id;
@@ -285,14 +276,6 @@ public class Member implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public Integer getNeedPwdFlag() {
-        return needPwdFlag;
-    }
-
-    public void setNeedPwdFlag(Integer needPwdFlag) {
-        this.needPwdFlag = needPwdFlag;
     }
 
     public Integer getSex() {
@@ -423,11 +406,11 @@ public class Member implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getMemPwdNew() {
-        return memPwdNew;
+    public String getMobileNo() {
+        return mobileNo;
     }
 
-    public void setMemPwdNew(String memPwdNew) {
-        this.memPwdNew = memPwdNew;
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
     }
 }
