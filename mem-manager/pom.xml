@@ -30,5 +30,10 @@
             <artifactId>mem-commen</artifactId>
             <version>${version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.peiyu.mem</groupId>
+            <artifactId>mem-rabbitmq</artifactId>
+            <version>${version}</version>
+        </dependency>
     </dependencies>
 </project>

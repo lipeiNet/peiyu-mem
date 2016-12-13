@@ -44,18 +44,18 @@ public class CouponManagerImpl implements CouponManager {
                         List<List<Coupon>> tempCoupons = ListUtil.splitList(coupons, 5000);
                         int i=0;
                         for (List<Coupon> item : tempCoupons) {
-                            try{
+//                            try{
                                 if (i==5){
-                                    i++;
+//                                    i++;
                                     throw new Exception("异常");
                                 }
                                 couponDao.insertBatchCoupons(item);
                                 i++;
-                            }catch (Exception e){
-                                String data= JsonUtil.g.toJson(item);
-                                mqSenderHandler.sendMessage("spring.makeCoupons.queueKey",data);
-                                continue;
-                            }
+//                            }catch (Exception e){
+//                                String data= JsonUtil.g.toJson(item);
+//                                mqSenderHandler.sendMessage("spring.makeCoupons.queueKey",data);
+//                                continue;
+//                            }
                         }
                     }
                     long end1 = System.currentTimeMillis();
