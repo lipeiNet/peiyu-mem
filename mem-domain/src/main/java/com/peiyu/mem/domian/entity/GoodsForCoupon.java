@@ -5,21 +5,66 @@ package com.peiyu.mem.domian.entity;
  * 商品送券的实体
  */
 public class GoodsForCoupon {
-    private long vendorId;//商家id
-    private String memNo;//会员号
-    private String organCode;//机构
-    private String storeCode;//门店
-    private String firstIcatCode;//商家一级品类编码
-    private String secondIcatCode;//商家二级品类编码
-    private String thirdIcatCode;//商家三级品类编码
-    private String fourthIcatCode;//商家四级品类编码
-    private String firstBrandCode;//一级品牌
-    private String secondBrandCode;//二级品牌
-    private String thirdBrandCode;//三级品牌
-    private String supplierCode;//供应商
-    private String skuCode;//sku编码
-    private double money;//单价
-    private double realPayMoney;//实际支付金额
+    /**
+     * 商家id
+     */
+    private long vendorId;
+    /**
+     * 会员号
+     */
+    private String memNo;
+    /**
+     * 机构
+     */
+    private String organCode;
+    /**
+     * 门店
+     */
+    private String storeCode;
+    /**
+     * 商家一级品类编码
+     */
+    private String firstIcatCode;
+    /**
+     * 商家二级品类编码
+     */
+    private String secondIcatCode;
+    /**
+     * 商家三级品类编码
+     */
+    private String thirdIcatCode;
+    /**
+     * 商家四级品类编码
+     */
+    private String fourthIcatCode;
+    /**
+     * 一级品牌
+     */
+    private String firstBrandCode;
+    /**
+     * 二级品牌
+     */
+    private String secondBrandCode;
+    /**
+     * 三级品牌
+     */
+    private String thirdBrandCode;
+    /**
+     * 供应商
+     */
+    private String supplierCode;
+    /**
+     * sku编码(商品编码)
+     */
+    private String skuCode;
+    /**
+     * 单价
+     */
+    private double money;
+    /**
+     * 实际支付金额
+     */
+    private double realPayMoney;
 
     public long getVendorId() {
         return vendorId;
