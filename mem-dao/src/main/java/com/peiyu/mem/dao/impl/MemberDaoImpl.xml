@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peiyu.mem.dao.MemberDao">
+    <insert id="insert" parameterType="com.peiyu.mem.domian.entity.Member">
+        insert into member (id, vendorId,memNo, memPin,memPwd, storeCode, storeName,
+        organCode,organName, memName, nickName,mobileNo, memCatCode,
+        provinceCode, cityCode, regionCode,memAddress, birthday, headImg,
+        memo, createDate, modifyDate,startDate,endDate)
+        values (#{id,jdbcType=BIGINT}, #{vendorId,jdbcType=BIGINT},#{memNo,jdbcType=VARCHAR}, #{memPin,jdbcType=VARCHAR},
+        #{memPwd,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR},#{organCode,jdbcType=VARCHAR},
+        #{organName,jdbcType=VARCHAR}, #{memName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR},
+        #{mobileNo,jdbcType=VARCHAR},#{memCatCode,jdbcType=VARCHAR},#{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR},
+        #{regionCode,jdbcType=VARCHAR},#{memAddress,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},#{headImg,jdbcType=VARCHAR},
+        #{memo,jdbcType=VARCHAR},#{createDate,jdbcType=TIMESTAMP},#{modifyDate,jdbcType=TIMESTAMP},#{startDate,jdbcType=TIMESTAMP},#{endDate,jdbcType=TIMESTAMP})
+    </insert>
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM member WHERE id=#{id}
+    </delete>
+    <update id="update" parameterType="com.peiyu.mem.domian.entity.Member">
+        update member
+        <set >
+            <if test="vendorId != null" >
+                vendorId = #{vendorId,jdbcType=BIGINT},
+            </if>
+            <if test="memNo != null" >
+                memNo = #{memNo,jdbcType=VARCHAR},
+            </if>
+            <if test="memPin != null" >
+                memPin = #{memPin,jdbcType=VARCHAR},
+            </if>
+            <if test="memPwd != null" >
+                memPwd = #{memPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="storeCode != null" >
+                storeCode = #{storeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="storeName != null" >
+                storeName = #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="organCode != null" >
+                organCode = #{organCode,jdbcType=VARCHAR},
+            </if>
+            <if test="organName != null" >
+                organName = #{organName,jdbcType=VARCHAR},
+            </if>
+            <if test="memName != null" >
+                memName = #{memName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null" >
+                nickName = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileNo != null" >
+                mobileNo = #{mobileNo,jdbcType=VARCHAR},
+            </if>
+            <if test="memPoint != null" >
+                memPoint = #{memPoint,jdbcType=DOUBLE},
+            </if>
+            <if test="consumeAmount != null" >
+                consumeAmount = #{consumeAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="memPointAmount != null" >
+                memPointAmount = #{memPointAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="memCatCode != null" >
+                memCatCode = #{memCatCode,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceCode != null" >
+                provinceCode = #{provinceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cityCode != null" >
+                cityCode = #{cityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="regionCode != null" >
+                regionCode = #{regionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="memAddress != null" >
+                memAddress = #{memAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="headImg != null" >
+                headImg = #{headImg,jdbcType=VARCHAR},
+            </if>
+            <if test="df != null" >
+                df = #{df,jdbcType=INTEGER},
+            </if>
+            <if test="memo != null" >
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyDate != null" >
+                modifyDate = now(),
+            </if>
+            <if test="startDate != null" >
+                startDate = #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDate != null" >
+                endDate = #{endDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.Member">
+        SELECT * FROM  member WHERE id=#{id}
+    </select>
+</mapper>
