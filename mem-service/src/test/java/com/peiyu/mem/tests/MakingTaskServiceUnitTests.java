@@ -2,7 +2,9 @@ package com.peiyu.mem.tests;
 
 import com.peiyu.mem.domian.entity.CpMakingTask;
 import com.peiyu.mem.manager.MakingTaskManager;
+import com.peiyu.mem.service.BizService;
 import com.peiyu.mem.service.MakingTaskService;
+import com.peiyu.mem.utils.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,31 +20,33 @@ import java.util.Date;
 @ContextConfiguration(locations = {"/spring-service-test.xml"})
 public class MakingTaskServiceUnitTests {
     @Autowired
+    private BizService bizService;
+    @Autowired
     private MakingTaskService makingTaskService;
     @Autowired
     private MakingTaskManager makingTaskManager;
     @Test
     public void testInsertMakingTask(){
         CpMakingTask makingTask=new CpMakingTask();
-        makingTask.setVendorId(1458l);
-        makingTask.setActNo("20140123");
-        makingTask.setActName("测试优惠券");
-        makingTask.setSubgroupCode("123");
+        makingTask.setVendorId(1483l);
+        makingTask.setActNo("VD2016121600001");
+        makingTask.setActName("消费送券001");
+        makingTask.setSubgroupCode("VE2016121600001");
         makingTask.setCpValue(10d);
-        makingTask.setStartDate(new Date());
-        makingTask.setEndDate(new Date());
-        makingTask.setTaskCode("1458001");
+        makingTask.setStartDate(DateUtil.getFormatDate("2016-12-15","yyyy-MM-dd"));
+        makingTask.setEndDate(DateUtil.getFormatDate("2016-12-25","yyyy-MM-dd"));
+        makingTask.setTaskCode(bizService.getOddNumbers(1483l,"Task_Codes",0));
         makingTask.setGenNoRulePrefix("a");
         makingTask.setGenNoRuleSuffix("b");
         makingTask.setTicNum(100000);
-        makingTaskManager.insertCacheByTaskCode(makingTask);
-        makingTaskManager.deleteCacheByMakingConpon(makingTask.getVendorId(),makingTask.getTaskCode());
-        makingTaskManager.deteleCacheByTaskCode(makingTask);
+//        makingTaskManager.insertCacheByTaskCode(makingTask);
+//        makingTaskManager.deleteCacheByMakingConpon(makingTask.getVendorId(),makingTask.getTaskCode());
+//        makingTaskManager.deteleCacheByTaskCode(makingTask);
         makingTaskService.insertMakingTask(makingTask);
     }
     @Test
     public void testMakingCoupon() throws InterruptedException {
-        makingTaskService.makingCoupon(1458l,"1458001");
+        makingTaskService.makingCoupon(1483l,"VT2016121600004");
         Thread.currentThread().join();
     }
 }
