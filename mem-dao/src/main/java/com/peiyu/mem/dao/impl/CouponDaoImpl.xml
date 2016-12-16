@@ -91,9 +91,6 @@ insert into coupon (id, vendorId, actNo,actName, subgroupCode, cpCode,
       <include refid="whereCase"></include>
     </select>
     <sql id="whereCase">
-        <if test="cpType != null" >
-            and cpType = #{cpType}
-        </if>
         <if test="cpValue != null" >
             and cpValue = #{cpValue}
         </if>
