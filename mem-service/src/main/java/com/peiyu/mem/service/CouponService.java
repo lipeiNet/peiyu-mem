@@ -1,6 +1,9 @@
 package com.peiyu.mem.service;
 
 import com.peiyu.mem.domian.entity.Coupon;
+import com.peiyu.mem.domian.entity.GoodsForCoupon;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/7.
@@ -26,6 +29,13 @@ public interface CouponService {
      * @return
      */
     int updateCoupon(Coupon coupon);
+
+    /**
+     * 消费送券
+     * @param goodsForCoupons
+     * @return
+     */
+    int consumeSendCoupon(List<GoodsForCoupon> goodsForCoupons);
 
     /**
      * 获取优惠券
