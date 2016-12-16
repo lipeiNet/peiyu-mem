@@ -6,6 +6,7 @@ import com.peiyu.mem.domian.entity.Coupon;
 import com.peiyu.mem.manager.CouponManager;
 import com.peiyu.mem.rabbitmq.produces.MqSenderHandler;
 import com.peiyu.mem.utils.ListUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,20 +43,14 @@ public class CouponManagerImpl implements CouponManager {
                     }
                     if (coupons.size() > 5000) {
                         List<List<Coupon>> tempCoupons = ListUtil.splitList(coupons, 5000);
-                        int i=0;
                         for (List<Coupon> item : tempCoupons) {
-//                            try{
-                                if (i==5){
-//                                    i++;
-                                    throw new Exception("异常");
-                                }
+                            try {
                                 couponDao.insertBatchCoupons(item);
-                                i++;
-//                            }catch (Exception e){
-//                                String data= JsonUtil.g.toJson(item);
-//                                mqSenderHandler.sendMessage("spring.makeCoupons.queueKey",data);
-//                                continue;
-//                            }
+                            } catch (Exception e) {
+                                String data = JsonUtil.g.toJson(item);
+                                mqSenderHandler.sendMessage("spring.makeCoupons.queueKey", data);
+                                continue;
+                            }
                         }
                     }
                     long end1 = System.currentTimeMillis();
@@ -63,6 +58,28 @@ public class CouponManagerImpl implements CouponManager {
                     return true;
                 } catch (Exception e) {
                     log.error("添加优惠券异常：" + e);
+                    transactionStatus.setRollbackOnly();
+                    return false;
+                }
+            }
+        });
+    }
+
+    @Override
+    public boolean updateCoupons(final List<Coupon> coupons) {
+        TransactionTemplate template = new TransactionTemplate(transactionManager);
+        return template.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                try {
+                    if (CollectionUtils.isNotEmpty(coupons)) {
+                        for (Coupon c : coupons) {
+                            couponDao.update(c);
+                        }
+                        return true;
+                    }
+                    return false;
+                } catch (Exception e) {
                     transactionStatus.setRollbackOnly();
                     return false;
                 }
