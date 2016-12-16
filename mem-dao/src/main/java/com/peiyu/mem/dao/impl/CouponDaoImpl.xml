@@ -80,6 +80,15 @@ insert into coupon (id, vendorId, actNo,actName, subgroupCode, cpCode,
             <if test="df != null" >
                 df = #{df,jdbcType=INTEGER},
             </if>
+            <if test="sendCouponDate!=null">
+                sendCouponDate=#{sendCouponDate}
+            </if>
+            <if test="usedCouponDate!=null">
+                usedCouponDate=#{usedCouponDate}
+            </if>
+            <if test="validCouponDate!=null">
+                validCouponDate=#{validCouponDate}
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
