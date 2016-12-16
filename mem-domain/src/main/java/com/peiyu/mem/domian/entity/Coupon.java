@@ -80,6 +80,18 @@ public class Coupon implements Serializable{
      *修改日期<br/>
      **/
     private Date modifyDate;
+    /**
+     * 发券时间
+     */
+    private Date sendCouponDate;
+    /**
+     * 使用券时间
+     */
+    private Date usedCouponDate;
+    /**
+     * 作废券时间
+     */
+    private Date validCouponDate;
 
     /**
      *创建人<br/>
@@ -228,5 +240,33 @@ public class Coupon implements Serializable{
 
     public void setMemNo(String memNo) {
         this.memNo = memNo;
+    }
+
+    public Date getSendCouponDate() {
+        return sendCouponDate;
+    }
+
+    public void setSendCouponDate(Date sendCouponDate) {
+        this.sendCouponDate = sendCouponDate;
+    }
+
+    public Date getUsedCouponDate() {
+        return usedCouponDate;
+    }
+
+    public void setUsedCouponDate(Date usedCouponDate) {
+        this.usedCouponDate = usedCouponDate;
+    }
+
+    public Date getValidCouponDate() {
+        return validCouponDate;
+    }
+
+    public void setValidCouponDate(Date validCouponDate) {
+        this.validCouponDate = validCouponDate;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 }
