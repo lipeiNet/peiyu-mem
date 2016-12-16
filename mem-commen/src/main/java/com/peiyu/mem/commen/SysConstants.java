@@ -4,6 +4,17 @@ package com.peiyu.mem.commen;
  * Created by Administrator on 2016/12/2.
  */
 public class SysConstants {
+
+    public static final class ACTIVITYSTATUS{
+        @ConstAnnotation("已保存")
+        public static final int SAVE=0;
+        @ConstAnnotation("审核中")
+        public static final int CHECKING=1;
+        @ConstAnnotation("已审核")
+        public static final int CHECKED=2;
+        @ConstAnnotation("已终止")
+        public static final int TERMINATED=3;
+    }
     /**
      * 优惠券状态
      */
@@ -18,18 +29,6 @@ public class SysConstants {
         public static final int CANCELED = 3;
         @ConstAnnotation("已过期")
         public static final int OVERDUE = 4;
-    }
-
-    /**
-     *优惠券操作
-     */
-    public static final class COUPONOPERTYPE {
-        @ConstAnnotation("发放")
-        public static final int GRANT = 0;
-        @ConstAnnotation("使用")
-        public static final int USE = 1;
-        @ConstAnnotation("作废")
-        public static final int CANCEL = 2;
     }
 
     /**
@@ -123,5 +122,15 @@ public class SysConstants {
         public static final int ACTIVITY = 0;
         @ConstAnnotation("优惠券组")
         public static final int GROUPS = 1;
+    }
+    public static final class CouponSendType {
+        @ConstAnnotation("请选择")
+        public static final int SELECT = -1;
+        @ConstAnnotation("用户领取")
+        public static final int USER_RECEIVE = 0;
+        @ConstAnnotation("消费送券")
+        public static final int AUTO_PROVIDE = 1;
+        @ConstAnnotation("手动发放")
+        public static final int MAN_PROVIDE = 2;
     }
 }
