@@ -413,4 +413,12 @@ public class Member implements Serializable {
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
     }
+
+    public String getMemNo() {
+        return memNo;
+    }
+
+    public void setMemNo(String memNo) {
+        this.memNo = memNo;
+    }
 }
