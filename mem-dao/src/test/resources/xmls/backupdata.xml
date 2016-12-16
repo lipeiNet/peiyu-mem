@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
+    <member id="1" vendorId="1433" memNo="134567893" memPin="12345678901" memPwd="1234567" organCode="100" organName="200" storeCode="300" storeName="400"
+            memName="英雄" nickName="大牛" mobileNo="12345687" memPoint="1" consumeAmount="1" memPointAmount="1" status="0"
+            sex="0" memCatCode="10" provinceCode="1" cityCode="1" regionCode="1" memAddress="中关村" birthday="1991-12-30"
+            headImg="1" df="0" memo="备注" createDate="2016-11-19" modifyDate="2016-11-19" startDate="2016-11-19" endDate="2017-11-19">
+    </member>
     <activity id="1" vendorId="1433" actNo="201611301615" actName="消费送券" startDate="2016-11-29" endDate="2016-12-30" getLimitType="1"
               getLimitQuantity="2" useLimitType="0" useLimitQuantity="1" startTime="18:24" endTime="18:27" weekFlag="1101010"
               allowSimt="0" applyScopeType="0" useScopeType="1" status="0" memo="备注" createDate="2016-11-29" modifyDate="2016-11-29"
