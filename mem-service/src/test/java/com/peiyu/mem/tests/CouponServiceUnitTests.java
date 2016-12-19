@@ -25,9 +25,9 @@ public class CouponServiceUnitTests {
         List<GoodsForCoupon> goodsForCoupons = new ArrayList<>();
         for (int i=0;i<=9;i++){
             GoodsForCoupon goodsForCoupon = new GoodsForCoupon();
-            goodsForCoupon.setVendorId(1483l);
-            goodsForCoupon.setMemNo("123456789");
-            goodsForCoupon.setFirstBrandCode("1");
+            goodsForCoupon.setVendorId(1468l);
+            goodsForCoupon.setMemNo("12345");
+            goodsForCoupon.setFirstBrandCode("pp30");
             goodsForCoupon.setSecondBrandCode("2");
             goodsForCoupon.setThirdBrandCode("3");
             goodsForCoupon.setFirstIcatCode("11");
@@ -38,7 +38,7 @@ public class CouponServiceUnitTests {
             goodsForCoupon.setRealPayMoney(300d);
             goodsForCoupon.setSkuCode("21");
             goodsForCoupon.setStoreCode("22");
-            goodsForCoupon.setOrganCode("23");
+            goodsForCoupon.setOrganCode("910003");
             goodsForCoupon.setSupplierCode("24");
             goodsForCoupons.add(goodsForCoupon);
         }
