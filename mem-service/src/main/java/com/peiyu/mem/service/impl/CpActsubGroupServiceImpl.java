@@ -46,7 +46,7 @@ public class CpActsubGroupServiceImpl implements CpActsubGroupService {
         String[] splitNames = actsubGroup.getDetailName().split(",");
         for (int i = 0; i < splitCodes.length; i++) {
             CpApplyLimitdt applyLimit = new CpApplyLimitdt();
-            BeanUtils.copyProperties(applyLimit, actsubGroup);
+            BeanUtils.copyProperties(actsubGroup, applyLimit);
             applyLimit.setId(null);
             applyLimit.setOwnRecordType(SysConstants.OWNRECORDTYPE.GROUPS);
             applyLimit.setOwnRecordCode(actsubGroup.getSubgroupCode());
@@ -58,7 +58,7 @@ public class CpActsubGroupServiceImpl implements CpActsubGroupService {
         String[] names = actsubGroup.getOrganOrStoreName().split(",");
         for (int i = 0; i < codes.length; i++) {
             CpUseLimitdt useLimit = new CpUseLimitdt();
-            BeanUtils.copyProperties(useLimit, actsubGroup);
+            BeanUtils.copyProperties(actsubGroup, useLimit);
             useLimit.setId(null);
             useLimit.setOwnRecordCode(actsubGroup.getSubgroupCode());
             useLimit.setOwnRecordType(SysConstants.OWNRECORDTYPE.GROUPS);
