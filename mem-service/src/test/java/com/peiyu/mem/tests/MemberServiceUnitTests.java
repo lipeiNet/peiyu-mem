@@ -22,9 +22,9 @@ public class MemberServiceUnitTests {
     @Test
     public void  testInsertMember(){
         Member member=new Member();
-        member.setVendorId(1483l);
-        member.setMemNo("123456789");
-        member.setMemPin("132489514");
+        member.setVendorId(1468l);
+        member.setMemNo("12345");
+        member.setMemPin("1324895");
         member.setMemPwd("123456");
         member.setOrganCode("1");
         member.setOrganName("信息大厦");
