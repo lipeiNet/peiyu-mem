@@ -54,7 +54,7 @@ public class CouponManagerImpl implements CouponManager {
                         }
                     }
                     long end1 = System.currentTimeMillis();
-                    log.info("添加10000张优惠券消耗时间：" + (end1 - start1) + "毫秒");
+                    log.info("添加"+coupons.size()+"张优惠券消耗时间：" + (end1 - start1) + "毫秒");
                     return true;
                 } catch (Exception e) {
                     log.error("添加优惠券异常：" + e);
