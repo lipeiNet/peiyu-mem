@@ -46,7 +46,26 @@ public class MakingTaskServiceUnitTests {
     }
     @Test
     public void testMakingCoupon() throws InterruptedException {
-        makingTaskService.makingCoupon(1483l,"VT2016121600004");
+        makingTaskService.makingCoupon(1468l,"VT2016121900010");
         Thread.currentThread().join();
+    }
+    @Test
+    public void testInsertMakingTask1(){
+        CpMakingTask makingTask=new CpMakingTask();
+        makingTask.setVendorId(1468l);
+        makingTask.setActNo("VD2016121900010");
+        makingTask.setActName("消费送券002");
+        makingTask.setSubgroupCode("VE20161219005");
+        makingTask.setCpValue(10d);
+        makingTask.setStartDate(DateUtil.getFormatDate("2016-12-15","yyyy-MM-dd"));
+        makingTask.setEndDate(DateUtil.getFormatDate("2016-12-25","yyyy-MM-dd"));
+        makingTask.setTaskCode(bizService.getOddNumbers(1468l,"Task_Codes",0));
+        makingTask.setGenNoRulePrefix("test");
+        makingTask.setGenNoRuleSuffix("001");
+        makingTask.setTicNum(50000);
+//        makingTaskManager.insertCacheByTaskCode(makingTask);
+//        makingTaskManager.deleteCacheByMakingConpon(makingTask.getVendorId(),makingTask.getTaskCode());
+//        makingTaskManager.deteleCacheByTaskCode(makingTask);
+        makingTaskService.insertMakingTask(makingTask);
     }
 }
