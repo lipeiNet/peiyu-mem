@@ -48,7 +48,7 @@ public class CpActivityServiceImpl implements CpActivityService {
             String[] splitNames = cpActivity.getDetailName().split(",");
             for (int i = 0; i < splitCodes.length; i++) {
                 CpApplyLimitdt applyLimit = new CpApplyLimitdt();
-                BeanUtils.copyProperties(applyLimit, cpActivity);
+                BeanUtils.copyProperties(cpActivity,applyLimit );
                 applyLimit.setId(null);
                 applyLimit.setOwnRecordCode(cpActivity.getActNo());
                 applyLimit.setOwnRecordType(SysConstants.OWNRECORDTYPE.ACTIVITY);
@@ -66,7 +66,7 @@ public class CpActivityServiceImpl implements CpActivityService {
             String[] splitNames = cpActivity.getOrganOrStoreName().split(",");
             for (int i = 0; i < splitCodes.length; i++) {
                 CpUseLimitdt useLimit = new CpUseLimitdt();
-                BeanUtils.copyProperties(useLimit, cpActivity);
+                BeanUtils.copyProperties(cpActivity, useLimit);
                 useLimit.setId(null);
                 useLimit.setOwnRecordCode(cpActivity.getActNo());
                 useLimit.setOwnRecordType(SysConstants.OWNRECORDTYPE.ACTIVITY);
