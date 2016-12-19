@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peiyu.mem.dao.ActionLogDao">
+    <insert id="insert" parameterType="com.peiyu.mem.domian.entity.ActionLog">
+        INSERT INTO actionlog(vendorId,memNo,className,methodName,methodParam,methodType,paramValue
+        ,createDate,operationTime)VALUES(
+        #{vendorId},#{memNo},#{className},#{methodName},#{methodParam},#{methodType},#{paramValue},
+        #{createDate},#{operationTime})
+    </insert>
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM actionlog WHERE id=#{id}
+    </delete>
+    <update id="update" parameterType="com.peiyu.mem.domian.entity.ActionLog">
+        UPDATE actionlog
+        <set>
+            <if test="vendorId!=null and vendorId!=''">
+                vendorId=#{vendorId}
+            </if>
+            <if test="memNo!=null and memNo!=''">
+                memNo=#{memNo}
+            </if>
+            <if test="className!=null and className!=''">
+                className=#{className}
+            </if>
+            <if test="methodName!=null and methodName!=''">
+                methodName=#{methodName}
+            </if>
+            <if test="methodType!=null">
+                methodType=#{methodType}
+            </if>
+            <if test="paramValue!=null and paramValue!=''">
+                paramValue=#{paramValue}
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                createDate=#{createDate}
+            </if>
+            <if test="operationTime!=null and operationTime!=''">
+                operationTime=#{operationTime}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.ActionLog">
+        SELECT * FROM actionlog WHERE id=#{id}
+    </select>
+</mapper>
