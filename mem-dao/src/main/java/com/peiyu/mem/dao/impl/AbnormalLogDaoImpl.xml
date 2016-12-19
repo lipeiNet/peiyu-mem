@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peiyu.mem.dao.AbnormalLogDao">
+    <insert id="insert" parameterType="com.peiyu.mem.domian.entity.AbnormalLog">
+        INSERT INTO abnormallog(vendorId,memNo,className,methodName,methodParam,paramValue
+        ,createDate,operationTime,abnormalInfo)VALUES(
+        #{vendorId},#{memNo},#{className},#{methodName},#{methodParam},#{paramValue},
+        #{createDate},#{operationTime},#{abnormalInfo})
+    </insert>
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM abnormallog WHERE id=#{id}
+    </delete>
+    <update id="update" parameterType="com.peiyu.mem.domian.entity.AbnormalLog">
+        UPDATE abnormallog
+        <set>
+            <if test="vendorId!=null and vendorId!=''">
+                vendorId=#{vendorId}
+            </if>
+            <if test="memNo!=null and memNo!=''">
+                memNo=#{memNo}
+            </if>
+            <if test="className!=null and className!=''">
+                className=#{className}
+            </if>
+            <if test="methodName!=null and methodName!=''">
+                methodName=#{methodName}
+            </if>
+            <if test="paramValue!=null and paramValue!=''">
+                paramValue=#{paramValue}
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                createDate=#{createDate}
+            </if>
+            <if test="operationTime!=null and operationTime!=''">
+                operationTime=#{operationTime}
+            </if>
+            <if test="abnormalInfo!=null and abnormalInfo!=''">
+                abnormalInfo=#{abnormalInfo}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.AbnormalLog">
+        SELECT * FROM abnormallog WHERE id=#{id}
+    </select>
+</mapper>
