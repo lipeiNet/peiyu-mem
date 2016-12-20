@@ -48,8 +48,8 @@ public class BaseDaoUnitTests extends DatabaseTestCase {
     @Override
     protected IDatabaseConnection getConnection() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/peiyu_mem?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true", "root", "123456");
-        return new MySqlConnection(conn, "peiyu_mem");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/peiyu_mem_test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true", "root", "123456");
+        return new MySqlConnection(conn, "peiyu_mem_test");
     }
     @Override
     protected IDataSet getDataSet() throws Exception {
@@ -90,6 +90,8 @@ public class BaseDaoUnitTests extends DatabaseTestCase {
         tableNames.add("makingtask");
         tableNames.add("uselimit");
         tableNames.add("member");
+        tableNames.add("actionlog");
+        tableNames.add("abnormallog");
         return tableNames;
     }
     /**
