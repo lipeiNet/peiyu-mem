@@ -43,4 +43,10 @@
     <bizcode id="2" vendorId="1483" bizCode="VD" bizName="优惠券活动编码" bno="Activity_Codes" curDate="2016-12-05" serialNumber="1" lengthValue="5"
              memo="优惠券活动编码" createDate="2016-07-25" modifyDate="2016-07-25">
     </bizcode>
+    <actionlog id="1" vendorId="1433" memNo="156234" className="actionlog" methodName="insert" methodType="1" methodParam="2312"
+               paramValue="123" createDate="2016-12-20" operationTime="1000">
+    </actionlog>
+    <abnormallog id="1" vendorId="1433" memNo="156234" className="actionlog" methodName="insert" abnormalInfo="异常信息" methodParam="2312"
+                 paramValue="123" createDate="2016-12-20" operationTime="1000">
+    </abnormallog>
 </dataset>
