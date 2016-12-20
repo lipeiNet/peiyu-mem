@@ -14,25 +14,25 @@
         UPDATE abnormallog
         <set>
             <if test="vendorId!=null and vendorId!=''">
-                vendorId=#{vendorId}
+                vendorId=#{vendorId},
             </if>
             <if test="memNo!=null and memNo!=''">
-                memNo=#{memNo}
+                memNo=#{memNo},
             </if>
             <if test="className!=null and className!=''">
-                className=#{className}
+                className=#{className},
             </if>
             <if test="methodName!=null and methodName!=''">
-                methodName=#{methodName}
+                methodName=#{methodName},
             </if>
             <if test="paramValue!=null and paramValue!=''">
-                paramValue=#{paramValue}
+                paramValue=#{paramValue},
             </if>
             <if test="createDate!=null and createDate!=''">
-                createDate=#{createDate}
+                createDate=#{createDate},
             </if>
             <if test="operationTime!=null and operationTime!=''">
-                operationTime=#{operationTime}
+                operationTime=#{operationTime},
             </if>
             <if test="abnormalInfo!=null and abnormalInfo!=''">
                 abnormalInfo=#{abnormalInfo}
