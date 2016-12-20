@@ -1,12 +1,10 @@
 package com.peiyu.mem.dao.tests;
 
 import com.peiyu.mem.dao.ActionLogDao;
-import com.peiyu.mem.dao.BaseDao;
 import com.peiyu.mem.domian.entity.ActionLog;
 import com.peiyu.mem.utils.DateUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ReflectionUtils;
 import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.util.Date;
@@ -42,6 +40,7 @@ public class ActionLogDaoUnitTests extends BaseDaoUnitTests{
         actionLog.setOperationTime(1000l);
         actionLog.setMethodType(1);
         actionLog.setVendorId(1433l);
+        assertEquals(1,actionLogDao.update(actionLog));
     }
     @Test
     public void testDelete(){
