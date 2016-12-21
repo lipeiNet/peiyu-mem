@@ -12,10 +12,13 @@ import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
 import org.apache.commons.collections.CollectionUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
 import java.util.Date;
 
 /**
@@ -27,7 +30,7 @@ public class ActionLogServiceImpl implements ActionLogService {
     private MqSenderHandler senderHandler;
 
     @Override
-    public Object insertActionLog(ProceedingJoinPoint joinPoint) {
+    public Object insertActionLog(ProceedingJoinPoint joinPoint) throws ClassNotFoundException, NotFoundException {
         if (actionLog(joinPoint,0)){
             return true;
         }
@@ -35,7 +38,7 @@ public class ActionLogServiceImpl implements ActionLogService {
     }
 
     @Override
-    public Object deleteActionLog(ProceedingJoinPoint joinPoint) {
+    public Object deleteActionLog(ProceedingJoinPoint joinPoint) throws ClassNotFoundException, NotFoundException {
         if (actionLog(joinPoint,1)){
             return true;
         }
@@ -43,7 +46,7 @@ public class ActionLogServiceImpl implements ActionLogService {
     }
 
     @Override
-    public Object updateActionLog(ProceedingJoinPoint joinPoint) {
+    public Object updateActionLog(ProceedingJoinPoint joinPoint) throws ClassNotFoundException, NotFoundException {
         if (actionLog(joinPoint,2)){
             return true;
         }
@@ -51,7 +54,7 @@ public class ActionLogServiceImpl implements ActionLogService {
     }
 
     @Override
-    public Object getActionLog(ProceedingJoinPoint joinPoint) {
+    public Object getActionLog(ProceedingJoinPoint joinPoint) throws ClassNotFoundException, NotFoundException {
         if (actionLog(joinPoint, 3)) {
             return new Member();
         }
@@ -65,54 +68,48 @@ public class ActionLogServiceImpl implements ActionLogService {
      * @param type
      * @return
      */
-    protected boolean actionLog(ProceedingJoinPoint joinPoint,int type){
-        String classType = joinPoint.getTarget().getClass().getName();
-        Class<?> clazz = null;
-        try {
-            clazz = Class.forName(classType);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        String clazzName = clazz.getName();
+    protected boolean actionLog(ProceedingJoinPoint joinPoint,int type) throws ClassNotFoundException, NotFoundException {
+        String className = joinPoint.getSignature().getDeclaringTypeName();
         String methodName = joinPoint.getSignature().getName();
-        String[] methodParams= new String[0];
-        try {
-            methodParams = this.getPavamsName(clazz,clazzName,methodName);
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
-        String methodStrs="";
-        if (methodParams!=null&& methodParams.length>0) {
-            for (String str : methodParams) {
-                methodStrs += str + ",";
+        StringBuilder methodParam=new StringBuilder();
+        StringBuilder pavamValues = new StringBuilder();
+        if (!className.contains("dao")) {
+            String classType = joinPoint.getTarget().getClass().getName();
+            Class<?> clazz = Class.forName(classType);
+            String clazzName = clazz.getName();
+            String[] methodParams;
+            methodParams = this.getPavamsName(clazz, clazzName, methodName);
+            if (methodParams != null && methodParams.length > 0) {
+                for (String str : methodParams) {
+                    methodParam.append(str+",");
+                }
             }
         }
         Object[] args = joinPoint.getArgs();
-        StringBuilder sb=new StringBuilder();
-        if (args!=null&&args.length>0) {
+        if (args != null && args.length > 0) {
             for (Object obj : args) {
                 String typeName = obj.getClass().getName();
-                boolean clazzFlag=true;
+                boolean clazzFlag = true;
                 for (String t : types) {
                     if (t.equals(typeName)) {
-                        clazzFlag=false;
-                        sb.append(obj + ",");
+                        clazzFlag = false;
+                        pavamValues.append(obj + ",");
                     }
                 }
-                if (clazzFlag){
-                    sb.append(this.getFieldsValue(obj)+",");
+                if (clazzFlag) {
+                    pavamValues.append(this.getFieldsValue(obj) + ",");
                 }
             }
         }
         ActionLog actionLog = new ActionLog();
         actionLog.setVendorId(0l);
         actionLog.setMemNo("0");
-        actionLog.setClassName(clazzName);
+        actionLog.setClassName(className);
         actionLog.setMethodName(methodName);
         actionLog.setMethodType(type);
         actionLog.setCreateDate(new Date());
-        actionLog.setMethodParam(methodStrs);
-        actionLog.setParamValue(sb.toString());
+        actionLog.setMethodParam(methodParam.toString());
+        actionLog.setParamValue(pavamValues.toString());
         long start = System.currentTimeMillis();
         try {
             joinPoint.proceed();
