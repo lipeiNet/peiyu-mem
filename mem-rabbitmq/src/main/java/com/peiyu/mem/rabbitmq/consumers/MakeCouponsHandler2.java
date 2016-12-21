@@ -11,16 +11,19 @@ import org.apache.log4j.Logger;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/12.
  */
+@Component
 public class MakeCouponsHandler2 implements ChannelAwareMessageListener {
     private Logger log = Logger.getLogger(MakeCouponsHandler2.class);
     @Autowired
     private CouponDao couponDao;
+    @Autowired
     private Gson2JsonMessageConverter jsonMessageConverter;
 
     @Override
@@ -41,13 +44,5 @@ public class MakeCouponsHandler2 implements ChannelAwareMessageListener {
             channel.basicNack(message.getMessageProperties().getDeliveryTag(), true, true);
             log.error("消息队列处理制券异常：" + e);
         }
-    }
-
-    public Gson2JsonMessageConverter getJsonMessageConverter() {
-        return jsonMessageConverter;
-    }
-
-    public void setJsonMessageConverter(Gson2JsonMessageConverter jsonMessageConverter) {
-        this.jsonMessageConverter = jsonMessageConverter;
     }
 }

@@ -23,6 +23,7 @@ public class MakeCouponsHandler1 implements ChannelAwareMessageListener {
     private Logger log = Logger.getLogger(MakeCouponsHandler1.class);
     @Autowired
     private CouponDao couponDao;
+    @Autowired
     private Gson2JsonMessageConverter jsonMessageConverter;
     @Override
     public void onMessage(Message message, Channel channel) throws Exception {
@@ -43,13 +44,5 @@ public class MakeCouponsHandler1 implements ChannelAwareMessageListener {
             channel.basicNack(message.getMessageProperties().getDeliveryTag(), true, true);
             log.error("消息队列处理制券异常：" + e);
         }
-    }
-
-    public Gson2JsonMessageConverter getJsonMessageConverter() {
-        return jsonMessageConverter;
-    }
-
-    public void setJsonMessageConverter(Gson2JsonMessageConverter jsonMessageConverter) {
-        this.jsonMessageConverter = jsonMessageConverter;
     }
 }
