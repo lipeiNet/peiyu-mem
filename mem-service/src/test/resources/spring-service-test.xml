@@ -7,6 +7,7 @@
     <import resource="spring-redis-service-test.xml"/>
     <import resource="spring-service-dao-test.xml"/>
     <import resource="classpath*:spring-rabbitmq-producer.xml"/>
+    <import resource="spring_aop_service.xml"/>
     <context:property-placeholder location="threadtest.properties" ignore-unresolvable="true"/>
     <context:component-scan base-package="com.peiyu.mem"/>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

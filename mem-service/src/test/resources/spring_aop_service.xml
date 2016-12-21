@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="actionLogService" class="com.peiyu.mem.service.impl.ActionLogServiceImpl"/>
+    <aop:config>
+        <aop:aspect ref="actionLogService">
+            <aop:pointcut id="insertActionPointCut" expression="execution(* com.peiyu.mem.service.*.insert*(..)) or within(com.peiyu.mem.dao.*.insert*)
+            or within(com.peiyu.mem.manager.*.insert*)"/>
+            <aop:around method="insertActionLog" pointcut-ref="insertActionPointCut"/>
+        </aop:aspect>
+        <aop:aspect ref="actionLogService">
+            <aop:pointcut id="deleteActionPointCut" expression="execution(* com.peiyu.mem.service.*.delete*(..)) or within(com.peiyu.mem.dao.*.delete*)
+            or within(com.peiyu.mem.manager.*.delete*)"/>
+            <aop:around method="deleteActionLog" pointcut-ref="deleteActionPointCut"/>
+        </aop:aspect>
+        <aop:aspect ref="actionLogService">
+            <aop:pointcut id="updateActionPointCut" expression="execution(* com.peiyu.mem.service.*.update*(..)) or within(com.peiyu.mem.dao.*.update*)
+            or within(com.peiyu.mem.manager.*.update*)"/>
+            <aop:around method="updateActionLog" pointcut-ref="updateActionPointCut"/>
+        </aop:aspect>
+        <aop:aspect ref="actionLogService">
+            <aop:pointcut id="getActionPointCut" expression="execution(* com.peiyu.mem.service.*.get*(..)) or within(com.peiyu.mem.dao.*.get*)
+            or within(com.peiyu.mem.manager.*.get*)"/>
+            <aop:around method="getActionLog" pointcut-ref="getActionPointCut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

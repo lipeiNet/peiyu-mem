@@ -10,16 +10,18 @@
     <import resource="spring-rabbitmq-share.xml"/>
     <import resource="spring-dao-rabbitmq.xml"/>
     <context:component-scan base-package="com.peiyu.mem.rabbitmq.consumers"/>
+    <!--制券-->
     <rabbit:listener-container connection-factory="connectionFactory">
         <rabbit:listener ref="makeCouponsHandler1" method="onMessage" queues="spring.makeCoupons.queue"/>
     </rabbit:listener-container>
     <rabbit:listener-container connection-factory="connectionFactory">
         <rabbit:listener ref="makeCouponsHandler2" method="onMessage" queues="spring.makeCoupons.queue"/>
     </rabbit:listener-container>
-    <bean id="makeCouponsHandler1" class="com.peiyu.mem.rabbitmq.consumers.MakeCouponsHandler1">
-        <property name="jsonMessageConverter" ref="jsonMessageConverter"></property>
-    </bean>
-    <bean id="makeCouponsHandler2" class="com.peiyu.mem.rabbitmq.consumers.MakeCouponsHandler2">
-        <property name="jsonMessageConverter" ref="jsonMessageConverter"></property>
-    </bean>
+    <!--操作日志-->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="actionLogHandler1" method="onMessage" queues="spring.actionLog.queue"/>
+    </rabbit:listener-container>
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="actionLogHandler2" method="onMessage" queues="spring.actionLog.queue"/>
+    </rabbit:listener-container>
 </beans>

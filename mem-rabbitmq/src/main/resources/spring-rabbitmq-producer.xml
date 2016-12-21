@@ -11,6 +11,6 @@
     <context:component-scan base-package="com.peiyu.mem.rabbitmq.produces"/>
     <context:property-placeholder location="/rabbitmq-server.properties" ignore-unresolvable="true"/>
     <!--定义rabbitmq模板类-->
-    <rabbit:template exchange="spring.makeCoupons.exchange.direct" id="rabbitTemplate" connection-factory="connectionFactory"
+    <rabbit:template exchange="spring.exchange.direct" id="rabbitTemplate" connection-factory="connectionFactory"
                      message-converter="jsonMessageConverter"/>
 </beans>

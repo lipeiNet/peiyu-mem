@@ -15,9 +15,17 @@
     <!--定义消息队列-->
     <rabbit:queue id="spring.makeCoupons.queue" durable="true" auto-delete="false" exclusive="false" name="${rabbit.makeCoupons.queue}"/>
     <!--定义direct的交换机（可以绑定多个队列）-->
-    <rabbit:direct-exchange name="${rabbit.makeCoupons.exchange.direct}" durable="true" auto-delete="false" id="${rabbit.makeCoupons.exchange.direct}">
+    <rabbit:direct-exchange name="${rabbit.exchange.direct}" durable="true" auto-delete="false" id="${rabbit.exchange.direct}">
         <rabbit:bindings>
             <rabbit:binding queue="spring.makeCoupons.queue" key="${rabbit.makeCoupons.routingKey}"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--操作日志-->
+    <rabbit:queue id="spring.actionLog.queue" durable="true" auto-delete="true" exclusive="false" name="${rabbit.actionLog.queue}"/>
+    <rabbit:direct-exchange name="${rabbit.exchange.direct}" durable="true" auto-delete="false" id="${rabbit.exchange.direct}">
+        <rabbit:bindings>
+            <rabbit:binding queue="spring.actionLog.queue" key="${rabbit.actionLog.routingKey}"></rabbit:binding>
         </rabbit:bindings>
     </rabbit:direct-exchange>
     <!--json转换插件-->
