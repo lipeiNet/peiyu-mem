@@ -52,4 +52,8 @@ public class MemberServiceUnitTests {
         member.setEndDate(DateUtil.getFormatDate("2017-12-15","yyyy-MM-dd"));
         memberService.insertMember(member);
     }
+    @Test
+    public void testGet(){
+        memberService.getMemberByMemNo(1433l,"123");
+    }
 }
