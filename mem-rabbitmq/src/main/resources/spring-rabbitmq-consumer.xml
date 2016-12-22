@@ -24,4 +24,11 @@
     <rabbit:listener-container connection-factory="connectionFactory">
         <rabbit:listener ref="actionLogHandler2" method="onMessage" queues="spring.actionLog.queue"/>
     </rabbit:listener-container>
+    <!--异常日志-->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="abnormalLogHandler1" method="onMessage" queues="spring.abnormalLog.queue"/>
+    </rabbit:listener-container>
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="abnormalLogHandler2" method="onMessage" queues="spring.abnormalLog.queue"/>
+    </rabbit:listener-container>
 </beans>
