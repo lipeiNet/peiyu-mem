@@ -28,6 +28,14 @@
             <rabbit:binding queue="spring.actionLog.queue" key="${rabbit.actionLog.routingKey}"></rabbit:binding>
         </rabbit:bindings>
     </rabbit:direct-exchange>
+
+    <!--异常日志-->
+    <rabbit:queue id="spring.abnormalLog.queue" durable="true" auto-delete="true" exclusive="false" name="${rabbit.abnormalLog.queue}"/>
+    <rabbit:direct-exchange name="${rabbit.exchange.direct}" durable="true" auto-delete="false" id="${rabbit.exchange.direct}">
+        <rabbit:bindings>
+            <rabbit:binding queue="spring.abnormalLog.queue" key="${rabbit.abnormalLog.routingKey}"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
     <!--json转换插件-->
     <bean id="jsonMessageConverter" class="com.peiyu.mem.rabbitmq.Gson2JsonMessageConverter"/>
 </beans>
