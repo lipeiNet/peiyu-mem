@@ -10,10 +10,12 @@ import org.apache.log4j.Logger;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Administrator on 2016/12/22.
  */
+@Component
 public class AbnormalLogHandler2 implements ChannelAwareMessageListener {
     private Logger log = Logger.getLogger(AbnormalLogHandler1.class);
     @Autowired
