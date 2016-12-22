@@ -5,6 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <bean id="actionLogService" class="com.peiyu.mem.service.impl.ActionLogServiceImpl"/>
+    <bean id="abnormalLogService" class="com.peiyu.mem.service.impl.AbnormalLogServiceImpl"/>
     <aop:config>
         <aop:aspect ref="actionLogService">
             <aop:pointcut id="insertActionPointCut" expression="execution(* com.peiyu.mem.service.*.insert*(..)) or
@@ -25,6 +26,10 @@
             <aop:pointcut id="getActionPointCut" expression="execution(* com.peiyu.mem.service.*.get*(..)) or
             execution(* com.peiyu.mem.dao.*.get*(..))"/>
             <aop:around method="getActionLog" pointcut-ref="getActionPointCut"/>
+        </aop:aspect>
+        <aop:aspect ref="abnormalLogService">
+            <aop:pointcut id="abnormalLog" expression="execution(* com.peiyu.mem.*.*.*(..))"/>
+            <aop:after-throwing method="saveAbnormalLog" throwing="e" pointcut-ref="abnormalLog"></aop:after-throwing>
         </aop:aspect>
     </aop:config>
 </beans>
