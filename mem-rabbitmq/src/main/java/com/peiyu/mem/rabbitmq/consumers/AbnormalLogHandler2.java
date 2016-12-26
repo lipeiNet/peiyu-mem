@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AbnormalLogHandler2 implements ChannelAwareMessageListener {
-    private Logger log = Logger.getLogger(AbnormalLogHandler1.class);
+    private Logger log = Logger.getLogger(AbnormalLogHandler2.class);
     @Autowired
     private AbnormalLogDao abnormalLogDao;
     @Autowired
