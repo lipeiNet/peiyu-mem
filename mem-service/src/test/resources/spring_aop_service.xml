@@ -28,8 +28,9 @@
             <aop:around method="getActionLog" pointcut-ref="getActionPointCut"/>
         </aop:aspect>
         <aop:aspect ref="abnormalLogService">
-            <aop:pointcut id="abnormalLog" expression="execution(* com.peiyu.mem.*.*.*(..))"/>
-            <aop:after-throwing method="saveAbnormalLog" throwing="e" pointcut-ref="abnormalLog"></aop:after-throwing>
+            <aop:pointcut id="abnormalLog" expression="execution(* com.peiyu.mem.service.*.*(..)) or
+            execution(* com.peiyu.mem.dao.*.*(..))"/>
+            <aop:after-throwing method="saveAbnormalLog" throwing="e" pointcut-ref="abnormalLog"/>
         </aop:aspect>
     </aop:config>
 </beans>
