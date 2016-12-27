@@ -9,17 +9,17 @@
     <aop:config>
         <aop:aspect ref="actionLogService">
             <aop:pointcut id="insertActionPointCut" expression="execution(* com.peiyu.mem.service.*.insert*(..)) or
-            execution(* com.peiyu.mem.dao.*.insert*(..))"/>
+             execution(* com.peiyu.mem.manager.*.insert*(..)) orexecution(* com.peiyu.mem.dao.*.insert*(..))"/>
             <aop:around method="insertActionLog" pointcut-ref="insertActionPointCut"/>
         </aop:aspect>
         <aop:aspect ref="actionLogService">
             <aop:pointcut id="deleteActionPointCut" expression="execution(* com.peiyu.mem.service.*.delete*(..)) or
-            execution(* com.peiyu.mem.dao.*.delete*(..))"/>
+            execution(* com.peiyu.mem.manager.*.delete*(..))or execution(* com.peiyu.mem.dao.*.delete*(..))"/>
             <aop:around method="deleteActionLog" pointcut-ref="deleteActionPointCut"/>
         </aop:aspect>
         <aop:aspect ref="actionLogService">
             <aop:pointcut id="updateActionPointCut" expression="execution(* com.peiyu.mem.service.*.update*(..)) or
-            execution(* com.peiyu.mem.dao.*.update*(..))"/>
+            execution(* com.peiyu.mem.dao.*.update*(..)) or execution(* com.peiyu.mem.manager.*.update*(..))"/>
             <aop:around method="updateActionLog" pointcut-ref="updateActionPointCut"/>
         </aop:aspect>
         <aop:aspect ref="actionLogService">
