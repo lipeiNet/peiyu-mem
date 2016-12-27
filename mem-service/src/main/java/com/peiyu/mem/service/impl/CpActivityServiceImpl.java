@@ -48,7 +48,7 @@ public class CpActivityServiceImpl implements CpActivityService {
             String[] splitNames = cpActivity.getDetailName().split(",");
             for (int i = 0; i < splitCodes.length; i++) {
                 CpApplyLimitdt applyLimit = new CpApplyLimitdt();
-                BeanUtils.copyProperties(cpActivity,applyLimit );
+                BeanUtils.copyProperties(cpActivity, applyLimit);
                 applyLimit.setId(null);
                 applyLimit.setOwnRecordCode(cpActivity.getActNo());
                 applyLimit.setOwnRecordType(SysConstants.OWNRECORDTYPE.ACTIVITY);
@@ -80,14 +80,14 @@ public class CpActivityServiceImpl implements CpActivityService {
                 }
                 useLimits.add(useLimit);
             }
-            if (cpActivity.getId() == null || "".equals(cpActivity.getId())) {
-                if (activityManager.insertCpActivity(cpActivity, applyLimits, useLimits)) {
-                    return 1;
-                }
-            }
-            if (activityManager.updateCpActivity(cpActivity, applyLimits, useLimits)) {
+        }
+        if (cpActivity.getId() == null || "".equals(cpActivity.getId())) {
+            if (activityManager.insertCpActivity(cpActivity, applyLimits, useLimits)) {
                 return 1;
             }
+        }
+        if (activityManager.updateCpActivity(cpActivity, applyLimits, useLimits)) {
+            return 1;
         }
         return 0;
     }
