@@ -25,32 +25,36 @@ public class MakingTaskServiceUnitTests {
     private MakingTaskService makingTaskService;
     @Autowired
     private MakingTaskManager makingTaskManager;
+
     @Test
-    public void testInsertMakingTask(){
-        CpMakingTask makingTask=new CpMakingTask();
+    public void testInsertMakingTask() {
+        CpMakingTask makingTask = new CpMakingTask();
         makingTask.setVendorId(1483l);
-        makingTask.setActNo("VD2016121600001");
-        makingTask.setActName("消费送券001");
-        makingTask.setSubgroupCode("VE2016121600001");
-        makingTask.setCpValue(10d);
-        makingTask.setStartDate(DateUtil.getFormatDate("2016-12-15","yyyy-MM-dd"));
-        makingTask.setEndDate(DateUtil.getFormatDate("2016-12-25","yyyy-MM-dd"));
-        makingTask.setTaskCode(bizService.getOddNumbers(1483l,"Task_Codes",0));
-        makingTask.setGenNoRulePrefix("a");
-        makingTask.setGenNoRuleSuffix("b");
-        makingTask.setTicNum(100000);
+        makingTask.setActNo("VD2016122700025");
+        makingTask.setActName("消费送券24");
+        makingTask.setSubgroupCode("VG2016122700194");
+        makingTask.setCpValue(20d);
+        makingTask.setStartDate(DateUtil.getFormatDate("2016-12-15", "yyyy-MM-dd"));
+        makingTask.setEndDate(DateUtil.getFormatDate("2016-17-25", "yyyy-MM-dd"));
+        makingTask.setTaskCode(bizService.getOddNumbers(1483l, "Task_Code", 0));
+        makingTask.setGenNoRulePrefix("91power");
+        makingTask.setGenNoRuleSuffix("test");
+        makingTask.setTicNum(50000);
 //        makingTaskManager.insertCacheByTaskCode(makingTask);
 //        makingTaskManager.deleteCacheByMakingConpon(makingTask.getVendorId(),makingTask.getTaskCode());
 //        makingTaskManager.deteleCacheByTaskCode(makingTask);
         makingTaskService.insertMakingTask(makingTask);
     }
+
+
     @Test
     public void testMakingCoupon() throws InterruptedException {
-        makingTaskService.makingCoupon(1468l,"VT2016121900010");
+        makingTaskService.makingCoupon(1483l,"VT2016122700050");
         Thread.currentThread().join();
     }
     @Test
     public void testInsertMakingTask1(){
+
         CpMakingTask makingTask=new CpMakingTask();
         makingTask.setVendorId(1468l);
         makingTask.setActNo("VD2016121900010");
