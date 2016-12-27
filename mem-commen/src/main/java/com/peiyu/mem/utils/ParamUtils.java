@@ -17,10 +17,10 @@ public class ParamUtils {
      * @return
      */
     public static boolean isBasicType(String typeName) {
-        boolean clazzFlag = true;
+        boolean clazzFlag = false;
         for (String t : types) {
             if (t.equals(typeName)) {
-                clazzFlag = false;
+                clazzFlag = true;
             }
         }
         return clazzFlag;
@@ -49,7 +49,7 @@ public class ParamUtils {
         String[] paramNames = new String[cm.getParameterTypes().length];
         int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
         for (int i = 0; i < paramNames.length; i++){
-            paramNames[i] = attr.variableName(i + pos+1); //paramNames即参数名
+            paramNames[i] = attr.variableName(i + pos); //paramNames即参数名
         }
 
         return paramNames;
