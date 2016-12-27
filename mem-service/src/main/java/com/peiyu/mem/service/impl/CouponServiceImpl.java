@@ -60,14 +60,14 @@ public class CouponServiceImpl implements CouponService {
         try {
             if (CollectionUtils.isEmpty(goodsForCoupons)) {
                 log.error("商品信息不能为空");
-                return 1;
+                return 0;
             }
             Long vendorId = goodsForCoupons.get(0).getVendorId();
             String memNo = goodsForCoupons.get(0).getMemNo();
             Member member = memberDao.getMemberByMemNo(vendorId, memNo);
             if (member == null) {
                 log.error("不存在vendorId=" + vendorId + ",memNo=" + memNo + "的会员");
-                return 2;
+                return 0;
             }
             CpActivity activity = new CpActivity();
             activity.setVendorId(vendorId);
@@ -85,7 +85,7 @@ public class CouponServiceImpl implements CouponService {
                 }
                 if (CollectionUtils.isEmpty(activities)) {
                     log.error("vendorId=" + vendorId + "下没有在" + new Date() + "的消费送券活动");
-                    return 3;
+                    return 0;
                 }
             }
             List<Coupon> needUpdateCoupons = new ArrayList<>();
@@ -221,10 +221,10 @@ public class CouponServiceImpl implements CouponService {
                                 List<Coupon> coupons = couponDao.getCouponsBySearch(coupon);
                                 if (CollectionUtils.isNotEmpty(coupons)) {
                                     for (Coupon c : coupons) {
-                                       if (!contains(needUpdateCoupons,c)){
-                                           needUpdateCoupons.add(c);
-                                           break;
-                                       }
+                                        if (!contains(needUpdateCoupons, c)) {
+                                            needUpdateCoupons.add(c);
+                                            break;
+                                        }
                                     }
                                 }
                             }
@@ -242,11 +242,11 @@ public class CouponServiceImpl implements CouponService {
                 }
             }
             if (couponManager.updateCoupons(needUpdateCoupons)) {
-                return 0;
+                return needUpdateCoupons.size();
             }
         } catch (Exception e) {
             log.error("消费送券出现异常" + e);
-            return 5;
+            return -1;
         }
         return 0;
     }
