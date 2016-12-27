@@ -24,7 +24,8 @@
         </aop:aspect>
         <aop:aspect ref="actionLogService">
             <aop:pointcut id="getActionPointCut" expression="execution(* com.peiyu.mem.service.*.get*(..)) or
-            execution(* com.peiyu.mem.dao.*.get*(..))"/>
+             execution(* com.peiyu.mem.service.CouponService.consumeSendCoupon(..)) or
+             execution(* com.peiyu.mem.manager.*.get*(..)) or execution(* com.peiyu.mem.dao.*.get*(..))"/>
             <aop:around method="getActionLog" pointcut-ref="getActionPointCut"/>
         </aop:aspect>
         <aop:aspect ref="abnormalLogService">
