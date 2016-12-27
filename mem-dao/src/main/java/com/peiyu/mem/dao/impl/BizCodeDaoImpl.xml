@@ -13,12 +13,11 @@
         DELETE FROM bizcode WHERE id=#{id}
     </delete>
     <update id="update" parameterType="com.peiyu.mem.domian.entity.BizCode">
-           <![CDATA[
            update bizcode
-           set bizCode=#{bizCode},bizName=#{bizName},curDate=#{curDate},serialNumber=#{serialNumber},
-           lengthValue=#{lengthValue},memo=#{memo},modifyDate=#{modifyDate}
-           where id=#{id}
-        ]]>
+           set bizCode=#{bizCode,jdbcType=VARCHAR},bizName=#{bizName,jdbcType=VARCHAR},curDate=#{curDate,jdbcType=TIMESTAMP},
+           serialNumber=#{serialNumber,jdbcType=INTEGER},
+           lengthValue=#{lengthValue,jdbcType=INTEGER},memo=#{memo},modifyDate=#{modifyDate}
+           where id=#{id,jdbcType=BIGINT}
     </update>
     <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.BizCode">
         SELECT * FROM bizcode WHERE id=#{id}
