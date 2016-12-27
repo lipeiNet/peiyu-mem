@@ -218,10 +218,7 @@ public class CouponServiceImpl implements CouponService {
                                 coupon.setActNo(ag.getActNo());
                                 coupon.setSubgroupCode(ag.getSubgroupCode());
                                 coupon.setState(SysConstants.COUPONSTATE.NOGRANT);
-                                long start = System.currentTimeMillis();
                                 List<Coupon> coupons = couponDao.getCouponsBySearch(coupon);
-                                long end = System.currentTimeMillis();
-                                log.info("获取券消耗的时间：" + (end - start) + "毫秒");
                                 if (CollectionUtils.isNotEmpty(coupons)) {
                                     for (Coupon c : coupons) {
                                        if (!contains(needUpdateCoupons,c)){
