@@ -43,5 +43,4 @@ public interface CouponService {
      * @return
      */
     Coupon getCoupon(long id);
-
 }
