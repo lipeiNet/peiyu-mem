@@ -4,7 +4,6 @@ import com.migr.common.util.DateUtil;
 import com.peiyu.mem.dao.BizCodeDao;
 import com.peiyu.mem.domian.entity.BizCode;
 import com.peiyu.mem.manager.BizCodeManager;
-import com.peiyu.mem.manager.impl.BizCodeManagerImpl;
 import com.peiyu.mem.service.BizService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class BizServiceImpl implements BizService {
                 }
                 bizCode.setModifyDate(new Date());
                 OddNumbers = bizCode.getBizCode() + now + getSerialNumber(bizCode.getLengthValue(), bizCode.getSerialNumber());
-                if (bizCodeDao.update(bizCode) < 1) {
+                if (bizCodeDao.update(bizCode) <= 0) {
                     return this.getOddNumbers(vendorId, bno, i + 1);
                 }
                 bizCodeManager.updateCacheForBno(bizCode);
