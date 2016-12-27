@@ -31,7 +31,7 @@ public interface CouponService {
     int updateCoupon(Coupon coupon);
 
     /**
-     * 消费送券
+     * 消费送券(-1表示服务器异常，返回送优惠券的数量)
      * @param goodsForCoupons
      * @return
      */
