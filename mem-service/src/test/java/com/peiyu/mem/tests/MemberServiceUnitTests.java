@@ -22,7 +22,7 @@ public class MemberServiceUnitTests {
     @Test
     public void  testInsertMember(){
         Member member=new Member();
-        member.setVendorId(1468l);
+        member.setVendorId(1483l);
         member.setMemNo("12345");
         member.setMemPin("1324895");
         member.setMemPwd("123456");
