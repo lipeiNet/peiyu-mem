@@ -32,47 +32,36 @@ public class ActionLogServiceImpl implements ActionLogService {
 
     @Override
     public Object insertActionLog(ProceedingJoinPoint joinPoint) throws ClassNotFoundException, NotFoundException {
-        if (actionLog(joinPoint,0)){
-            return true;
-        }
-        return false;
+        return actionLog(joinPoint, 0);
     }
 
     @Override
     public Object deleteActionLog(ProceedingJoinPoint joinPoint) throws ClassNotFoundException, NotFoundException {
-        if (actionLog(joinPoint,1)){
-            return true;
-        }
-        return false;
+        return actionLog(joinPoint, 1);
     }
 
     @Override
     public Object updateActionLog(ProceedingJoinPoint joinPoint) throws ClassNotFoundException, NotFoundException {
-        if (actionLog(joinPoint,2)){
-            return true;
-        }
-        return false;
+        return actionLog(joinPoint, 2);
     }
 
     @Override
     public Object getActionLog(ProceedingJoinPoint joinPoint) throws ClassNotFoundException, NotFoundException {
-        if (actionLog(joinPoint, 3)) {
-            return new Member();
-        }
-        return null;
+        return actionLog(joinPoint, 3);
     }
 
 
     /**
      * 公共处理操作日志
+     *
      * @param joinPoint
      * @param type
      * @return
      */
-    protected boolean actionLog(ProceedingJoinPoint joinPoint,int type) throws ClassNotFoundException, NotFoundException {
+    protected Object actionLog(ProceedingJoinPoint joinPoint, int type) throws ClassNotFoundException, NotFoundException {
         String className = joinPoint.getSignature().getDeclaringTypeName();
         String methodName = joinPoint.getSignature().getName();
-        StringBuilder methodParam=new StringBuilder();
+        StringBuilder methodParam = new StringBuilder();
         StringBuilder pavamValues = new StringBuilder();
         if (!className.contains("dao")) {
             String classType = joinPoint.getTarget().getClass().getName();
@@ -82,7 +71,7 @@ public class ActionLogServiceImpl implements ActionLogService {
             methodParams = ParamUtils.getPavamsName(clazz, clazzName, methodName);
             if (methodParams != null && methodParams.length > 0) {
                 for (String str : methodParams) {
-                    methodParam.append(str+",");
+                    methodParam.append(str + ",");
                 }
             }
         }
@@ -107,8 +96,9 @@ public class ActionLogServiceImpl implements ActionLogService {
         actionLog.setMethodParam(methodParam.toString());
         actionLog.setParamValue(pavamValues.toString());
         long start = System.currentTimeMillis();
+        Object obj = null;
         try {
-            joinPoint.proceed();
+            obj = joinPoint.proceed();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
@@ -116,6 +106,6 @@ public class ActionLogServiceImpl implements ActionLogService {
         actionLog.setOperationTime(end - start);
         String data = JsonUtil.g.toJson(actionLog);
         senderHandler.sendMessage("spring.actionLog.queueKey", data);
-        return true;
+        return obj;
     }
 }
