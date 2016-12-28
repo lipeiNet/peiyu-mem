@@ -11,17 +11,24 @@ import java.util.List;
  */
 @Repository
 public interface CouponDao extends BaseDao<Coupon> {
-
-    /**
-     * 根据条件获取优惠券
-     * @param serach
-     * @return
-     */
-    List<Coupon> getCouponsBySearch(Coupon serach);
-
     /**
      * 批量插入优惠券
      * @param coupons
      */
     void insertBatchCoupons(@Param("coupons") List<Coupon> coupons);
+    /**
+     * 根据条件获取优惠券
+     * @param search
+     * @return
+     */
+    List<Coupon> getCouponsBySearch(Coupon search);
+
+    /**
+     * 分页
+     * @param search
+     * @return
+     */
+    List<Coupon> getCouponListByPage(Coupon search);
+
+
 }
