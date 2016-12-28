@@ -99,6 +99,13 @@ insert into coupon (id, vendorId, actNo,actName, subgroupCode, cpCode,
       select * from coupon WHERE df=0 AND vendorId = #{vendorId}
       <include refid="whereCase"></include>
     </select>
+    <select id="getCouponListByPage" parameterType="com.peiyu.mem.domian.entity.Coupon" resultType="com.peiyu.mem.domian.entity.Coupon">
+        select * from coupon WHERE df=0 AND vendorId = #{vendorId}
+        <include refid="whereCase"></include>
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex} , #{pageSize}
+        </if>
+    </select>
     <sql id="whereCase">
         <if test="cpValue != null" >
             and cpValue = #{cpValue}
