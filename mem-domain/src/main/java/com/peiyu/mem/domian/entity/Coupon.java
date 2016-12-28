@@ -101,6 +101,14 @@ public class Coupon implements Serializable{
      *是否已删除 1删除 0正常<br/>
      **/
     private Integer df;
+    /**
+     * 页索引
+     */
+    private Integer pageIndex;
+    /**
+     * 页大小
+     */
+    private Integer pageSize;
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -268,5 +276,21 @@ public class Coupon implements Serializable{
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public Integer getPageIndex() {
+        return pageIndex;
+    }
+
+    public void setPageIndex(Integer pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 }
