@@ -49,12 +49,11 @@ public class MakingTaskServiceUnitTests {
 
     @Test
     public void testMakingCoupon() throws InterruptedException {
-        makingTaskService.makingCoupon(1483l,"VT2016122700050");
+        makingTaskService.makingCoupon(1483l,"VT2016122700014");
         Thread.currentThread().join();
     }
     @Test
     public void testInsertMakingTask1(){
-
         CpMakingTask makingTask=new CpMakingTask();
         makingTask.setVendorId(1468l);
         makingTask.setActNo("VD2016121900010");
