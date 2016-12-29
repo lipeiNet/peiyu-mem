@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Administrator on 2016/12/7.
@@ -89,6 +86,7 @@ public class CouponServiceImpl implements CouponService {
                 }
             }
             List<Coupon> needUpdateCoupons = new ArrayList<>();
+            Map couponMap = new HashMap();
             for (GoodsForCoupon goodsForCoupon : goodsForCoupons) {
                 List<CpActivity> validActivitys = new ArrayList<>();
                 for (CpActivity act : activities) {
@@ -218,7 +216,19 @@ public class CouponServiceImpl implements CouponService {
                                 coupon.setActNo(ag.getActNo());
                                 coupon.setSubgroupCode(ag.getSubgroupCode());
                                 coupon.setState(SysConstants.COUPONSTATE.NOGRANT);
-                                List<Coupon> coupons = couponDao.getCouponsBySearch(coupon);
+                                coupon.setPageIndex(0);
+                                coupon.setPageSize(100);
+                                String key = String.format("%s_%s_%s", vendorId, t.getActNo(), ag.getSubgroupCode());
+                                List<Coupon> coupons = new ArrayList<>();
+                                if (couponMap.get(key)!=null){
+                                    coupons = (List<Coupon>) couponMap.get(key);
+                                }
+                                if (couponMap.get(key) == null) {
+                                    coupons = couponDao.getCouponListByPage(coupon);
+                                    if (CollectionUtils.isNotEmpty(coupons)){
+                                        couponMap.put(key, coupons);
+                                    }
+                                }
                                 if (CollectionUtils.isNotEmpty(coupons)) {
                                     for (Coupon c : coupons) {
                                         if (!contains(needUpdateCoupons, c)) {
