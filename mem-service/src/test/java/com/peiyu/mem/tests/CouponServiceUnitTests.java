@@ -23,9 +23,10 @@ public class CouponServiceUnitTests {
     @Test
     public void testConsumeSendCoupon() {
         List<GoodsForCoupon> goodsForCoupons = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
             GoodsForCoupon goodsForCoupon = new GoodsForCoupon();
             goodsForCoupon.setVendorId(1483l);
-            goodsForCoupon.setMemNo("12345");
+            goodsForCoupon.setMemNo("13520452");
             goodsForCoupon.setFirstBrandCode("pp30");
             goodsForCoupon.setSecondBrandCode("2");
             goodsForCoupon.setThirdBrandCode("3");
@@ -40,6 +41,7 @@ public class CouponServiceUnitTests {
             goodsForCoupon.setOrganCode("910003");
             goodsForCoupon.setSupplierCode("24");
             goodsForCoupons.add(goodsForCoupon);
+        }
         int result = couponService.consumeSendCoupon(goodsForCoupons);
         System.out.println(result);
     }
