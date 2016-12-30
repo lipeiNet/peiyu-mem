@@ -23,15 +23,15 @@ public class MemberServiceUnitTests {
     public void  testInsertMember(){
         Member member=new Member();
         member.setVendorId(1483l);
-        member.setMemNo("12345");
-        member.setMemPin("1324895");
-        member.setMemPwd("123456");
+        member.setMemNo("13520452");
+        member.setMemPin("13248951");
+        member.setMemPwd("1234561");
         member.setOrganCode("1");
         member.setOrganName("信息大厦");
         member.setStoreCode("2");
         member.setStoreName("信息办事处");
-        member.setMemName("张三");
-        member.setNickName("赵四");
+        member.setMemName("admin");
+        member.setNickName("admin");
         member.setMobileNo("1234321244");
         member.setConsumeAmount(10d);
         member.setMemPoint(100d);
