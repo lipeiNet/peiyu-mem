@@ -16,6 +16,12 @@ public interface CouponDao extends BaseDao<Coupon> {
      * @param coupons
      */
     void insertBatchCoupons(@Param("coupons") List<Coupon> coupons);
+
+    /**
+     * 批量更新优惠券状态
+     * @param coupons
+     */
+    void updateBatchCouponsState(@Param("coupons") List<Coupon> coupons);
     /**
      * 根据条件获取优惠券
      * @param search
