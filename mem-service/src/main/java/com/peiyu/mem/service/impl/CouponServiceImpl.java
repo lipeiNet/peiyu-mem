@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Administrator on 2016/12/7.
@@ -22,6 +23,7 @@ import java.util.*;
 @Service
 public class CouponServiceImpl implements CouponService {
     private Logger log = Logger.getLogger(CouponServiceImpl.class);
+    private Map couponMap = new ConcurrentHashMap();
     @Autowired
     private MemberDao memberDao;
     @Autowired
@@ -86,7 +88,7 @@ public class CouponServiceImpl implements CouponService {
                 }
             }
             List<Coupon> needUpdateCoupons = new ArrayList<>();
-            Map couponMap = new HashMap();
+
             for (GoodsForCoupon goodsForCoupon : goodsForCoupons) {
                 List<CpActivity> validActivitys = new ArrayList<>();
                 for (CpActivity act : activities) {
