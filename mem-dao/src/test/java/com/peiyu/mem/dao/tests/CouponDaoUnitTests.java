@@ -69,6 +69,19 @@ public class CouponDaoUnitTests extends BaseDaoUnitTests {
         assertEquals(1,result);
     }
     @Test
+    public void testUpdateBatchCouponsState(){
+        Coupon coupon=new Coupon();
+        coupon.setMemNo("17876647");
+        coupon.setMemCat("2");
+        coupon.setSendCouponDate(new Date());
+        coupon.setModifyDate(new Date());
+        coupon.setState(1);
+        coupon.setId(1l);
+        List<Coupon> coupons=new ArrayList<>();
+        coupons.add(coupon);
+        couponDao.updateBatchCouponsState(coupons);
+    }
+    @Test
     public void testGet(){
         Coupon except=getExceptCoupon();
         Coupon result=couponDao.get(1l);
