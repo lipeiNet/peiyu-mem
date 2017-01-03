@@ -49,4 +49,16 @@ public class MqSenderHandlerUnitTests {
             mqSenderHandler.sendMessage("spring.makeCoupons.queueKey",data);
         }
     }
+    @Test
+    public void testUpdateCouponState(){
+        Coupon coupon=new Coupon();
+        coupon.setId(799165l);
+        coupon.setState(1);
+        coupon.setMemNo("123456");
+        coupon.setSendCouponDate(new Date());
+        List<Coupon> coupons=new ArrayList<>();
+        coupons.add(coupon);
+        String data=JsonUtil.g.toJson(coupons);
+        mqSenderHandler.sendMessage("spring.updateCouponState.queueKey",data);
+    }
 }
