@@ -36,6 +36,14 @@
             <rabbit:binding queue="spring.abnormalLog.queue" key="${rabbit.abnormalLog.routingKey}"></rabbit:binding>
         </rabbit:bindings>
     </rabbit:direct-exchange>
+
+    <!--更新券状态-->
+    <rabbit:queue id="spring.updateCouponState.queue" durable="true" auto-delete="true" exclusive="false" name="${rabbit.updateCouponState.queue}"/>
+    <rabbit:direct-exchange name="${rabbit.exchange.direct}" durable="true" auto-delete="false" id="${rabbit.exchange.direct}">
+        <rabbit:bindings>
+            <rabbit:binding queue="spring.updateCouponState.queue" key="${rabbit.updateCouponState.routingKey}"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
     <!--json转换插件-->
     <bean id="jsonMessageConverter" class="com.peiyu.mem.rabbitmq.Gson2JsonMessageConverter"/>
 </beans>
