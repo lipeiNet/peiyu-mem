@@ -23,4 +23,5 @@ public interface CouponManager {
      * @return
      */
     boolean updateCoupons(List<Coupon> coupons);
+
 }
