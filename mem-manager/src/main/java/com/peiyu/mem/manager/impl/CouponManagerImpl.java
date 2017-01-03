@@ -79,6 +79,8 @@ public class CouponManagerImpl implements CouponManager {
                     return false;
                 } catch (Exception e) {
                     transactionStatus.setRollbackOnly();
+                    String data=JsonUtil.g.toJson(coupons);
+                    mqSenderHandler.sendMessage("spring.updateCouponState.queueKey",data);
                     return false;
                 }
             }
