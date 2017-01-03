@@ -31,4 +31,11 @@
     <rabbit:listener-container connection-factory="connectionFactory">
         <rabbit:listener ref="abnormalLogHandler2" method="onMessage" queues="spring.abnormalLog.queue"/>
     </rabbit:listener-container>
+    <!--更新券状态-->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="updateCouponStateHandler1" method="onMessage" queues="spring.updateCouponState.queue"/>
+    </rabbit:listener-container>
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="updateCouponStateHandler2" method="onMessage" queues="spring.updateCouponState.queue"/>
+    </rabbit:listener-container>
 </beans>
