@@ -11,6 +11,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -38,6 +39,8 @@ public class CouponServiceImpl implements CouponService {
     private CouponDao couponDao;
     @Autowired
     private CouponManager couponManager;
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public int insertCoupon(Coupon coupon) {
@@ -222,12 +225,12 @@ public class CouponServiceImpl implements CouponService {
                                 coupon.setPageSize(100);
                                 String key = String.format("%s_%s_%s", vendorId, t.getActNo(), ag.getSubgroupCode());
                                 List<Coupon> coupons = new ArrayList<>();
-                                if (couponMap.get(key)!=null){
+                                if (couponMap.get(key) != null) {
                                     coupons = (List<Coupon>) couponMap.get(key);
                                 }
                                 if (couponMap.get(key) == null) {
                                     coupons = couponDao.getCouponListByPage(coupon);
-                                    if (CollectionUtils.isNotEmpty(coupons)){
+                                    if (CollectionUtils.isNotEmpty(coupons)) {
                                         couponMap.put(key, coupons);
                                     }
                                 }
@@ -244,23 +247,12 @@ public class CouponServiceImpl implements CouponService {
                     }
                 }
             }
-            if (CollectionUtils.isNotEmpty(needUpdateCoupons)) {
-                for (Coupon coupon : needUpdateCoupons) {
-                    coupon.setMemNo(memNo);
-                    coupon.setMemCat(member.getMemCatCode());
-                    coupon.setModifyDate(new Date());
-                    coupon.setSendCouponDate(new Date());
-                    coupon.setState(SysConstants.COUPONSTATE.GRANT);
-                }
-            }
-            if (couponManager.updateCoupons(needUpdateCoupons)) {
-                return needUpdateCoupons.size();
-            }
+            this.asyncSaveCouponsState(needUpdateCoupons, member);
+            return needUpdateCoupons.size();
         } catch (Exception e) {
             log.error("消费送券出现异常" + e);
             return -1;
         }
-        return 0;
     }
 
     @Override
@@ -292,5 +284,28 @@ public class CouponServiceImpl implements CouponService {
             }
         }
         return false;
+    }
+
+    /**
+     * 异步发券
+     *
+     * @param coupons
+     */
+    private void asyncSaveCouponsState(final List<Coupon> coupons, Member member) {
+        if (CollectionUtils.isNotEmpty(coupons)) {
+            for (Coupon coupon : coupons) {
+                coupon.setMemNo(member.getMemNo());
+                coupon.setMemCat(member.getMemCatCode());
+                coupon.setModifyDate(new Date());
+                coupon.setSendCouponDate(new Date());
+                coupon.setState(SysConstants.COUPONSTATE.GRANT);
+            }
+        }
+        taskExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                couponManager.updateCoupons(coupons);
+            }
+        });
     }
 }
