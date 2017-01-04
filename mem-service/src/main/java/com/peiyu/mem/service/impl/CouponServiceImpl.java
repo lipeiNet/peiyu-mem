@@ -140,17 +140,12 @@ public class CouponServiceImpl implements CouponService {
     }
 
     /**
-     * 获取有效的活动
+     * 获取日期范围内有效的活动
      * @Param vendorId 商家id
      * @return
      */
     private List<CpActivity> getValidActivitys(Long vendorId) throws ParseException {
-        CpActivity activity = new CpActivity();
-        activity.setVendorId(vendorId);
-        activity.setSendType(SysConstants.CouponSendType.AUTO_PROVIDE);
-        activity.setStatus(SysConstants.ACTIVITYSTATUS.CHECKED);
-        activity.setEndDate(new Date());
-        List<CpActivity> activities = activityDao.getCpActivityBySearch(activity);
+        List<CpActivity> activities = getActivitys(vendorId);
         if (CollectionUtils.isEmpty(activities)) {
             return null;
         }
@@ -165,87 +160,84 @@ public class CouponServiceImpl implements CouponService {
     }
 
     /**
-     * 过滤应用范围内有效的活动
+     * 获取应用范围内有效的活动
      * @param activities
      * @return
      */
-    private List<CpActivity> getApplyValidActivity(List<CpActivity> activities,GoodsForCoupon goodsForCoupon){
-        if (CollectionUtils.isEmpty(activities)){
+    private List<CpActivity> getApplyValidActivity(List<CpActivity> activities,GoodsForCoupon goodsForCoupon) {
+        if (CollectionUtils.isEmpty(activities)) {
             return null;
         }
-        List<CpActivity> resultActivitys=new ArrayList<>();
+        List<CpActivity> resultActivitys = new ArrayList<>();
         for (CpActivity act : activities) {
             if (act.getApplyScopeType().equals(SysConstants.COUPONAPPLIEDRANGE.UNLIMITED)) {
                 resultActivitys.add(act);
                 continue;
             }
-            CpApplyLimitdt applyLimitdt = new CpApplyLimitdt();
-            applyLimitdt.setVendorId(act.getVendorId());
-            applyLimitdt.setOwnRecordCode(act.getActNo());
-            applyLimitdt.setOwnRecordType(0);
-            List<CpApplyLimitdt> applyLimitdts = cpapplylimitdtDao.getCpApplyLimitdtsBySearch(applyLimitdt);
-            if (CollectionUtils.isNotEmpty(applyLimitdts)) {
-                for (CpApplyLimitdt apply : applyLimitdts) {
-                    switch (act.getApplyScopeType().intValue()) {
-                        case SysConstants.COUPONAPPLIEDRANGE.BRAND:
-                            if (StringUtils.isNotBlank(goodsForCoupon.getFirstIcatCode())) {
-                                if (apply.getDetailCode().equals(goodsForCoupon.getFirstIcatCode())) {
-                                    resultActivitys.add(act);
-                                    break;
-                                }
-                            }
-                            if (StringUtils.isNotBlank(goodsForCoupon.getSecondIcatCode())) {
-                                if (apply.getDetailCode().equals(goodsForCoupon.getSecondIcatCode())) {
-                                    resultActivitys.add(act);
-                                    break;
-                                }
-                            }
-                            if (StringUtils.isNotBlank(goodsForCoupon.getThirdIcatCode())) {
-                                if (apply.getDetailCode().equals(goodsForCoupon.getThirdIcatCode())) {
-                                    resultActivitys.add(act);
-                                    break;
-                                }
-                            }
-                            if (StringUtils.isNotBlank(goodsForCoupon.getFourthIcatCode())) {
-                                if (apply.getDetailCode().equals(goodsForCoupon.getFourthIcatCode())) {
-                                    resultActivitys.add(act);
-                                    break;
-                                }
-                            }
-                            break;
-                        case SysConstants.COUPONAPPLIEDRANGE.CATEGORY:
-                            if (StringUtils.isNotBlank(goodsForCoupon.getFirstBrandCode())) {
-                                if (apply.getDetailCode().equals(goodsForCoupon.getFirstBrandCode())) {
-                                    resultActivitys.add(act);
-                                    break;
-                                }
-                            }
-                            if (StringUtils.isNotBlank(goodsForCoupon.getSecondBrandCode())) {
-                                if (apply.getDetailCode().equals(goodsForCoupon.getSecondBrandCode())) {
-                                    resultActivitys.add(act);
-                                    break;
-                                }
-                            }
-                            if (StringUtils.isNotBlank(goodsForCoupon.getThirdBrandCode())) {
-                                if (apply.getDetailCode().equals(goodsForCoupon.getThirdBrandCode())) {
-                                    resultActivitys.add(act);
-                                    break;
-                                }
-                            }
-                            break;
-                        case SysConstants.COUPONAPPLIEDRANGE.GOOD:
-                            if (apply.getDetailCode().equals(goodsForCoupon.getSkuCode())) {
+            List<CpApplyLimitdt> applyLimitdts = getApplyLimits(act.getVendorId(), act.getActNo());
+            if (CollectionUtils.isEmpty(applyLimitdts)) {
+                continue;
+            }
+            for (CpApplyLimitdt apply : applyLimitdts) {
+                switch (act.getApplyScopeType().intValue()) {
+                    case SysConstants.COUPONAPPLIEDRANGE.BRAND:
+                        if (StringUtils.isNotBlank(goodsForCoupon.getFirstIcatCode())) {
+                            if (apply.getDetailCode().equals(goodsForCoupon.getFirstIcatCode())) {
                                 resultActivitys.add(act);
                                 break;
                             }
-                            break;
-                        case SysConstants.COUPONAPPLIEDRANGE.SUPPLIER:
-                            if (apply.getDetailCode().equals(goodsForCoupon.getSupplierCode())) {
+                        }
+                        if (StringUtils.isNotBlank(goodsForCoupon.getSecondIcatCode())) {
+                            if (apply.getDetailCode().equals(goodsForCoupon.getSecondIcatCode())) {
                                 resultActivitys.add(act);
                                 break;
                             }
+                        }
+                        if (StringUtils.isNotBlank(goodsForCoupon.getThirdIcatCode())) {
+                            if (apply.getDetailCode().equals(goodsForCoupon.getThirdIcatCode())) {
+                                resultActivitys.add(act);
+                                break;
+                            }
+                        }
+                        if (StringUtils.isNotBlank(goodsForCoupon.getFourthIcatCode())) {
+                            if (apply.getDetailCode().equals(goodsForCoupon.getFourthIcatCode())) {
+                                resultActivitys.add(act);
+                                break;
+                            }
+                        }
+                        break;
+                    case SysConstants.COUPONAPPLIEDRANGE.CATEGORY:
+                        if (StringUtils.isNotBlank(goodsForCoupon.getFirstBrandCode())) {
+                            if (apply.getDetailCode().equals(goodsForCoupon.getFirstBrandCode())) {
+                                resultActivitys.add(act);
+                                break;
+                            }
+                        }
+                        if (StringUtils.isNotBlank(goodsForCoupon.getSecondBrandCode())) {
+                            if (apply.getDetailCode().equals(goodsForCoupon.getSecondBrandCode())) {
+                                resultActivitys.add(act);
+                                break;
+                            }
+                        }
+                        if (StringUtils.isNotBlank(goodsForCoupon.getThirdBrandCode())) {
+                            if (apply.getDetailCode().equals(goodsForCoupon.getThirdBrandCode())) {
+                                resultActivitys.add(act);
+                                break;
+                            }
+                        }
+                        break;
+                    case SysConstants.COUPONAPPLIEDRANGE.GOOD:
+                        if (apply.getDetailCode().equals(goodsForCoupon.getSkuCode())) {
+                            resultActivitys.add(act);
                             break;
-                    }
+                        }
+                        break;
+                    case SysConstants.COUPONAPPLIEDRANGE.SUPPLIER:
+                        if (apply.getDetailCode().equals(goodsForCoupon.getSupplierCode())) {
+                            resultActivitys.add(act);
+                            break;
+                        }
+                        break;
                 }
             }
         }
@@ -253,7 +245,7 @@ public class CouponServiceImpl implements CouponService {
     }
 
     /**
-     * 过滤使用范围有效活动
+     * 获取使用范围有效活动
      * @param activities
      * @return
      */
@@ -267,11 +259,10 @@ public class CouponServiceImpl implements CouponService {
                 resultActivity.add(c);
                 continue;
             }
-            CpUseLimitdt useLimitdt = new CpUseLimitdt();
-            useLimitdt.setVendorId(c.getVendorId());
-            useLimitdt.setOwnRecordCode(c.getActNo());
-            useLimitdt.setOwnRecordType(0);
-            List<CpUseLimitdt> useLimitdts = cpuselimitdtDao.getCpUseLimitdts(useLimitdt);
+            List<CpUseLimitdt> useLimitdts = getUseLimits(c.getVendorId(), c.getActNo());
+            if (CollectionUtils.isEmpty(useLimitdts)) {
+                continue;
+            }
             for (CpUseLimitdt uselimit : useLimitdts) {
                 if (uselimit.getUseScopeType().equals(SysConstants.COUPONUSERANGE.ORAGN)) {
                     if (goodsForCoupon.getOrganCode().equals(uselimit.getOrganCode())) {
@@ -311,6 +302,19 @@ public class CouponServiceImpl implements CouponService {
     }
 
     /**
+     * 获取活动
+     * @param vendorId
+     * @return
+     */
+    private List<CpActivity> getActivitys(Long vendorId) {
+        CpActivity activity = new CpActivity();
+        activity.setVendorId(vendorId);
+        activity.setSendType(SysConstants.CouponSendType.AUTO_PROVIDE);
+        activity.setStatus(SysConstants.ACTIVITYSTATUS.CHECKED);
+        activity.setEndDate(new Date());
+        return activityDao.getCpActivityBySearch(activity);
+    }
+    /**
      * 获取活动下的优惠券组
      * @return
      */
@@ -323,6 +327,14 @@ public class CouponServiceImpl implements CouponService {
         return actsubGroups;
     }
 
+    /**
+     * 获取券组下优惠券
+     * @param vendorId
+     * @param actNo
+     * @param groupNo
+     * @param type
+     * @return
+     */
     private List<Coupon> getCoupons(Long vendorId,String actNo,String groupNo,int type) {
         Coupon coupon = new Coupon();
         coupon.setVendorId(vendorId);
@@ -343,6 +355,34 @@ public class CouponServiceImpl implements CouponService {
             }
         }
         return coupons;
+    }
+
+    /**
+     * 获取应用范围限制
+     * @param vendorId
+     * @param actNo
+     * @return
+     */
+    private List<CpApplyLimitdt> getApplyLimits(Long vendorId,String actNo) {
+        CpApplyLimitdt applyLimitdt = new CpApplyLimitdt();
+        applyLimitdt.setVendorId(vendorId);
+        applyLimitdt.setOwnRecordCode(actNo);
+        applyLimitdt.setOwnRecordType(0);
+        return cpapplylimitdtDao.getCpApplyLimitdtsBySearch(applyLimitdt);
+    }
+
+    /**
+     * 获取使用范围限制
+     * @param vendorId
+     * @param actNo
+     * @return
+     */
+    private List<CpUseLimitdt> getUseLimits(Long vendorId,String actNo) {
+        CpUseLimitdt useLimitdt = new CpUseLimitdt();
+        useLimitdt.setVendorId(vendorId);
+        useLimitdt.setOwnRecordCode(actNo);
+        useLimitdt.setOwnRecordType(0);
+        return cpuselimitdtDao.getCpUseLimitdts(useLimitdt);
     }
 
     /**
