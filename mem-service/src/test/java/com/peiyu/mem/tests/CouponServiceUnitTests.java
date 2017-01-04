@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class CouponServiceUnitTests {
     @Autowired
     private CouponService couponService;
     @Test
-    public void testConsumeSendCoupon() {
+    public void testConsumeSendCoupon() throws ParseException {
         List<GoodsForCoupon> goodsForCoupons = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             GoodsForCoupon goodsForCoupon = new GoodsForCoupon();
