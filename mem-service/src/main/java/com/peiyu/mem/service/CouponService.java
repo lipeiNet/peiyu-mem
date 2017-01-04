@@ -3,6 +3,7 @@ package com.peiyu.mem.service;
 import com.peiyu.mem.domian.entity.Coupon;
 import com.peiyu.mem.domian.entity.GoodsForCoupon;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public interface CouponService {
      * @param goodsForCoupons
      * @return
      */
-    int consumeSendCoupon(List<GoodsForCoupon> goodsForCoupons);
+    int consumeSendCoupon(List<GoodsForCoupon> goodsForCoupons) throws ParseException;
 
     /**
      * 获取优惠券
