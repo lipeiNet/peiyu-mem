@@ -146,17 +146,19 @@ public class JedisTemplate {
      * @param fieldKey
      * @param value
      */
-    public void hsetNX(String key,String fieldKey,String value){
-        Jedis jedis=getJedis();
+    public long hsetNX(String key,String fieldKey,String value) {
+        Jedis jedis = getJedis();
+        long result = 0;
         try {
-            jedis.hsetnx(key,fieldKey,value);
-        }catch (Exception e) {
+            result = jedis.hsetnx(key, fieldKey, value);
+        } catch (Exception e) {
             if (jedis != null) {
                 jedis.close();
             }
         } finally {
             jedis.close();
         }
+        return result;
     }
     /**
      * 从hset中hget出对应的key-field对应的value值
