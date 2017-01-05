@@ -6,6 +6,7 @@ import com.peiyu.mem.commen.VerificationDate;
 import com.peiyu.mem.dao.*;
 import com.peiyu.mem.domian.entity.*;
 import com.peiyu.mem.manager.CouponManager;
+import com.peiyu.mem.manager.impl.CouponActivityCacheManager;
 import com.peiyu.mem.service.CouponService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
@@ -41,6 +42,8 @@ public class CouponServiceImpl implements CouponService {
     private CouponManager couponManager;
     @Autowired
     private ThreadPoolTaskExecutor taskExecutor;
+    @Autowired
+    private CouponActivityCacheManager activityCacheManager;
 
     @Override
     public int insertCoupon(Coupon coupon) {
@@ -312,7 +315,7 @@ public class CouponServiceImpl implements CouponService {
         activity.setSendType(SysConstants.CouponSendType.AUTO_PROVIDE);
         activity.setStatus(SysConstants.ACTIVITYSTATUS.CHECKED);
         activity.setEndDate(new Date());
-        return activityDao.getCpActivityBySearch(activity);
+        return activityCacheManager.getCpActivityList(activity);
     }
     /**
      * 获取活动下的优惠券组
