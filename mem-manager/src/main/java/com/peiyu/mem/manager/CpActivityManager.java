@@ -27,4 +27,11 @@ public interface CpActivityManager {
      * @return
      */
     boolean updateCpActivity(CpActivity cpActivity,List<CpApplyLimitdt> applyLimits,List<CpUseLimitdt> useLimits);
+
+    /**
+     * 从缓存中获取当天有效的活动
+     * @param searct
+     * @return
+     */
+    List<CpActivity> getActivitysForCache(CpActivity searct);
 }
