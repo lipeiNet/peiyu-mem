@@ -25,6 +25,9 @@
         <constructor-arg index="0" ref="jedisPoolConfig" />
         <constructor-arg index="1" value="${redis.hostName}" type="java.lang.String"/>
         <constructor-arg index="2" value="${redis.port}" type="int"/>
+        <constructor-arg index="3" value="${redis.timeout}" type="int"/>
+        <constructor-arg index="4" value="${redis.pwd}"/>
+        <constructor-arg index="5" value="0"/>
     </bean>
     <bean id="jedisTemplate" class="com.peiyu.mem.redis.JedisTemplate">
         <constructor-arg index="0" ref="jedisPool" />
