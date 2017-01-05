@@ -32,6 +32,7 @@ public class CpActivityManagerImpl implements CpActivityManager {
     private CpapplylimitdtDao applyLimitdtDao;
     @Autowired
     private CpuselimitdtDao cpuselimitdtDao;
+
     @Override
     public boolean insertCpActivity(final CpActivity cpActivity, final List<CpApplyLimitdt> applyLimits, final List<CpUseLimitdt> useLimits) {
         TransactionTemplate template = new TransactionTemplate(transactionManager);
@@ -55,8 +56,15 @@ public class CpActivityManagerImpl implements CpActivityManager {
             }
         });
     }
+
     @Override
     public boolean updateCpActivity(CpActivity cpActivity, List<CpApplyLimitdt> applyLimits, List<CpUseLimitdt> useLimits) {
         return false;
+    }
+
+    @Override
+    public List<CpActivity> getActivitysForCache(CpActivity searct) {
+        String key="";
+        return null;
     }
 }
