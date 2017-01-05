@@ -24,7 +24,7 @@ public class CouponServiceUnitTests {
     @Test
     public void testConsumeSendCoupon() throws ParseException {
         List<GoodsForCoupon> goodsForCoupons = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+      /*  for (int i = 0; i < 10; i++) {*/
             GoodsForCoupon goodsForCoupon = new GoodsForCoupon();
             goodsForCoupon.setVendorId(1483l);
             goodsForCoupon.setMemNo("13520452");
@@ -42,7 +42,7 @@ public class CouponServiceUnitTests {
             goodsForCoupon.setOrganCode("910003");
             goodsForCoupon.setSupplierCode("24");
             goodsForCoupons.add(goodsForCoupon);
-        }
+       // }
         int result = couponService.consumeSendCoupon(goodsForCoupons);
         System.out.println(result);
     }
