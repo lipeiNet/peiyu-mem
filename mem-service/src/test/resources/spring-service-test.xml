@@ -4,7 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-    <import resource="spring-redis-service-test.xml"/>
+    <import resource="classpath*:spring-redis-config.xml"/>
     <import resource="spring-service-dao-test.xml"/>
     <import resource="classpath*:spring-rabbitmq-producer.xml"/>
     <import resource="spring_aop_service.xml"/>
