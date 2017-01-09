@@ -23,4 +23,9 @@ public class JedisTemplateUnitTests {
         String result = jedisTemplate.get("myredis");
         assertEquals("helloworld", result);
     }
+    @Test
+    public void testFlushDB(){
+        jedisTemplate.flushDB();
+    }
+
 }
