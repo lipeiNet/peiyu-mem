@@ -326,7 +326,7 @@ public class CouponServiceImpl implements CouponService {
         cpActsubGroup.setVendorId(vendorId);
         cpActsubGroup.setActNo(actNo);
         cpActsubGroup.setEndDate(new Date());
-        List<CpActsubGroup> actsubGroups = actsubGroupDao.getCpActsubGroupList(cpActsubGroup);
+        List<CpActsubGroup> actsubGroups = activityCacheManager.getCpActsubGroupList(cpActsubGroup);
         return actsubGroups;
     }
 
@@ -371,7 +371,7 @@ public class CouponServiceImpl implements CouponService {
         applyLimitdt.setVendorId(vendorId);
         applyLimitdt.setOwnRecordCode(actNo);
         applyLimitdt.setOwnRecordType(0);
-        return cpapplylimitdtDao.getCpApplyLimitdtsBySearch(applyLimitdt);
+        return activityCacheManager.getCpApplyLimitdtList(applyLimitdt);
     }
 
     /**
@@ -385,7 +385,7 @@ public class CouponServiceImpl implements CouponService {
         useLimitdt.setVendorId(vendorId);
         useLimitdt.setOwnRecordCode(actNo);
         useLimitdt.setOwnRecordType(0);
-        return cpuselimitdtDao.getCpUseLimitdts(useLimitdt);
+        return activityCacheManager.getCpUseLimitList(useLimitdt);
     }
 
     /**
