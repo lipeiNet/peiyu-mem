@@ -10,6 +10,14 @@ import java.util.List;
  */
 @Repository
 public interface CpActivityDao extends BaseDao<CpActivity>{
+
+    /**
+     * 根据商家id和活动编号获取活动
+     * @param vendorId
+     * @param actNo
+     * @return
+     */
+    CpActivity getActivity(Long vendorId,String actNo);
     /**
      * 根据商家id获取优惠券活动
      * @param venorId
