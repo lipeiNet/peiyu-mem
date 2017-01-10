@@ -108,6 +108,9 @@ insert into activity (id, vendorId, actNo,
     <select id="get" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.CpActivity">
      SELECT * FROM activity WHERE df=0 AND id=#{id}
     </select>
+    <select id="getActivity" resultType="com.peiyu.mem.domian.entity.CpActivity">
+        select * from activity WHERE df=0 AND vendorId=#{vendorId} AND actNo=#{actNo};
+    </select>
     <select id="getCpActivitysByVendorId" parameterType="java.lang.Long" resultType="com.peiyu.mem.domian.entity.CpActivity">
       SELECT * FROM activity WHERE df=0 AND vendorId=#{vendorId}
     </select>
