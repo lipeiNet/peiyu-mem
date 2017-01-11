@@ -159,7 +159,7 @@ public class CouponActivityCacheManager {
      * @return
      */
     public List<CpUseLimitdt> getCpUseLimitList(CpUseLimitdt search) {
-        String key = String.format("applyLimits_%s_%s", search.getVendorId(), search.getOwnRecordCode());
+        String key = String.format("useLimits_%s_%s", search.getVendorId(), search.getOwnRecordCode());
         return useLimitdtListGetterHandler.getListAndSetCache(key, search, CpUseLimitdt.class);
     }
 }
