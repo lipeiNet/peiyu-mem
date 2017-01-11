@@ -82,6 +82,25 @@ public class JedisTemplate {
         Jedis jedis=getJedis();
         jedis.del(keys);
     }
+
+    /**
+     * 验证key是否存在
+     * @param key
+     * @return
+     */
+    public boolean exists(String key) {
+        Jedis jedis = getJedis();
+        try {
+            return jedis.exists(key);
+        } catch (Exception e) {
+            if (jedis != null) {
+                jedis.close();
+            }
+        } finally {
+            jedis.close();
+        }
+        return false;
+    }
     /***********************************String结束**************************************/
 
     /***********************************Hash开始**************************************/
@@ -142,6 +161,7 @@ public class JedisTemplate {
     /**
      * 哈希表 key 中的域 field 的值设置为 value ，
      * 当且仅当域 field 不存在。若域 field 已经存在，该操作无效。
+     * 操作成功返回1，操作失败返回0
      * @param key
      * @param fieldKey
      * @param value
@@ -372,8 +392,17 @@ public class JedisTemplate {
      */
     public Long lpush(String key,String value) {
         Jedis jedis = getJedis();
-        Long result = jedis.lpush(key, value);
-        return result;
+        try {
+            Long result = jedis.lpush(key, value);
+            return result;
+        } catch (Exception e) {
+            if (jedis != null) {
+                jedis.close();
+            }
+        } finally {
+            jedis.close();
+        }
+        return null;
     }
 
     /**
@@ -384,8 +413,17 @@ public class JedisTemplate {
      */
     public Long lpush(String key,String[] values) {
         Jedis jedis = getJedis();
-        Long result = jedis.lpush(key, values);
-        return result;
+        try {
+            Long result = jedis.lpush(key, values);
+            return result;
+        }catch (Exception e){
+            if (jedis!=null){
+                jedis.close();
+            }
+        }finally {
+            jedis.close();
+        }
+       return null;
     }
 
     /**
@@ -513,10 +551,19 @@ public class JedisTemplate {
      * @param key
      * @return
      */
-    public String lpop(String key){
-        Jedis jedis=getJedis();
-        String result=jedis.lpop(key);
-        return result;
+    public String lpop(String key) {
+        Jedis jedis = getJedis();
+        try {
+            String result = jedis.lpop(key);
+            return result;
+        } catch (Exception e) {
+            if (jedis != null) {
+                jedis.close();
+            }
+        } finally {
+            jedis.close();
+        }
+        return null;
     }
 
     /**
