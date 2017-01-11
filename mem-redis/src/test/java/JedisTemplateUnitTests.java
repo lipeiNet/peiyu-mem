@@ -27,5 +27,13 @@ public class JedisTemplateUnitTests {
     public void testFlushDB(){
         jedisTemplate.flushDB();
     }
+    @Test
+    public void testExists(){
+        boolean result=jedisTemplate.exists("myredis");
+    }
+    @Test
+    public void testHsetNx() {
+        long result = jedisTemplate.hsetNX("lock", "lock", "60");
+    }
 
 }
