@@ -7,6 +7,7 @@ import com.peiyu.mem.dao.*;
 import com.peiyu.mem.domian.entity.*;
 import com.peiyu.mem.manager.CouponManager;
 import com.peiyu.mem.manager.impl.CouponActivityCacheManager;
+import com.peiyu.mem.manager.impl.CouponCacheManager;
 import com.peiyu.mem.service.CouponService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
@@ -44,6 +45,8 @@ public class CouponServiceImpl implements CouponService {
     private ThreadPoolTaskExecutor taskExecutor;
     @Autowired
     private CouponActivityCacheManager activityCacheManager;
+    @Autowired
+    private CouponCacheManager couponCacheManager;
 
     @Override
     public int insertCoupon(Coupon coupon) {
@@ -93,7 +96,7 @@ public class CouponServiceImpl implements CouponService {
                         continue;
                     }
                     for (CpActsubGroup group : actsubGroups) {
-                        List<Coupon> coupons = getCoupons(group.getVendorId(), group.getActNo(), group.getSubgroupCode(), SysConstants.COUPONSTATE.NOGRANT);
+                       /* List<Coupon> coupons = getCoupons(group.getVendorId(), group.getActNo(), group.getSubgroupCode(), SysConstants.COUPONSTATE.NOGRANT);
                         if (CollectionUtils.isEmpty(coupons)) {
                             continue;
                         }
@@ -102,7 +105,14 @@ public class CouponServiceImpl implements CouponService {
                                 needUpdateCoupons.add(c);
                                 break;
                             }
-                        }
+                        }*/
+                        Coupon coupon = new Coupon();
+                        coupon.setVendorId(vendorId);
+                        coupon.setActNo(group.getActNo());
+                        coupon.setSubgroupCode(group.getSubgroupCode());
+                        coupon.setState(SysConstants.COUPONSTATE.NOGRANT);
+                        coupon = couponCacheManager.getOneNoGrantCouponFromCache(coupon);
+                        needUpdateCoupons.add(coupon);
                     }
                 }
             }
@@ -352,6 +362,7 @@ public class CouponServiceImpl implements CouponService {
             coupons = (List<Coupon>) couponMap.get(key);
         }
         if (couponMap.get(key) == null) {
+            //coupons=couponCacheManager.getOneNoGrantCouponFromCache(coupon);
             coupons = couponDao.getCouponListByPage(coupon);
             if (CollectionUtils.isNotEmpty(coupons)) {
                 couponMap.put(key, coupons);
