@@ -61,6 +61,14 @@ public class CpActivityDaoUnitTests extends BaseDaoUnitTests {
         CpActivity result=cpActivityDao.get(1l);
         ReflectionAssert.assertReflectionEquals(expect, result);
     }
+    @Test
+    public void testGetActivity() throws ParseException {
+        CpActivity expect=getExpectCpActivity();
+        Long vendorId=1433l;
+        String actNo="201611301615";
+        CpActivity result=cpActivityDao.getActivity(vendorId,actNo);
+        ReflectionAssert.assertReflectionEquals(expect, result);
+    }
 
     private CpActivity getExpectCpActivity() throws ParseException {
         CpActivity expectCpAcivity = new CpActivity();
