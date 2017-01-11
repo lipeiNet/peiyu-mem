@@ -1,6 +1,7 @@
 package com.peiyu.mem.dao;
 
 import com.peiyu.mem.domian.entity.CpActivity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface CpActivityDao extends BaseDao<CpActivity>{
      * @param actNo
      * @return
      */
-    CpActivity getActivity(Long vendorId,String actNo);
+    CpActivity getActivity(@Param("vendorId") Long vendorId,@Param("actNo") String actNo);
     /**
      * 根据商家id获取优惠券活动
      * @param venorId
